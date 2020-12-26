@@ -105,14 +105,14 @@ public class NewCustomerDriver extends NewCustomer {
         setMeterCode(getGovernmentCode(), getNationalIdNum());
         getContractDataFromCustomer();
         setContractDate();
-        PushAllNewCustomerInfoToDB();
+        pushAllNewCustomerInfoToDB();
         String [] name = getName().split(" ");
         Sendmail.meterReady(getEmail(), name[0], getMeterCode());
         
         if(determinesAttachOrNot == 'Y' || determinesAttachOrNot == 'y'){
             
             setApartmentContractPath(apartmentContractPath);
-            attachCopyOfContract();
+            attachCopyOfContractToDB();
 
         }
         
