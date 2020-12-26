@@ -26,7 +26,7 @@ public class Main {
             switch (choice) {
                 case '1':
                     NewCustomerDriver newCustomer = new NewCustomerDriver();
-                    newCustomer.runDashboardNC();
+                    newCustomer.runDashboard();
                     returnedToMain();
                     break;
                 case '2':

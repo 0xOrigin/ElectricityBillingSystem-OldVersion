@@ -15,10 +15,10 @@ public class NewCustomerDriver extends NewCustomer {
     private char typeOfUse;
     private String apartmentContractPath;
     
-    char determinesAttachOrNot;
+    private char determinesAttachOrNot;
     
     
-    public void runDashboardNC() throws Exception{
+    public void runDashboard() throws Exception{
         
         char qContinue;
         
