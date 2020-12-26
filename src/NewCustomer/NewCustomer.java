@@ -45,14 +45,14 @@ public class NewCustomer extends PersonDriver {
     
     // Protected functions
     
-    protected void PushAllNewCustomerInfoToDB(){
+    protected void pushAllNewCustomerInfoToDB(){
         NewCustomerDatabase.insertNewCustomer(
                 getName(), getNationalIdNum(), getAddress(), getEmail(),
                 getGovernmentCode(), getPhoneNumber(), getGender(), getDateOfBirth(),
                 getTypeOfUse(), getMeterCode(), getContractDate());
     }
     
-    protected void attachCopyOfContract(){
+    protected void attachCopyOfContractToDB(){
         NewCustomerDatabase.attachApartmentContract(getApartmentContractPath(), getMeterCode());
     }
     
