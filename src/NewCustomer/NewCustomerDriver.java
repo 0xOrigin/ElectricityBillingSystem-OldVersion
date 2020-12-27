@@ -20,11 +20,10 @@ public class NewCustomerDriver extends NewCustomer {
     
     public void runDashboard() throws Exception{
         
-        char qContinue;
+        char qContinue, choice;
         
         do {
             
-            char choice;
             viewDashboard();
             
             do {

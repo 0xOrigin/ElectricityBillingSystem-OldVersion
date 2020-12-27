@@ -10,31 +10,36 @@ public class Sendmail {
     
     
     //This method will send email if customer didn't pay for three months
-    //To excute this method type Sendmail.unPaidEmail("xxxx@gmail.com", "name");
     
     public static void unPaidEmail(String recepient, String name, String meterCode) throws Exception{
         
         
-        Properties properties =new Properties();
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true");
-        properties.put("mail.smtp.host", "smtp.gmail.com");         //gmail host
-        properties.put("mail.smtp.port", "587");                    //gmail port
-        
-        final String myAccountEmail= "PL2Project.EGKMS@gmail.com";  //sender mail
-        final String password="PL2_123456";                         //sender password
-        
-        Session session=Session.getInstance(properties, new Authenticator(){
-
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(myAccountEmail, password);
-            }
+        try {
             
-        }); 
-        
-        Message message= unpaidBills(session,myAccountEmail,recepient, name, meterCode);
-        Transport.send(message);
+            Properties properties =new Properties();
+            properties.put("mail.smtp.auth", "true");
+            properties.put("mail.smtp.starttls.enable", "true");
+            properties.put("mail.smtp.host", "smtp.gmail.com");         //gmail host
+            properties.put("mail.smtp.port", "587");                    //gmail port
+
+            final String myAccountEmail= "PL2Project.EGKMS@gmail.com";  //sender mail
+            final String password="PL2_123456";                         //sender password
+
+            Session session=Session.getInstance(properties, new Authenticator(){
+
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(myAccountEmail, password);
+                }
+
+            }); 
+
+            Message message= unpaidBills(session,myAccountEmail,recepient, name, meterCode);
+            Transport.send(message);
+            
+        } catch (Exception e) {
+            System.out.println("\n\t[-] You haven't paid your bills for three months or more at the meter number: " + meterCode + " , please pay.");
+        }
         
     }
     
@@ -52,7 +57,7 @@ public class Sendmail {
             return message;
             
         } catch (MessagingException ex) {
-            System.out.println(ex.toString());
+            System.out.println("\n\t[-] You haven't paid your bills for three months or more at the meter number: " + meterCode + " , please pay.");
         }
         
         return null;
@@ -66,26 +71,33 @@ public class Sendmail {
     public static void meterReady(String recepient, String name, String meterCode) throws Exception{
         
         System.out.println("\n[-] Please wait a moment.");
-        Properties properties =new Properties();
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true");
-        properties.put("mail.smtp.host", "smtp.gmail.com");         //gmail host
-        properties.put("mail.smtp.port", "587");                    //gmail port
         
-        final String myAccountEmail= "PL2Project.EGKMS@gmail.com";  //Sender mail
-        final String password="PL2_123456";                         //sender password
-        
-        Session session=Session.getInstance(properties, new Authenticator(){
-
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(myAccountEmail, password);
-            }
+        try {
             
-        }); 
-        
-        Message message= meterReady(session,myAccountEmail,recepient, name, meterCode);
-        Transport.send(message);
+            Properties properties =new Properties();
+            properties.put("mail.smtp.auth", "true");
+            properties.put("mail.smtp.starttls.enable", "true");
+            properties.put("mail.smtp.host", "smtp.gmail.com");         //gmail host
+            properties.put("mail.smtp.port", "587");                    //gmail port
+
+            final String myAccountEmail= "PL2Project.EGKMS@gmail.com";  //Sender mail
+            final String password="PL2_123456";                         //sender password
+
+            Session session=Session.getInstance(properties, new Authenticator(){
+
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(myAccountEmail, password);
+                }
+
+            }); 
+
+            Message message= meterReady(session,myAccountEmail,recepient, name, meterCode);
+            Transport.send(message);
+            
+        } catch (Exception e) {
+            System.out.println("\n\t[-] Your meter code is: " + meterCode + " . You can pay bills using this code only.");
+        }
         
     }
 
@@ -109,7 +121,7 @@ public class Sendmail {
             return message;
             
         } catch (MessagingException ex) {
-            System.out.println(ex.toString());
+            System.out.println("\n\t[-] Your meter code is: " + meterCode + " . You can pay bills using this code only.");
         }
         
         return null;
