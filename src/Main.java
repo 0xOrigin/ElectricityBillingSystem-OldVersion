@@ -30,11 +30,13 @@ public class Main {
                     returnedToMain();
                     break;
                 case '2':
-
+                    OldCustomerDriver oldCustomer = new OldCustomerDriver();
+                    oldCustomer.runDashboard();
                     returnedToMain();
                     break;
                 case '3':
-
+                    AdministratorDriver administratorDriver = new AdministratorDriver();
+                    administratorDriver.runDashboard();
                     returnedToMain();
                     break;
                 case '0':
