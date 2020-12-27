@@ -1,5 +1,5 @@
 package OldCustomer;
 
-public class OldCustomerDriver {
+public class OldCustomerDriver extends OldCustomer {
     
 }
