@@ -8,7 +8,7 @@ import javax.mail.*;
 
 public class Sendmail {
     
-    
+    // Comment for test
     //This method will send email if customer didn't pay for three months
     
     public static void unPaidEmail(String recepient, String name, String meterCode) throws Exception{
