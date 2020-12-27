@@ -36,7 +36,7 @@ public class Sendmail {
             Message message= unpaidBills(session,myAccountEmail,recepient, name, meterCode);
             Transport.send(message);
             
-        } catch (Exception e) {
+        } catch (UnsupportedEncodingException | MessagingException e) {
             System.out.println("\n\t[-] You haven't paid your bills for three months or more at the meter number: " + meterCode + " , please pay.");
         }
         
@@ -94,7 +94,7 @@ public class Sendmail {
             Message message= meterReady(session,myAccountEmail,recepient, name, meterCode);
             Transport.send(message);
             
-        } catch (Exception e) {
+        } catch (UnsupportedEncodingException | MessagingException e) {
             System.out.println("\n\t[-] Your meter code is: " + meterCode + " . You can pay bills using this code only.");
         }
         
