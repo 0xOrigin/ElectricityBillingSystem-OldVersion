@@ -7,7 +7,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.*;
 
 public class Sendmail {
-    //comment
+    
     //This method will send email if customer didn't pay for three months
     
     public static void unPaidEmail(String recepient, String name, String meterCode) throws Exception{
