@@ -66,7 +66,7 @@ public class PersonDriver extends Person {
     
     // Data Validators
     
-    private String Name_Val(String name){
+    public String Name_Val(String name){
         
         do {
             
@@ -83,7 +83,7 @@ public class PersonDriver extends Person {
     }
     
     
-    private String NationalID_Val(String nationalIdNum){
+    public String NationalID_Val(String nationalIdNum){
         
         do {
 
@@ -100,7 +100,7 @@ public class PersonDriver extends Person {
     }
     
     
-    private String Address_Val(String address){
+    public String Address_Val(String address){
  
         do {
             
@@ -117,7 +117,7 @@ public class PersonDriver extends Person {
     }
     
     
-    private String Email_Val(String email){
+    public String Email_Val(String email){
         
         do {
             
@@ -134,7 +134,7 @@ public class PersonDriver extends Person {
     }
     
     
-    private String GovernmentCode_Val(String governmentCode){
+    public String GovernmentCode_Val(String governmentCode){
 
         String[] governmentCodes = {"02", "013", "03", "040", "048", "055", "062", "064",
                                     "046", "066", "068", "069", "050", "045", "057", "047",
@@ -164,7 +164,7 @@ public class PersonDriver extends Person {
     }
     
     
-    private String PhoneNumber_Val(String phoneNum){
+    public String PhoneNumber_Val(String phoneNum){
         
         do {
 

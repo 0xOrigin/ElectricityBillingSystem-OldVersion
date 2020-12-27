@@ -139,7 +139,7 @@ public class NewCustomerDriver extends NewCustomer {
     
     // Data Validators
     
-    private void TypeOfUse_Val(char selector){
+    public void TypeOfUse_Val(char selector){
         
         do{
             
@@ -160,7 +160,7 @@ public class NewCustomerDriver extends NewCustomer {
         
     }
  
-    private String AttachedFile_Val(String apartmentContractPath){
+    public String AttachedFile_Val(String apartmentContractPath){
         
         do{
             
