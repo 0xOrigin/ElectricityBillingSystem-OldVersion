@@ -22,7 +22,7 @@ public class NewCustomer extends PersonDriver {
         String updatedNumOfCustomers = String.format("%07d", latestNumberOfCustomers);
         
         this.meterCode = String.format("%03d", Integer.parseInt(governmentCode)) + "C" + nationalIdNum.charAt(7) + nationalIdNum.charAt(8) +
-                         String.format("%03d", random) + updatedNumOfCustomers;
+                         String.format("%02d", random) + updatedNumOfCustomers;
     }
 
     protected void setApartmentContractPath(String apartmentContractPath) {
