@@ -95,7 +95,7 @@ public class Main {
             System.out.print("\u001b[1K");
             ro.keyRelease(KeyEvent.VK_CONTROL);
             System.out.print("\u001b[2K");
-            ro.delay(20);
+            ro.delay(10);
            
         } catch (AWTException ex) {
             System.out.println(ex.toString());
