@@ -18,11 +18,11 @@ public class Main {
         printDashboards();
         
         do {
-
+            
             System.out.print("\n[+] Choose a number(0 to terminate the program): ");
             System.out.flush();
             char choice = input.next().charAt(0);
-
+            
             switch (choice) {
                 case '1':
                     NewCustomerDriver newCustomer = new NewCustomerDriver();
@@ -41,7 +41,7 @@ public class Main {
                     break;
                 case '0':
                     System.out.println("\n[-] The program has been successfully terminated.");
-                    System.exit(0);
+                    return;
                 default:
                     System.out.println("\n[-] Enter a valid choice.");
                     break;
@@ -54,9 +54,9 @@ public class Main {
     public static void returnedToMain(){
         
         clearScreen();
-        System.out.flush();
         printBanner();
         printDashboards();
+        System.out.flush();
         
     }
     
@@ -84,14 +84,15 @@ public class Main {
         try {
             
             Robot ro = new Robot();
+            ro.delay(40);
+            ro.setAutoWaitForIdle(true);
+            ro.setAutoDelay(40);
             ro.keyPress(KeyEvent.VK_CONTROL);
-            ro.waitForIdle();
             ro.keyPress(KeyEvent.VK_L);
-            ro.waitForIdle();
             ro.keyRelease(KeyEvent.VK_L);
-            ro.waitForIdle();
             ro.keyRelease(KeyEvent.VK_CONTROL);
-            ro.waitForIdle();
+            System.out.print("\u001b[2K");
+            ro.delay(40);
            
         } catch (AWTException ex) {
             System.out.println(ex.toString());
