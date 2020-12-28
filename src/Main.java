@@ -6,9 +6,6 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.util.*;
 import Datebase.OldCustomerDatabase;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
         
 public class Main {
 

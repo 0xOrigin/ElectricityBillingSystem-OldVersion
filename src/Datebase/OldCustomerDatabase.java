@@ -22,7 +22,7 @@ public class OldCustomerDatabase {
     }
     
     
-    public static void enterMonthlyReading(String meterCode, int currentReading){
+    public static void enterMonthlyReading(String meterCode, int currentReading, int tariff, double moneyValue){
         
         int pastReading = getLastReading(meterCode);
         int consumption = currentReading - pastReading;
@@ -30,16 +30,18 @@ public class OldCustomerDatabase {
         try(
             Connection connect = DbConnection.connect();
             PreparedStatement ps = connect.prepareStatement("insert into OldCustomer "
-                    + "(GovernmentCode, MeterCode, PastReading, CurrentReading, Consumption, Status, DateOfBill) "
-                    + "values(?, ?, ?, ?, ?, 'Unpaid', ?)");
+                    + "(GovernmentCode, MeterCode, Tariff, PastReading, CurrentReading, Consumption, MoneyValue, Status, DateOfBill) "
+                    + "values(?, ?, ?, ?, ?, ?, ?, 'Unpaid', ?)");
         ){
             
             ps.setString(1, getGovernmentCodeForMeter(meterCode));
             ps.setString(2, meterCode);
-            ps.setInt(3, pastReading);
-            ps.setInt(4, currentReading);
-            ps.setInt(5, consumption);
-            ps.setString(6, generateNewDateOfBill( getDateOfLastBill(meterCode) ));
+            ps.setInt(3, tariff);
+            ps.setInt(4, pastReading);
+            ps.setInt(5, currentReading);
+            ps.setInt(6, consumption);
+            ps.setDouble(7, moneyValue);
+            ps.setString(8, generateNewDateOfBill( getDateOfLastBill(meterCode) ));
             
             ps.execute();
             
