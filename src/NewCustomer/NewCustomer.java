@@ -18,10 +18,10 @@ public class NewCustomer extends PersonDriver {
     protected void setMeterCode(String governmentCode, String nationalIdNum) {
         
         int latestNumberOfCustomers = NewCustomerDatabase.getNumberOfCustomers() + 1;
-        int random = (int)(Math.random() * 1000);
+        int random = (int)(Math.random() * 100);
         String updatedNumOfCustomers = String.format("%07d", latestNumberOfCustomers);
         
-        this.meterCode = governmentCode + "C" + nationalIdNum.charAt(7) + nationalIdNum.charAt(8) +
+        this.meterCode = String.format("%03d", Integer.parseInt(governmentCode)) + "C" + nationalIdNum.charAt(7) + nationalIdNum.charAt(8) +
                          String.format("%03d", random) + updatedNumOfCustomers;
     }
 
