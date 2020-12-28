@@ -1,6 +1,7 @@
 package Administrator;
+import Person.PersonDriver;
 
-public class Administrator {
+public class Administrator extends PersonDriver {
 
     // Data fields
     private String administratorID;
