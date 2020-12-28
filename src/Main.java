@@ -23,6 +23,7 @@ public class Main {
             
             System.out.print("\n[+] Choose a number(0 to terminate the program): ");
             System.out.flush();
+            System.out.print("\u001b[0K");
             char choice = input.next().charAt(0);
             
             switch (choice) {
