@@ -4,6 +4,8 @@ import java.sql.*;
 
 public class NewCustomerDatabase {
   
+    // --------------------------------------------- Public functions --------------------------------------------- //
+    
     public static void insertNewCustomer(
             
             String name, String nationalID, String address, String email, String governmentCode, String phoneNumber, String gender,
@@ -49,7 +51,8 @@ public class NewCustomerDatabase {
         
     }
     
-    public static String getTypeOfUseFromNC(String meterCode){
+    
+    public static String getTypeOfUseFrom(String meterCode){
         
         try(Connection connect = DbConnection.connect();
             PreparedStatement ps = connect.prepareStatement("SELECT TypeOfUse from NewCustomer where MeterCode = ?");
@@ -57,7 +60,6 @@ public class NewCustomerDatabase {
             
             ps.setString(1, meterCode);
             ResultSet r = ps.executeQuery();
-            
             
             return r.getString("TypeOfUse");
             
@@ -85,7 +87,6 @@ public class NewCustomerDatabase {
             System.out.println(ex.toString());
         }
     
-   
         return result;
     }
     
@@ -111,6 +112,28 @@ public class NewCustomerDatabase {
     }
     
     
+    public static void attachApartmentContract(String filename, String meterCode){
+        
+        String updateSQL = "update NewCustomer set ApartmentContract = ? where MeterCode = ?";
+
+        try(   
+            Connection connect = DbConnection.connect();
+            PreparedStatement ps = connect.prepareStatement(updateSQL)
+        ){
+
+            ps.setBytes(1, readFile(filename));
+            ps.setString(2, meterCode);
+
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    
+    // --------------------------------------------- Private functions --------------------------------------------- //
+    
     private static byte[] readFile(String file) {
         
         ByteArrayOutputStream bos = null;
@@ -133,24 +156,5 @@ public class NewCustomerDatabase {
         return bos != null ? bos.toByteArray() : null;
     }
     
-    
-    public static void attachApartmentContract(String filename, String meterCode){
-        
-        String updateSQL = "update NewCustomer set ApartmentContract = ? where MeterCode = ?";
-
-        try(   
-            Connection connect = DbConnection.connect();
-            PreparedStatement ps = connect.prepareStatement(updateSQL)
-        ){
-
-            ps.setBytes(1, readFile(filename));
-            ps.setString(2, meterCode);
-
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
     
 }
