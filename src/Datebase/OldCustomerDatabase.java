@@ -85,7 +85,7 @@ public class OldCustomerDatabase {
     
     
     public static String getTypeOfUse(String meterCode){
-        return NewCustomerDatabase.getTypeOfUseFrom(meterCode);
+        return NewCustomerDatabase.getTypeOfUse(meterCode);
     }
     
     

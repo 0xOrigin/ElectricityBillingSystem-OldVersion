@@ -52,7 +52,7 @@ public class NewCustomerDatabase {
     }
     
     
-    public static String getTypeOfUseFrom(String meterCode){
+    public static String getTypeOfUse(String meterCode){
         
         try(Connection connect = DbConnection.connect();
             PreparedStatement ps = connect.prepareStatement("SELECT TypeOfUse from NewCustomer where MeterCode = ?");
