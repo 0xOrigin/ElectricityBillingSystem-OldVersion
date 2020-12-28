@@ -20,10 +20,11 @@ public class NewCustomerDriver extends NewCustomer {
     
     public void runDashboard() throws Exception{
         
-        char qContinue, choice;
+        char qContinue;
         
         do {
             
+            char choice;
             viewDashboard();
             
             do {
@@ -46,6 +47,7 @@ public class NewCustomerDriver extends NewCustomer {
             } while (choice != '1');
             
             System.out.print("\n[+]Do you want to perform any additional operation in this dashboard? (y/n): ");
+            System.out.flush();
             qContinue = input.next().charAt(0);
            
         } while (qContinue == 'Y' || qContinue == 'y');
@@ -53,10 +55,12 @@ public class NewCustomerDriver extends NewCustomer {
     }
     
     private static void viewDashboard(){
+        
         clearScreen();
-        System.out.flush();
         printBanner();
         printSelections();
+        System.out.flush();
+        
     }
     
     private static void printBanner(){
@@ -82,14 +86,15 @@ public class NewCustomerDriver extends NewCustomer {
         try {
             
             Robot ro = new Robot();
+            ro.delay(40);
+            ro.setAutoWaitForIdle(true);
+            ro.setAutoDelay(40);
             ro.keyPress(KeyEvent.VK_CONTROL);
-            ro.waitForIdle();
             ro.keyPress(KeyEvent.VK_L);
-            ro.waitForIdle();
             ro.keyRelease(KeyEvent.VK_L);
-            ro.waitForIdle();
             ro.keyRelease(KeyEvent.VK_CONTROL);
-            ro.waitForIdle();
+            System.out.print("\u001b[2K");
+            ro.delay(40);
             
         } catch (AWTException ex) {
             System.out.println(ex.toString());
