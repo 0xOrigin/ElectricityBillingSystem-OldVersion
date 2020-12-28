@@ -6,6 +6,8 @@ import java.awt.AWTException;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import Email.Sendmail;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class NewCustomerDriver extends NewCustomer {
     
@@ -18,7 +20,7 @@ public class NewCustomerDriver extends NewCustomer {
     private char determinesAttachOrNot;
     
     
-    public void runDashboard() throws Exception{
+    public void runDashboard(){
         
         char qContinue;
         
@@ -104,7 +106,7 @@ public class NewCustomerDriver extends NewCustomer {
     }
     
     
-    public void fillNewContract() throws Exception {
+    public void fillNewContract(){
         
         runPersonDriver();
         setMeterCode(getGovernmentCode(), getNationalIdNum());

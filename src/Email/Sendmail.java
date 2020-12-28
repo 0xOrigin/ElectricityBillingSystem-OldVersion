@@ -67,7 +67,7 @@ public class Sendmail {
     //To excute this method type Sendmail.meterReady("xxxx@gmail.com", "name", "materCode");
     
     
-    public static void meterReady(String recepient, String name, String meterCode) throws Exception{
+    public static void meterReady(String recepient, String name, String meterCode){
         
         System.out.println("\n[-] Please wait a moment.");
         
