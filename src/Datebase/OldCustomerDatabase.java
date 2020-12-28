@@ -3,6 +3,38 @@ import java.sql.*;
 
 public class OldCustomerDatabase {
     
+    
+    public static String[] getFirstUnpaidBillInfo(String meterCode){
+        
+        String[] billInfo = new String[7];
+        
+        try(
+            Connection connect = DbConnection.connect();
+            PreparedStatement ps = connect.prepareStatement("SELECT GovernmentCode, PastReading, CurrentReading, Consumption, Tariff, MoneyValue, DateOfBill FROM OldCustomer " +
+                                    "WHERE MeterCode = ? and Status = 'Unpaid' ORDER by Num LIMIT 1");
+        ){
+            
+            ps.setString(1, meterCode);
+            
+            ResultSet r = ps.executeQuery();
+            r.next();
+            
+            billInfo[0] = r.getString("GovernmentCode");
+            billInfo[1] = String.valueOf(r.getInt("PastReading"));
+            billInfo[2] = String.valueOf(r.getInt("CurrentReading"));
+            billInfo[3] = String.valueOf(r.getInt("Consumption"));
+            billInfo[4] = String.valueOf(r.getInt("Tariff"));
+            billInfo[5] = String.valueOf(r.getDouble("MoneyValue"));
+            billInfo[6] = r.getString("DateOfBill");
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return billInfo;
+    }
+    
+    
     public static void payBill(String meterCode){
         
         try(   
