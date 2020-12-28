@@ -1,6 +1,5 @@
 package Datebase;
 import java.sql.*;
-import Datebase.OldCustomerDatabase;
 
 public class AdministratorDatabase {
 
