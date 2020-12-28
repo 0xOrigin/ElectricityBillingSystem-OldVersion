@@ -33,6 +33,7 @@ public class NewCustomerDriver extends NewCustomer {
                 
                 System.out.print("\n[+] Choose a number(0 to return to main menu): ");
                 System.out.flush();
+                System.out.print("\u001b[0K");
                 choice = input.next().charAt(0);
 
                 switch (choice) {
