@@ -75,7 +75,8 @@ public class NewCustomerDatabase {
         
         int result = 0;
         
-        try(Connection connect = DbConnection.connect();
+        try(
+            Connection connect = DbConnection.connect();
             PreparedStatement ps = connect.prepareStatement("SELECT count(*) from NewCustomer");
         ){
             
@@ -88,6 +89,27 @@ public class NewCustomerDatabase {
         }
     
         return result;
+    }
+    
+    
+    public static String getEmail(String meterCode){
+        
+        try(
+            Connection connect = DbConnection.connect();
+            PreparedStatement ps = connect.prepareStatement("SELECT Email from NewCustomer where MeterCode = ?");
+        ){
+            
+            ps.setString(1, meterCode);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            
+            return rs.getString("MeterCode");
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+
+        return "";
     }
     
     
