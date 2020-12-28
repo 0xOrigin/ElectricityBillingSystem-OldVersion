@@ -149,4 +149,37 @@ public class AdministratorDatabase {
         
     }
     
+    
+    public static String[] consumptionStatForSpecificRegion(String governmentCode){
+        
+        String[] statisticsData = new String[3];
+    
+        try(   
+            Connection connect = DbConnection.connect();
+            PreparedStatement ps1 = connect.prepareStatement("SELECT sum(Consumption) FROM OldCustomer where GovernmentCode = ?");
+            PreparedStatement ps2 = connect.prepareStatement("SELECT count(DISTINCT MeterCode) FROM OldCustomer "
+                                    + "where (PastReading != 0 or CurrentReading != 0) and GovernmentCode = ?");
+        ){
+            
+            ps1.setString(1, governmentCode);
+            ps2.setString(1, governmentCode);
+            
+            ResultSet rs1 =  ps1.executeQuery();
+            ResultSet rs2 = ps2.executeQuery();
+            
+            statisticsData[0] = String.valueOf(rs1.getInt(1)); // Sum of Consumptions
+            statisticsData[1] = String.valueOf(rs2.getInt(1)); // Actual number of consumers
+            
+            if(!statisticsData[1].equals("0"))
+                statisticsData[2] = String.valueOf((double) rs1.getInt(1) / rs2.getInt(1));  // Average consumption for this region
+            else
+                statisticsData[2] = "0";
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return statisticsData;
+    }
+    
 }
