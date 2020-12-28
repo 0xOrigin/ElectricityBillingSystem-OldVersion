@@ -6,8 +6,6 @@ import java.awt.AWTException;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import Email.Sendmail;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class NewCustomerDriver extends NewCustomer {
     
@@ -97,7 +95,7 @@ public class NewCustomerDriver extends NewCustomer {
             System.out.print("\u001b[1K");
             ro.keyRelease(KeyEvent.VK_CONTROL);
             System.out.print("\u001b[2K");
-            ro.delay(20);
+            ro.delay(10);
             
         } catch (AWTException ex) {
             System.out.println(ex.toString());
