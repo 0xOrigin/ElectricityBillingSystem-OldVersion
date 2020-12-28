@@ -10,7 +10,7 @@ public class Sendmail {
     
     //This method will send email if customer didn't pay for three months
     
-    public static void unPaidEmail(String recepient, String name, String meterCode) throws Exception{
+    public static void unpaidEmail(String recepient, String name, String meterCode) throws Exception{
         
         
         try {
