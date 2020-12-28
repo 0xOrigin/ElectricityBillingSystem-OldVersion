@@ -6,6 +6,8 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.util.*;
 import Datebase.OldCustomerDatabase;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
         
 public class Main {
@@ -84,15 +86,15 @@ public class Main {
         try {
             
             Robot ro = new Robot();
-            ro.delay(40);
             ro.setAutoWaitForIdle(true);
-            ro.setAutoDelay(40);
+            ro.setAutoDelay(10);
             ro.keyPress(KeyEvent.VK_CONTROL);
             ro.keyPress(KeyEvent.VK_L);
             ro.keyRelease(KeyEvent.VK_L);
+            System.out.print("\u001b[1K");
             ro.keyRelease(KeyEvent.VK_CONTROL);
             System.out.print("\u001b[2K");
-            ro.delay(40);
+            ro.delay(20);
            
         } catch (AWTException ex) {
             System.out.println(ex.toString());
