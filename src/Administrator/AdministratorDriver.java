@@ -1,6 +1,6 @@
 package Administrator;
 
-public class AdministratorDriver {
+public class AdministratorDriver extends Administrator {
 
     
     public void runDashboard(){
