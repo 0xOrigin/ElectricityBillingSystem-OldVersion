@@ -57,6 +57,8 @@ public class OldCustomerDatabase {
     
     public static void enterMonthlyReading(String meterCode, int currentReading, int tariff, double moneyValue){
         
+        // Creating a new bill
+        
         int pastReading = getLastReading(meterCode);
         int consumption = currentReading - pastReading;
         
