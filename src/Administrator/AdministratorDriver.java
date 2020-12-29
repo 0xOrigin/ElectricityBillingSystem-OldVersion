@@ -213,7 +213,7 @@ public class AdministratorDriver extends Administrator {
     }
 
     public void deleteOperator(String operatorID) {
-        if (AdministratorDatabase.isAdministratorIDExists(operatorID) == true && "Operator".equals(AdministratorDatabase.getAdministratorRole(operatorID))) {
+        if (AdministratorDatabase.isAdministratorIdExists(operatorID) == true && "Operator".equals(AdministratorDatabase.getAdministratorRole(operatorID))) {
             AdministratorDatabase.deleteAdministrator(operatorID);
             System.out.println("\t       The Operator Deleted Successfully.");
         } else {
@@ -222,7 +222,7 @@ public class AdministratorDriver extends Administrator {
     }
 
     public void deleteAdministrator(String administratorID) {
-        if (AdministratorDatabase.isAdministratorIDExists(administratorID) == true && "Administrator".equals(AdministratorDatabase.getAdministratorRole(administratorID))) {
+        if (AdministratorDatabase.isAdministratorIdExists(administratorID) == true && "Administrator".equals(AdministratorDatabase.getAdministratorRole(administratorID))) {
             AdministratorDatabase.deleteAdministrator(administratorID);
             System.out.println("\t       The Administrator Deleted Successfully.");
         } else {
@@ -309,7 +309,7 @@ public class AdministratorDriver extends Administrator {
     }
 
     public void updateOperator(final String columnName, String value, String operatorID) {
-        if (AdministratorDatabase.isAdministratorIDExists(operatorID) == true) {
+        if (AdministratorDatabase.isAdministratorIdExists(operatorID) == true) {
             AdministratorDatabase.updateAdministrator(columnName, value, operatorID);
             System.out.println("\t       The Operator Updated Successfully.");
         } else {
@@ -318,7 +318,7 @@ public class AdministratorDriver extends Administrator {
     }
 
     public void updateAdministrator(final String columnName, String value, String administratorID) {
-        if (AdministratorDatabase.isAdministratorIDExists(administratorID) == true) {
+        if (AdministratorDatabase.isAdministratorIdExists(administratorID) == true) {
             AdministratorDatabase.updateAdministrator(columnName, value, administratorID);
             System.out.println("\t       The Administrator Updated Successfully.");
         } else {
