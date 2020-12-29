@@ -79,7 +79,7 @@ public class AdministratorDriver extends Administrator {
     private static void printSelections() {
 
         System.out.println("\n[-] What do you want to do?\n");
-        System.out.println("\t     [1] - Add User ");
+        System.out.println("\n\t     [1] - Add User ");
         System.out.println("\t     [2] - Delete User ");
         System.out.println("\t     [3] - Update User ");
         System.out.println("\t     [4] - View Total Collected ");
@@ -114,7 +114,7 @@ public class AdministratorDriver extends Administrator {
     private void addUser() {
         char choice_2, q2Continue;
         do {
-            System.out.println("\t     [1] - Add New Customer ");
+            System.out.println("\n\t     [1] - Add New Customer ");
             System.out.println("\t     [2] - Add New Operator ");
             System.out.println("\t     [3] - Add New Administrator ");
 
@@ -145,15 +145,25 @@ public class AdministratorDriver extends Administrator {
 
     private void addNewCustomer() {
         NewCustomerDriver newCustomer = new NewCustomerDriver();
-        newCustomer.runDashboard();
+        newCustomer.fillNewContract();
     }
 
     private void addNewOperator() {
-
+        runPersonDriver();
+        setAdministratorID(getGovernmentCode() , getNationalIdNum());
+        setAdministratorRole("Operator");
+        String password = input.next();
+        setAdministratorPass(password);
+        pushAllNewAdministratorInfoToDB();
     }
 
     private void addNewAdministrator() {
-
+        runPersonDriver();
+        setAdministratorID(getGovernmentCode() , getNationalIdNum());
+        setAdministratorRole("Administrator");
+        String password = input.next();
+        setAdministratorPass(password);
+        pushAllNewAdministratorInfoToDB();
     }
 
     /**
@@ -166,7 +176,7 @@ public class AdministratorDriver extends Administrator {
         char choice_2, q2Continue;
         String administratorID, meterCode, operatorID;
         do {
-            System.out.println("\t     [1] - Delete  Customer");
+            System.out.println("\n\t     [1] - Delete  Customer");
             System.out.println("\t     [2] - Delete  Operator");
             System.out.println("\t     [3] - Delete  Addminstrator");
             System.out.print("\n[+] Choose a number(0 to return to main menu): ");
@@ -175,19 +185,19 @@ public class AdministratorDriver extends Administrator {
             choice_2 = input.next().charAt(0);
             switch (choice_2) {
                 case '1': {
-                    System.out.print("\t      Enter Meter Code: ");
+                    System.out.print("\n\t      Enter Meter Code: ");
                     meterCode = input.next();
                     deleteCustomer(meterCode);
                     break;
                 }
                 case '2': {
-                    System.out.print("\t      Enter Operator ID: ");
+                    System.out.print("\n\t      Enter Operator ID: ");
                     operatorID = input.next();
                     deleteOperator(operatorID);
                     break;
                 }
                 case '3': {
-                    System.out.print("\t      Enter Administrator ID: ");
+                    System.out.print("\n\t      Enter Administrator ID: ");
                     administratorID = input.next();
                     deleteAdministrator(administratorID);
                     break;
@@ -206,27 +216,27 @@ public class AdministratorDriver extends Administrator {
     public void deleteCustomer(String meterCode) {
         if (NewCustomerDatabase.isMeterCodeExists(meterCode) == true) {
             AdministratorDatabase.deleteCustomer(meterCode);
-            System.out.println("\t       The Customer Deleted Successfully.");
+            System.out.println("\n\t       The Customer Deleted Successfully.");
         } else {
-            System.out.println("\t      The Meter Code \"" + meterCode + "\" Does Not Exists");
+            System.out.println("\n\t      The Meter Code \"" + meterCode + "\" Does Not Exists");
         }
     }
 
     public void deleteOperator(String operatorID) {
         if (AdministratorDatabase.isAdministratorIdExists(operatorID) == true && "Operator".equals(AdministratorDatabase.getAdministratorRole(operatorID))) {
             AdministratorDatabase.deleteAdministrator(operatorID);
-            System.out.println("\t       The Operator Deleted Successfully.");
+            System.out.println("\n\t       The Operator Deleted Successfully.");
         } else {
-            System.out.println("\t      The Operator \"" + operatorID + "\" Does Not Exists");
+            System.out.println("\n\t      The Operator \"" + operatorID + "\" Does Not Exists");
         }
     }
 
     public void deleteAdministrator(String administratorID) {
         if (AdministratorDatabase.isAdministratorIdExists(administratorID) == true && "Administrator".equals(AdministratorDatabase.getAdministratorRole(administratorID))) {
             AdministratorDatabase.deleteAdministrator(administratorID);
-            System.out.println("\t       The Administrator Deleted Successfully.");
+            System.out.println("\n\t       The Administrator Deleted Successfully.");
         } else {
-            System.out.println("\t      The Administrator \"" + administratorID + "\" Does Not Exists");
+            System.out.println("\n\t      The Administrator \"" + administratorID + "\" Does Not Exists");
         }
     }
 
@@ -239,7 +249,7 @@ public class AdministratorDriver extends Administrator {
     private void updateUser() {
         char choice_2, q2Continue;
         do {
-            System.out.println("\t     [1] - Update Customer ");
+            System.out.println("\n\t     [1] - Update Customer ");
             System.out.println("\t     [2] - Update Operator ");
             System.out.println("\t     [3] - Update Addminstrator ");
             System.out.print("\n[+] Choose a number(0 to return to main menu): ");
@@ -251,7 +261,7 @@ public class AdministratorDriver extends Administrator {
                     String meterCode, value;
                     final String columnName;
 
-                    System.out.print("\t      Enter Meter Code: ");
+                    System.out.print("\n\t      Enter Meter Code: ");
                     meterCode = input.next();
                     System.out.print("\n\t      Enter Value: ");
                     value = input.next();
@@ -264,7 +274,7 @@ public class AdministratorDriver extends Administrator {
                     String operatorID, value;
                     final String columnName;
 
-                    System.out.print("\t      Enter Operator ID: ");
+                    System.out.print("\n\t      Enter Operator ID: ");
                     operatorID = input.next();
                     System.out.print("\n\t      Enter Value: ");
                     value = input.next();
@@ -278,7 +288,7 @@ public class AdministratorDriver extends Administrator {
                     String administratorID, value;
                     final String columnName;
 
-                    System.out.print("\t      Enter Administrator ID: ");
+                    System.out.print("\n\t      Enter Administrator ID: ");
                     administratorID = input.next();
                     System.out.print("\n\t      Enter Value: ");
                     value = input.next();
@@ -302,27 +312,27 @@ public class AdministratorDriver extends Administrator {
     public void updateCustomer(final String columnName, String value, String meterCode) {
         if (NewCustomerDatabase.isMeterCodeExists(meterCode) == true) {
             AdministratorDatabase.updateCustomer(columnName, value, meterCode);
-            System.out.println("\t       The Customer Updated Successfully.");
+            System.out.println("\n\t       The Customer Updated Successfully.");
         } else {
-            System.out.println("\t      The Meter Code \"" + meterCode + "\" Does Not Exists");
+            System.out.println("\n\t      The Meter Code \"" + meterCode + "\" Does Not Exists");
         }
     }
 
     public void updateOperator(final String columnName, String value, String operatorID) {
-        if (AdministratorDatabase.isAdministratorIdExists(operatorID) == true) {
+        if (AdministratorDatabase.isAdministratorIdExists(operatorID) == true && "Operator".equals(AdministratorDatabase.getAdministratorRole(operatorID))) {
             AdministratorDatabase.updateAdministrator(columnName, value, operatorID);
-            System.out.println("\t       The Operator Updated Successfully.");
+            System.out.println("\n\t       The Operator Updated Successfully.");
         } else {
-            System.out.println("\t      The Operator \"" + operatorID + "\" Does Not Exists");
+            System.out.println("\n\t      The Operator \"" + operatorID + "\" Does Not Exists");
         }
     }
 
     public void updateAdministrator(final String columnName, String value, String administratorID) {
-        if (AdministratorDatabase.isAdministratorIdExists(administratorID) == true) {
+        if (AdministratorDatabase.isAdministratorIdExists(administratorID) == true && "Administrator".equals(AdministratorDatabase.getAdministratorRole(administratorID))) {
             AdministratorDatabase.updateAdministrator(columnName, value, administratorID);
-            System.out.println("\t       The Administrator Updated Successfully.");
+            System.out.println("\n\t       The Administrator Updated Successfully.");
         } else {
-            System.out.println("\t      The Administrator \"" + administratorID + "\" Does Not Exists");
+            System.out.println("\n\t      The Administrator \"" + administratorID + "\" Does Not Exists");
         }
     }
     /**
