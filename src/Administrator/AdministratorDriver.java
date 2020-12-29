@@ -35,11 +35,11 @@ public class AdministratorDriver extends Administrator {
     }
 
     /*
-        -------------------- Administrator Dash Board --------------------
-        -------------------- Administrator Dash Board --------------------
-        -------------------- Administrator Dash Board --------------------
-        -------------------- Administrator Dash Board --------------------
-        -------------------- Administrator Dash Board --------------------
+        -------------------- Administrator DashBoard --------------------
+        -------------------- Administrator DashBoard --------------------
+        -------------------- Administrator DashBoard --------------------
+        -------------------- Administrator DashBoard --------------------
+        -------------------- Administrator DashBoard --------------------
     
      */
     private void runAdminDashboard() {
@@ -132,11 +132,11 @@ public class AdministratorDriver extends Administrator {
     }
 
     /*
-        -------------------- End Administrator Dash Board --------------------
-        -------------------- End Administrator Dash Board --------------------
-        -------------------- End Administrator Dash Board --------------------
-        -------------------- End Administrator Dash Board --------------------
-        -------------------- End Administrator Dash Board --------------------
+        -------------------- End Of Administrator DashBoard --------------------
+        -------------------- End Of Administrator DashBoard --------------------
+        -------------------- End Of Administrator DashBoard --------------------
+        -------------------- End Of Administrator DashBoard --------------------
+        -------------------- End Of Administrator DashBoard --------------------
      */
  /*-------------------------------------------------------------------
     -------------------------------------------------------------------
@@ -146,11 +146,11 @@ public class AdministratorDriver extends Administrator {
     -------------------------------------------------------------------
     -------------------------------------------------------------------*/
  /*
-        -------------------- Operator Dash Board --------------------
-        -------------------- Operator Dash Board --------------------
-        -------------------- Operator Dash Board --------------------
-        -------------------- Operator Dash Board --------------------
-        -------------------- Operator Dash Board --------------------
+        -------------------- Operator DashBoard --------------------
+        -------------------- Operator DashBoard --------------------
+        -------------------- Operator DashBoard --------------------
+        -------------------- Operator DashBoard --------------------
+        -------------------- Operator DashBoard --------------------
     
      */
     private void runOperatorDashboard() {
@@ -225,11 +225,11 @@ public class AdministratorDriver extends Administrator {
     }
 
     /*
-        -------------------- End Operator Dash Board --------------------
-        -------------------- End Operator Dash Board --------------------
-        -------------------- End Operator Dash Board --------------------
-        -------------------- End Operator Dash Board --------------------
-        -------------------- End Operator Dash Board --------------------
+        -------------------- End Of Operator DashBoard --------------------
+        -------------------- End Of Operator DashBoard --------------------
+        -------------------- End Of Operator DashBoard --------------------
+        -------------------- End Of Operator DashBoard --------------------
+        -------------------- End Of Operator DashBoard --------------------
     
      */
  /*-------------------------------------------------------------------
@@ -593,11 +593,11 @@ public class AdministratorDriver extends Administrator {
         } while (q2Continue == 'Y' || q2Continue == 'y');
     }
     /*
-        -------------------- End Administrator Code --------------------
-        -------------------- End Administrator Code --------------------
-        -------------------- End Administrator Code --------------------
-        -------------------- End Administrator Code --------------------
-        -------------------- End Administrator Code --------------------
+        -------------------- End Of Administrator Code --------------------
+        -------------------- End Of Administrator Code --------------------
+        -------------------- End Of Administrator Code --------------------
+        -------------------- End Of Administrator Code --------------------
+        -------------------- End Of Administrator Code --------------------
      */
  /*-------------------------------------------------------------------
     -------------------------------------------------------------------
