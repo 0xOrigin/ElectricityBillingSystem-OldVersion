@@ -42,7 +42,7 @@ public class OldCustomerDriver extends OldCustomer {
                         meterCode= enterMeterCode();
                          System.out.println("\n[-]Enter your complain about "+firstUnpaidMoneyValueString(meterCode)+"$: ");
                          String complain=input.nextLine();
-                         complainAboutBill(meterCode, complain);
+                         complainAboutBill( complain,meterCode);
                         break;
                     case '0':
                         return;
@@ -66,21 +66,23 @@ public class OldCustomerDriver extends OldCustomer {
     }
     public  void payBills(String meterCode){
         
-            System.out.println("\n[-]You have "+ unpaidBillsCount( meterCode)+" unpaid bills.");//Print number of unpaid bills
-            
             if (haveUnpaidBills(meterCode)==true)
             {
+                System.out.println("\n[+]Your Bill Information");
+                System.out.println("\n\t[-]Government Code: "+getFirstUnpaidGovCode(meterCode));
+                System.out.println("\n\t[-]Past Reading: "+getFirstUnpaidPastReading(meterCode));
+                System.out.println("\n\t[-]Current Reading: "+getFirstUnpaidCurrentReading(meterCode));
+                System.out.println("\n\t[-]Consumption: "+getFirstUnpaidConsumption(meterCode));
+                System.out.println("\n\t[-]Tariff: "+getFirstUnpaidTariff(meterCode));
+                System.out.println("\n\t[-]Date Of Bill: "+getFirstUnpaidDateOfBill(meterCode));
                 System.out.println("\n[-]Do you want to pay "+firstUnpaidMoneyValueString(meterCode)+"$ ? (1 = Yes / 0 = No)");
                 int choice1=input.nextInt();
                 input.nextLine();
-                
-                
                 if (choice1==0)
                 {
                     System.out.println("[-]Do you want to complain about the bill? (1 = Yes / 0 = No)");
                     int choice2=input.nextInt();
                     input.nextLine();
-                    
                     if (choice2==1)
                     {
                         System.out.println("[-]Please Enter your complain: ");
@@ -97,6 +99,7 @@ public class OldCustomerDriver extends OldCustomer {
             }
             else
             {
+                System.out.println("\n[-]You have no unpaid bills");
                 return;
             }
         
@@ -108,11 +111,10 @@ public class OldCustomerDriver extends OldCustomer {
     {
         
         
-        if (true/*if the current reading is true*/)//Should be edited later
+        if (true/*if the current reading is true*/)
         {
             super.enterMonthlyReading(meterCode, currentReading, tariff, moneyValue);
         }
-        
         else
         {
             System.out.println("\n\nPlease enter valid reading.");
