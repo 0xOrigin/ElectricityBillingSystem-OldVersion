@@ -1,7 +1,6 @@
 package Administrator;
 
 import Datebase.*;
-import Person.*;
 import NewCustomer.*;
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -10,15 +9,44 @@ import java.util.*;
 
 public class AdministratorDriver extends Administrator {
 
+    private String administratorID;
+    private String administratorPass;
+
+    private char qContinue, choice;
     Scanner input = new Scanner(System.in);
 
     public void runDashboard() {
-        char qContinue;
+
+        System.out.print("\n\t[+] Enter administrator ID: ");
+        administratorID = input.nextLine();
+        administratorID = AdministratorID_Val(administratorID);
+
+        System.out.print("\n\t[+] Enter administrator password: ");
+        administratorPass = input.nextLine();
+
+        String choiceDashboard = loginForm(administratorID, administratorPass);
+
+        if (choiceDashboard.equals("Administrator")) {
+            runAdminDashboard();
+        } else {
+            runOperatorDashboard();
+        }
+
+    }
+
+    /*
+        -------------------- Administrator Dash Board --------------------
+        -------------------- Administrator Dash Board --------------------
+        -------------------- Administrator Dash Board --------------------
+        -------------------- Administrator Dash Board --------------------
+        -------------------- Administrator Dash Board --------------------
+    
+     */
+    private void runAdminDashboard() {
 
         do {
 
-            char choice;
-            viewDashboard();
+            viewAdminDashboard();
 
             do {
 
@@ -26,6 +54,7 @@ public class AdministratorDriver extends Administrator {
                 System.out.flush();
                 System.out.print("\u001b[0K");
                 choice = input.next().charAt(0);
+
                 switch (choice) {
                     /*case [1] Add User -> (Operator || Customer || Administrator)? */
                     case '1':
@@ -40,6 +69,20 @@ public class AdministratorDriver extends Administrator {
                     case '3':
                         updateUser();
                         break;
+                    case '4':
+                        System.out.println("\n      The Total Collected : " + AdministratorDatabase.viewTotalCollected());
+                        break;
+                    case '5':
+                        //view bills of specific region
+                        //view bills of specific region
+                        //view bills of specific region
+                        //view bills of specific region
+                        //view bills of specific region
+                        //view bills of specific region
+                        break;
+                    case '6':
+                        consumptionStatForSpecificRegion();
+                        break;
                     case '0':
                         return;
                     default:
@@ -47,9 +90,9 @@ public class AdministratorDriver extends Administrator {
                         break;
                 }
 
-            } while (choice != '1');
+            } while (choice != '1' && choice != '2' && choice != '3' && choice != '4' && choice != '5' && choice != '6');
 
-            System.out.print("\n[+]Do you want to perform any additional operation in this dashboard? (y/n): ");
+            System.out.print("\n[+] Do you want to perform any additional operation in this dashboard? (y/n): ");
             System.out.flush();
             qContinue = input.next().charAt(0);
 
@@ -57,26 +100,26 @@ public class AdministratorDriver extends Administrator {
 
     }
 
-    private static void viewDashboard() {
+    private static void viewAdminDashboard() {
 
         clearScreen();
-        printBanner();
-        printSelections();
+        printAdminBanner();
+        printAdminSelections();
         System.out.flush();
 
     }
 
-    private static void printBanner() {
+    private static void printAdminBanner() {
 
         System.out.println("\n\t\t  ——————————————————————————————");
         System.out.print("\t\t |  Electricity Billing System  |\n");
         System.out.println("\t\t  ——————————————————————————————\n");
-        System.out.println("\t     [-] Welcome in Administration Dashboard [-]");
-        System.out.println("\t    ———————————————————————————————————————————");
+        System.out.println("\t\t[-] Welcome in Admin Dashboard [-]");
+        System.out.println("\t\t——————————————————————————————————");
 
     }
 
-    private static void printSelections() {
+    private static void printAdminSelections() {
 
         System.out.println("\n[-] What do you want to do?\n");
         System.out.println("\n\t     [1] - Add User ");
@@ -84,9 +127,118 @@ public class AdministratorDriver extends Administrator {
         System.out.println("\t     [3] - Update User ");
         System.out.println("\t     [4] - View Total Collected ");
         System.out.println("\t     [5] - View All Bills Of Specific Regions. ");
+        System.out.println("\t     [6] - Make Consumption Statistics For Specific Regions. ");
 
     }
 
+    /*
+        -------------------- End Administrator Dash Board --------------------
+        -------------------- End Administrator Dash Board --------------------
+        -------------------- End Administrator Dash Board --------------------
+        -------------------- End Administrator Dash Board --------------------
+        -------------------- End Administrator Dash Board --------------------
+     */
+ /*-------------------------------------------------------------------
+    -------------------------------------------------------------------
+    -------------------------------------------------------------------
+    -------------------------------------------------------------------
+    -------------------------------------------------------------------
+    -------------------------------------------------------------------
+    -------------------------------------------------------------------*/
+ /*
+        -------------------- Operator Dash Board --------------------
+        -------------------- Operator Dash Board --------------------
+        -------------------- Operator Dash Board --------------------
+        -------------------- Operator Dash Board --------------------
+        -------------------- Operator Dash Board --------------------
+    
+     */
+    private void runOperatorDashboard() {
+
+        do {
+
+            viewOperatorDashboard();
+
+            do {
+
+                System.out.print("\n[+] Choose a number(0 to return to main menu): ");
+                System.out.flush();
+                System.out.print("\u001b[0K");
+                choice = input.next().charAt(0);
+
+                switch (choice) {
+                    case '1':
+
+                        break;
+                    case '2':
+
+                        break;
+                    case '3':
+
+                        break;
+                    case '4':
+
+                        break;
+                    case '0':
+                        return;
+                    default:
+                        System.out.println("\n[-] Enter a valid choice.");
+                        break;
+                }
+
+            } while (choice != '1' && choice != '2' && choice != '3' && choice != '4');
+
+            System.out.print("\n[+] Do you want to perform any additional operation in this dashboard? (y/n): ");
+            System.out.flush();
+            qContinue = input.next().charAt(0);
+
+        } while (qContinue == 'Y' || qContinue == 'y');
+
+    }
+
+    private static void viewOperatorDashboard() {
+
+        clearScreen();
+        printOperatorBanner();
+        printOperatorSelections();
+        System.out.flush();
+
+    }
+
+    private static void printOperatorBanner() {
+
+        System.out.println("\n\t\t  ——————————————————————————————");
+        System.out.print("\t\t |  Electricity Billing System  |\n");
+        System.out.println("\t\t  ——————————————————————————————\n");
+        System.out.println("\t      [-] Welcome in Operator Dashboard [-]");
+        System.out.println("\t      —————————————————————————————————————");
+
+    }
+
+    private static void printOperatorSelections() {
+
+        System.out.println("\n[-] What do you want to do?\n");
+        System.out.println("\t     [1] - Collect payments from customer.\n");
+        System.out.println("\t     [2] - Print bill with meter code.\n");
+        System.out.println("\t     [3] - View bills of specific region.\n");
+        System.out.println("\t     [4] - Stop meter and cancel subscription for customer.");
+    }
+
+    /*
+        -------------------- End Operator Dash Board --------------------
+        -------------------- End Operator Dash Board --------------------
+        -------------------- End Operator Dash Board --------------------
+        -------------------- End Operator Dash Board --------------------
+        -------------------- End Operator Dash Board --------------------
+    
+     */
+ /*-------------------------------------------------------------------
+    -------------------------------------------------------------------
+    -------------------------------------------------------------------
+    -------------------------------------------------------------------
+    -------------------------------------------------------------------
+    -------------------------------------------------------------------
+    -------------------------------------------------------------------*/
     private static void clearScreen() {
 
         try {
@@ -105,6 +257,55 @@ public class AdministratorDriver extends Administrator {
         } catch (AWTException ex) {
             System.out.println(ex.toString());
         }
+
+    }
+
+    private String loginForm(String administratorID, String administratorPass) {
+
+        do {
+
+            if (loginValidator(administratorID, administratorPass)) {
+                return getAdministratorRole(administratorID);
+            } else {
+
+                System.out.print("\n[+] Enter a valid administrator password: ");
+                administratorPass = input.nextLine();
+
+            }
+
+        } while (true);
+
+    }
+
+    /*-------------------------------------------------------------------
+    -------------------------------------------------------------------
+    -------------------------------------------------------------------
+    -------------------------------------------------------------------
+    -------------------------------------------------------------------
+    -------------------------------------------------------------------
+    -------------------------------------------------------------------*/
+
+ /*
+        -------------------- Administrator Code --------------------
+        -------------------- Administrator Code --------------------
+        -------------------- Administrator Code --------------------
+        -------------------- Administrator Code --------------------
+        -------------------- Administrator Code --------------------
+     */
+    private String AdministratorID_Val(String administratorID) {
+
+        do {
+
+            if (isAdministratorIdExists(administratorID)) {
+                return administratorID;
+            } else {
+
+                System.out.print("\n[+] Enter a valid administrator ID: ");
+                administratorID = input.nextLine();
+
+            }
+
+        } while (true);
 
     }
 
@@ -132,12 +333,14 @@ public class AdministratorDriver extends Administrator {
                 case '3':
                     addNewAdministrator();
                     break;
+                case '0':
+                    return;
                 default:
                     System.out.println("\n[-] Enter a valid choice.");
                     break;
             }
 
-            System.out.print("\n[+]Do you want to Add another User? (y/n): ");
+            System.out.print("\n[+] Do you want to Add another User? (y/n): ");
             System.out.flush();
             q2Continue = input.next().charAt(0);
         } while (q2Continue == 'Y' || q2Continue == 'y');
@@ -150,8 +353,9 @@ public class AdministratorDriver extends Administrator {
 
     private void addNewOperator() {
         runPersonDriver();
-        setAdministratorID(getGovernmentCode() , getNationalIdNum());
+        setAdministratorID(getGovernmentCode(), getNationalIdNum());
         setAdministratorRole("Operator");
+        System.out.print("\n\t     [+] Enter Your Password : ");
         String password = input.next();
         setAdministratorPass(password);
         pushAllNewAdministratorInfoToDB();
@@ -159,8 +363,9 @@ public class AdministratorDriver extends Administrator {
 
     private void addNewAdministrator() {
         runPersonDriver();
-        setAdministratorID(getGovernmentCode() , getNationalIdNum());
+        setAdministratorID(getGovernmentCode(), getNationalIdNum());
         setAdministratorRole("Administrator");
+        System.out.print("\n\t     [+] Enter Your Password : ");
         String password = input.next();
         setAdministratorPass(password);
         pushAllNewAdministratorInfoToDB();
@@ -202,6 +407,8 @@ public class AdministratorDriver extends Administrator {
                     deleteAdministrator(administratorID);
                     break;
                 }
+                case '0':
+                    return;
                 default:
                     System.out.println("\n[-] Enter a valid choice.");
                     break;
@@ -297,7 +504,8 @@ public class AdministratorDriver extends Administrator {
                     updateAdministrator(columnName, value, administratorID);
                     break;
                 }
-
+                case '0':
+                    return;
                 default:
                     System.out.println("\n[-] Enter a valid choice.");
                     break;
@@ -321,9 +529,9 @@ public class AdministratorDriver extends Administrator {
     public void updateOperator(final String columnName, String value, String operatorID) {
         if (AdministratorDatabase.isAdministratorIdExists(operatorID) == true && "Operator".equals(AdministratorDatabase.getAdministratorRole(operatorID))) {
             AdministratorDatabase.updateAdministrator(columnName, value, operatorID);
-            System.out.println("\n\t       The Operator Updated Successfully.");
+            System.out.println("\n\t       [-] The Operator Updated Successfully.");
         } else {
-            System.out.println("\n\t      The Operator \"" + operatorID + "\" Does Not Exists");
+            System.out.println("\n\t      [-] The Operator \"" + operatorID + "\" Does Not Exists");
         }
     }
 
@@ -335,8 +543,68 @@ public class AdministratorDriver extends Administrator {
             System.out.println("\n\t      The Administrator \"" + administratorID + "\" Does Not Exists");
         }
     }
+
     /**
      ******************END OF Update USER****************
      */
+    private void consumptionStatForSpecificRegion() {
+        char q2Continue;
+        System.out.println("\n-------------------------------------------------------------------------------------------------");
+        String[][] governmentCodes = {{"02", "Cairo"}, {"013", "Qalyubia"}, {"03", "Alexandria"}, {"040", "Gharbia"}, {"048", "Monufia"}, {"055", "Sharqia"}, {"062", "Suez"}, {"064", "Ismailia"},
+        {"046", "Matruh"}, {"066", "Port Said"}, {"068", "North Sinai"}, {"069", "South Sinai"}, {"050", "Dakahlia"}, {"045", "Beheira"}, {"057", "Damietta"}, {"047", "Kafr El Sheikh"},
+        {"092", "New Valley"}, {"065", "Red Sea"}, {"084", "Faiyum"}, {"082", "Beni Suef"}, {"086", "Minya"}, {"088", "Asyut"}, {"093", "Sohag"}, {"095", "Luxor"},
+        {"096", "Qena"}, {"097", "Aswan"}};
+        for (int i = 0; i < 22; i += 3) {
+            System.out.printf("| %20s -> %5s |", governmentCodes[i][1], governmentCodes[i][0]);
+            System.out.printf(" %20s -> %5s ", governmentCodes[i + 1][1], governmentCodes[i + 1][0]);
+            System.out.printf("| %20s -> %5s |\n", governmentCodes[i + 2][1], governmentCodes[i + 2][0]);
+
+        }
+        System.out.printf("| %20s -> %5s |", governmentCodes[24][1], governmentCodes[24][0]);
+        System.out.printf(" %20s -> %5s ", governmentCodes[25][1], governmentCodes[25][0]);
+        System.out.printf("| %29s |", "");
+
+        System.out.println("\n-------------------------------------------------------------------------------------------------");
+        String GovernmentCode;
+        do {
+            boolean Exists = false;
+            do {
+                System.out.print("\n\t[+]Enter The Government Code Of The Regoin That You Want To Mack Consumption Statistics For: ");
+                GovernmentCode = input.next();
+                for (int i = 0; i < 26; i++) {
+                    if (GovernmentCode.equals(governmentCodes[i][0])) {
+                        Exists = true;
+                        break;
+                    }
+                }
+                if (!Exists) {
+                    System.out.println("\n[+] Enter a valid Government Code.");
+                }
+            } while (!Exists);
+            String[] statisticsData;
+            statisticsData = AdministratorDatabase.consumptionStatForSpecificRegion(GovernmentCode);
+            System.out.println("\n\t\t [-] The Summation Of Consumptions : " + statisticsData[0]);
+            System.out.println("\n\t\t [-] The Actual Number Of Consumers : " + statisticsData[1]);
+            System.out.println("\n\t\t [-] The Average consumption For " + ": " + statisticsData[2]);
+
+            System.out.print("\n[+]Do you want to View Consumption Of another Region ? (y/n): ");
+            System.out.flush();
+            q2Continue = input.next().charAt(0);
+        } while (q2Continue == 'Y' || q2Continue == 'y');
+    }
+    /*
+        -------------------- End Administrator Code --------------------
+        -------------------- End Administrator Code --------------------
+        -------------------- End Administrator Code --------------------
+        -------------------- End Administrator Code --------------------
+        -------------------- End Administrator Code --------------------
+     */
+ /*-------------------------------------------------------------------
+    -------------------------------------------------------------------
+    -------------------------------------------------------------------
+    -------------------------------------------------------------------
+    -------------------------------------------------------------------
+    -------------------------------------------------------------------
+    -------------------------------------------------------------------*/
 
 }
