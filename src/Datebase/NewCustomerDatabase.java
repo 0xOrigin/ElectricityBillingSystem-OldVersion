@@ -113,6 +113,27 @@ public class NewCustomerDatabase {
     }
     
     
+    public static String getName(String meterCode){
+        
+        try(
+            Connection connect = DbConnection.connect();
+            PreparedStatement ps = connect.prepareStatement("SELECT Name from NewCustomer where MeterCode = ?");
+        ){
+            
+            ps.setString(1, meterCode);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            
+            return rs.getString("Name");
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+
+        return "";
+    }
+    
+    
     public static boolean isMeterCodeExists(String meterCode){
         
         try(Connection connect = DbConnection.connect();
