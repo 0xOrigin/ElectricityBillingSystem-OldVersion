@@ -221,7 +221,7 @@ public class AdministratorDatabase {
         return "";
     }
     
-    public static boolean loginValidation(String administratorID, String administratorPass){
+    public static boolean loginValidator(String administratorID, String administratorPass){
         
         if(!isAdministratorIDExists(administratorID))
             return false;
