@@ -6,8 +6,6 @@ import java.awt.AWTException;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import Email.Sendmail;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class NewCustomerDriver extends NewCustomer {
     
