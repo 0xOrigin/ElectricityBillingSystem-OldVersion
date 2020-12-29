@@ -223,7 +223,7 @@ public class AdministratorDatabase {
     
     public static boolean loginValidator(String administratorID, String administratorPass){
         
-        if(!isAdministratorIDExists(administratorID))
+        if(!isAdministratorIdExists(administratorID))
             return false;
         
         try(Connection connect = DbConnection.connect();
