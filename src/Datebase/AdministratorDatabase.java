@@ -220,4 +220,27 @@ public class AdministratorDatabase {
         
         return "";
     }
+    
+    public static boolean loginValidation(String administratorID, String administratorPass){
+        
+        if(!isAdministratorIDExists(administratorID))
+            return false;
+        
+        try(Connection connect = DbConnection.connect();
+            PreparedStatement ps = connect.prepareStatement("SELECT AdministratorPass from Administrators where AdministratorID = ?");
+        ){
+            
+            ps.setString(1, administratorID);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            
+            return administratorPass.equals(rs.getString("AdministratorPass"));
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+    
+        return false;
+        
+    }
 }
