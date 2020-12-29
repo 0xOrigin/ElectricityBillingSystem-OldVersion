@@ -180,5 +180,24 @@ public class AdministratorDatabase {
 
         return statisticsData;
     }
+    public static boolean isAdministratorIDExists(String AdministratorID){
+        
+        try(Connection connect = DbConnection.connect();
+            PreparedStatement ps = connect.prepareStatement("SELECT count(AdministratorID) from Administrators where AdministratorID = ?");
+        ){
+            
+            ps.setString(1, AdministratorID);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            
+            return (rs.getInt(1) > 0);
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+    
+   
+        return false;
+    }
     
 }
