@@ -180,13 +180,15 @@ public class AdministratorDatabase {
 
         return statisticsData;
     }
-    public static boolean isAdministratorIDExists(String AdministratorID){
+    
+    
+    public static boolean isAdministratorIDExists(String administratorID){
         
         try(Connection connect = DbConnection.connect();
             PreparedStatement ps = connect.prepareStatement("SELECT count(AdministratorID) from Administrators where AdministratorID = ?");
         ){
             
-            ps.setString(1, AdministratorID);
+            ps.setString(1, administratorID);
             ResultSet rs = ps.executeQuery();
             rs.next();
             
@@ -196,8 +198,26 @@ public class AdministratorDatabase {
             System.out.println(ex.toString());
         }
     
-   
         return false;
     }
     
+    
+    public static String getAdministratorRole(String administratorID){
+        
+        try(Connection connect = DbConnection.connect();
+            PreparedStatement ps = connect.prepareStatement("SELECT AdministratorRole from Administrators where AdministratorID = ?");
+        ){
+            
+            ps.setString(1, administratorID);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            
+            return rs.getString("AdministratorRole");
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        
+        return "";
+    }
 }
