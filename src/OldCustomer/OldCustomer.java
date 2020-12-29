@@ -25,6 +25,39 @@ public class OldCustomer {
     {
         return OldCustomerDatabase.getFirstUnpaidBillInfo(meterCode)[5];
     }
+           /* billInfo[0] = r.getString("GovernmentCode");
+            billInfo[1] = String.valueOf(r.getInt("PastReading"));
+            billInfo[2] = String.valueOf(r.getInt("CurrentReading"));
+            billInfo[3] = String.valueOf(r.getInt("Consumption"));
+            billInfo[4] = String.valueOf(r.getInt("Tariff"));
+            billInfo[5] = String.valueOf(r.getDouble("MoneyValue"));
+            billInfo[6] = r.getString("DateOfBill");*/
+    
+    public String getFirstUnpaidGovCode(String meterCode)
+    {
+        return OldCustomerDatabase.getFirstUnpaidBillInfo(meterCode)[0];
+    }
+    public String getFirstUnpaidPastReading(String meterCode)
+    {
+        return OldCustomerDatabase.getFirstUnpaidBillInfo(meterCode)[1];
+    }
+    public String getFirstUnpaidCurrentReading(String meterCode)
+    {
+        return OldCustomerDatabase.getFirstUnpaidBillInfo(meterCode)[2];
+    }
+    public String getFirstUnpaidConsumption(String meterCode)
+    {
+        return OldCustomerDatabase.getFirstUnpaidBillInfo(meterCode)[3];
+    }
+    public String getFirstUnpaidTariff(String meterCode)
+    {
+        return OldCustomerDatabase.getFirstUnpaidBillInfo(meterCode)[4];
+    }
+    public String getFirstUnpaidDateOfBill(String meterCode)
+    {
+        return OldCustomerDatabase.getFirstUnpaidBillInfo(meterCode)[6];
+    }
+    
     public double firstUnpaidMoneyValue(String meterCode)
     {
         double moneyValue=Double.parseDouble(OldCustomerDatabase.getFirstUnpaidBillInfo(meterCode)[5]);
