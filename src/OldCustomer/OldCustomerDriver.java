@@ -23,6 +23,7 @@ public class OldCustomerDriver extends OldCustomer {
         System.out.println("\t     [3] - Complain about bill.");
         System.out.print("\n[+] Choose a number(0 to return to main menu): ");
         char choice = input.next().charAt(0);
+        input.nextLine();
         String meterCode;
                 switch (choice) {
                     case '1':
@@ -33,6 +34,7 @@ public class OldCustomerDriver extends OldCustomer {
                         meterCode= enterMeterCode();
                         System.out.println("\n[-]Enter the current reading: ");
                         int currentReading=input.nextInt();
+                        input.nextLine();
                         int tariff=1; double moneyValue=100;// SHOULD BE CHANGED LATER!!!
                         enterMonthlyReading(meterCode, currentReading, tariff, moneyValue);
                         break;
@@ -64,15 +66,21 @@ public class OldCustomerDriver extends OldCustomer {
     }
     public  void payBills(String meterCode){
         
-            System.out.println("\n[-]You have "+ unpaidBillsCount( meterCode)+" unpaid bills.");
+            System.out.println("\n[-]You have "+ unpaidBillsCount( meterCode)+" unpaid bills.");//Print number of unpaid bills
+            
             if (haveUnpaidBills(meterCode)==true)
             {
                 System.out.println("\n[-]Do you want to pay "+firstUnpaidMoneyValueString(meterCode)+"$ ? (1 = Yes / 0 = No)");
                 int choice1=input.nextInt();
+                input.nextLine();
+                
+                
                 if (choice1==0)
                 {
                     System.out.println("[-]Do you want to complain about the bill? (1 = Yes / 0 = No)");
                     int choice2=input.nextInt();
+                    input.nextLine();
+                    
                     if (choice2==1)
                     {
                         System.out.println("[-]Please Enter your complain: ");
@@ -100,10 +108,11 @@ public class OldCustomerDriver extends OldCustomer {
     {
         
         
-        if (true/*if the current reading is true*/)
+        if (true/*if the current reading is true*/)//Should be edited later
         {
             super.enterMonthlyReading(meterCode, currentReading, tariff, moneyValue);
         }
+        
         else
         {
             System.out.println("\n\nPlease enter valid reading.");
