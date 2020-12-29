@@ -182,7 +182,7 @@ public class AdministratorDatabase {
     }
     
     
-    public static boolean isAdministratorIDExists(String administratorID){
+    public static boolean isAdministratorIdExists(String administratorID){
         
         try(Connection connect = DbConnection.connect();
             PreparedStatement ps = connect.prepareStatement("SELECT count(AdministratorID) from Administrators where AdministratorID = ?");
