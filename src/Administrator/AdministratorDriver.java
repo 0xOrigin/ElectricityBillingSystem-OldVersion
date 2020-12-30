@@ -414,7 +414,6 @@ public class AdministratorDriver extends Administrator {
      */
     private void deleteUser() {
         char choice_2, q2Continue;
-        String administratorID, meterCode, operatorID;
         do {
             System.out.println("\n\t     [1] - Delete  Customer");
             System.out.println("\t     [2] - Delete  Operator");
@@ -492,7 +491,6 @@ public class AdministratorDriver extends Administrator {
             choice_2 = input.next().charAt(0);
             switch (choice_2) {
                 case '1': {
-                    String meterCode;
                     System.out.print("\n\t      Enter Meter Code: ");
                     meterCode = input.next();
                     this.meterCode = Customer_Val(meterCode);
@@ -500,7 +498,6 @@ public class AdministratorDriver extends Administrator {
                     break;
                 }
                 case '2': {
-                    String operatorID;
                     System.out.print("\n\t      Enter Operator ID: ");
                     operatorID = input.next();
                     this.operatorID = OperatorID_Val(operatorID);
@@ -509,7 +506,6 @@ public class AdministratorDriver extends Administrator {
                 }
 
                 case '3': {
-                    String administratorID;
                     System.out.print("\n\t      Enter Administrator ID: ");
                     administratorID = input.next();
                     this.administratorID = AdministratorID_Val(administratorID);
