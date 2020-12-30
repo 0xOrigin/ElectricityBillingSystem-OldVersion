@@ -309,7 +309,7 @@ public class OldCustomerDatabase {
         return "";
     }
 
-    public double getMoneyValue( int consumption, String typeOfUse){
+    public double getMoneyValue(int consumption, String typeOfUse){
         
         double moneyValue=0;
         
