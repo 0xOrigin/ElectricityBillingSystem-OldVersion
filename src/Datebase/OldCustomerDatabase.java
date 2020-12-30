@@ -233,7 +233,7 @@ public class OldCustomerDatabase {
     
     // --------------------------------------------- Private functions --------------------------------------------- //
     
-    private static int getLastReading(String meterCode){
+    public static int getLastReading(String meterCode){
         
         try(
             Connection connect = DbConnection.connect();
