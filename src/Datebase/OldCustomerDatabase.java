@@ -347,16 +347,20 @@ public class OldCustomerDatabase {
             if (consumption<=100){
                 moneyValue = consumption*.65;
                 tarrif=1;
-            }else if (consumption<=200){
+            }
+            else if (consumption<=200){
                 moneyValue = consumption *1.20;
                 tarrif=2;
-            }else if (consumption<=600){
+            }
+            else if (consumption<=600){
                 moneyValue = consumption *1.40;
                 tarrif=3;
-            }else if (consumption >600 && consumption <=1000){
+            }
+            else if (consumption >600 && consumption <=1000){
                 moneyValue = 840 + (consumption-600) *1.55;
                 tarrif=4;
-            }else{
+            }
+            else{
                 moneyValue = consumption *1.60;
                 tarrif=5;
             }
