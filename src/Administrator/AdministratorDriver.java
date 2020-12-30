@@ -456,12 +456,9 @@ public class AdministratorDriver extends Administrator {
     }
 
     public void deleteCustomer(String meterCode) {
-        if (NewCustomerDatabase.isMeterCodeExists(meterCode) == true) {
-            AdministratorDatabase.deleteCustomer(meterCode);
-            System.out.println("\n\t       The Customer Deleted Successfully.");
-        } else {
-            System.out.println("\n\t      The Meter Code \"" + meterCode + "\" Does Not Exists");
-        }
+        this.meterCode = Customer_Val(meterCode);
+        AdministratorDatabase.deleteCustomer(this.meterCode);
+        System.out.println("\n\t       The Customer Deleted Successfully.");
     }
 
     public void deleteOperator(String operatorID) {
@@ -526,7 +523,7 @@ public class AdministratorDriver extends Administrator {
                     break;
             }
 
-            System.out.print("\n[+]Do you want to Add another User? (y/n): ");
+            System.out.print("\n[+]Do you want to Update another User? (y/n): ");
             System.out.flush();
             q2Continue = input.next().charAt(0);
         } while (q2Continue == 'Y' || q2Continue == 'y');
@@ -584,7 +581,7 @@ public class AdministratorDriver extends Administrator {
                     break;
             }
 
-            System.out.print("\n[+]Do you want to Delete another Customer? (y/n): ");
+            System.out.print("\n[+]Do you want to Update another Customer? (y/n): ");
             System.out.flush();
             q2Continue = input.next().charAt(0);
         } while (q2Continue == 'Y' || q2Continue == 'y');
@@ -709,30 +706,22 @@ public class AdministratorDriver extends Administrator {
     }
 
     public void updateCustomer(final String columnName, String value, String meterCode) {
-        if (NewCustomerDatabase.isMeterCodeExists(meterCode) == true) {
-            AdministratorDatabase.updateCustomer(columnName, value, meterCode);
-            System.out.println("\n\t       The Customer Updated Successfully.");
-        } else {
-            System.out.println("\n\t      The Meter Code \"" + meterCode + "\" Does Not Exists");
-        }
+        this.meterCode = Customer_Val(meterCode);
+        AdministratorDatabase.updateCustomer(columnName, value, this.meterCode);
+        System.out.println("\n\t       The Customer Updated Successfully.");
+
     }
 
     public void updateOperator(final String columnName, String value, String operatorID) {
-        if (AdministratorDatabase.isAdministratorIdExists(operatorID) == true && "Operator".equals(AdministratorDatabase.getAdministratorRole(operatorID))) {
-            AdministratorDatabase.updateAdministrator(columnName, value, operatorID);
-            System.out.println("\n\t       [-] The Operator Updated Successfully.");
-        } else {
-            System.out.println("\n\t      [-] The Operator \"" + operatorID + "\" Does Not Exists");
-        }
+        this.operatorID = OperatorID_Val(operatorID);
+        AdministratorDatabase.updateAdministrator(columnName, value, this.operatorID);
+        System.out.println("\n\t       [-] The Operator Updated Successfully.");
     }
 
     public void updateAdministrator(final String columnName, String value, String administratorID) {
-        if (AdministratorDatabase.isAdministratorIdExists(administratorID) == true && "Administrator".equals(AdministratorDatabase.getAdministratorRole(administratorID))) {
-            AdministratorDatabase.updateAdministrator(columnName, value, administratorID);
+        this.administratorID = OperatorID_Val(administratorID);
+        AdministratorDatabase.updateAdministrator(columnName, value, this.administratorID);
             System.out.println("\n\t       The Administrator Updated Successfully.");
-        } else {
-            System.out.println("\n\t      The Administrator \"" + administratorID + "\" Does Not Exists");
-        }
     }
 
     /**
