@@ -1,5 +1,8 @@
 package Administrator;
 
+import Datebase.AdministratorDatabase;
+import Datebase.OldCustomerDatabase;
+
 public class Operator extends AdministratorDriver {
 
     private int tarrif;
@@ -111,6 +114,7 @@ public class Operator extends AdministratorDriver {
                 tarrif=7;
             }
         }
+        
         else {
             if (consumption<=100){
                 moneyValue = consumption*.65;
@@ -140,6 +144,4 @@ public class Operator extends AdministratorDriver {
     public int getTarrif (String meterCode){
         return tarrif;
     }
-
-    
 }
