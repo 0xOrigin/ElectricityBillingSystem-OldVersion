@@ -1,6 +1,7 @@
 package Administrator;
 import Person.PersonDriver;
 import Datebase.*;
+import java.util.ArrayList;
 
 
 public class Administrator extends PersonDriver {
@@ -64,7 +65,16 @@ public class Administrator extends PersonDriver {
     protected static void pushAdministratorUpdateToDB(final String columnName, String value, String administratorID){
         AdministratorDatabase.updateAdministrator(columnName, value, administratorID);
     }
+
+
+    protected static String[] getLastBillInfo(String meterCode){
+        return OldCustomerDatabase.getLastBillInfo(meterCode);
+    }
     
+    
+    protected static ArrayList<String[]> getBillsInfoOfSpecificRegion(String governmentCode){
+        return OldCustomerDatabase.getBillsInfoOfSpecificRegion(governmentCode);
+    }
     
     // --------------------------------------- Protected Setters
     
