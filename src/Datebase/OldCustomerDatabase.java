@@ -313,7 +313,7 @@ public class OldCustomerDatabase {
         
         double moneyValue=0;
         
-        if (typeOfUse=="Home"){
+        if (typeOfUse == "Home"){
             if (consumption >= 0 && consumption <=50){
                 moneyValue = 0.38 *consumption;
                 tarrif =1;
