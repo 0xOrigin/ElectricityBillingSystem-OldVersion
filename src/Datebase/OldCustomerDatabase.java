@@ -343,6 +343,7 @@ public class OldCustomerDatabase {
                 tarrif=7;
             }
         }
+        
         else {
             if (consumption<=100){
                 moneyValue = consumption*.65;
