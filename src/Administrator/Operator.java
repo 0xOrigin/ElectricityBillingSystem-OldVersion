@@ -1,6 +1,9 @@
 package Administrator;
 import OldCustomer.OldCustomerDriver;
 
+import Datebase.AdministratorDatabase;
+import Datebase.OldCustomerDatabase;
+
 public class Operator extends AdministratorDriver {
 
     private int tarrif;
@@ -194,6 +197,4 @@ public class Operator extends AdministratorDriver {
     public int getTarrif(){
         return tarrif;
     }
-
-    
 }
