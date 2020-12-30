@@ -54,6 +54,18 @@ public class Administrator extends PersonDriver {
     protected static void deleteAdministratorFromDB(String administratorID){
         AdministratorDatabase.deleteAdministrator(administratorID);
     }
+    
+    
+    protected static void pushCustomerUpdateToDB(final String columnName, String value, String meterCode){
+        AdministratorDatabase.updateCustomer(columnName, value, meterCode);
+    }
+    
+    
+    protected static void pushAdministratorUpdateToDB(final String columnName, String value, String administratorID){
+        AdministratorDatabase.updateAdministrator(columnName, value, administratorID);
+    }
+    
+    
     // --------------------------------------- Protected Setters
     
     protected void setAdministratorID(String governmentCode, String nationalIdNum){
@@ -102,6 +114,15 @@ public class Administrator extends PersonDriver {
         return AdministratorDatabase.getAdministratorName(administratorID);
     }
     
+    
+    protected static double getTotalCollectedFromDB(){
+        return AdministratorDatabase.viewTotalCollected();
+    }
+    
+    
+    protected static String[] consumptionStatForSpecificRegionFromDB(String governmentCode){
+        return AdministratorDatabase.consumptionStatForSpecificRegion(governmentCode);
+    }
     
     // Private getter
     

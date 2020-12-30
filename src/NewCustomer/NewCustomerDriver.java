@@ -30,10 +30,9 @@ public class NewCustomerDriver extends NewCustomer {
             do {
                 
                 System.out.print("\n[+] Choose a number(0 to return to main menu): ");
-                System.out.flush();
-                System.out.print("\u001b[0K");
                 choice = input.next().charAt(0);
-
+                input.nextLine();
+                
                 switch (choice) {
                     case '1':
                         fillNewContract();
@@ -48,7 +47,6 @@ public class NewCustomerDriver extends NewCustomer {
             } while (choice != '1');
             
             System.out.print("\n[+]Do you want to perform any additional operation in this dashboard? (y/n): ");
-            System.out.flush();
             qContinue = input.next().charAt(0);
            
         } while (qContinue == 'Y' || qContinue == 'y');
@@ -60,7 +58,6 @@ public class NewCustomerDriver extends NewCustomer {
         clearScreen();
         printBanner();
         printSelections();
-        System.out.flush();
         
     }
     
@@ -100,7 +97,7 @@ public class NewCustomerDriver extends NewCustomer {
         } catch (AWTException ex) {
             System.out.println(ex.toString());
         }
-                
+        
     }
     
     

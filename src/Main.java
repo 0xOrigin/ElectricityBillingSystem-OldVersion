@@ -4,8 +4,7 @@ import Administrator.AdministratorDriver;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
-import java.util.*;
-import Datebase.*;
+import java.util.Scanner;
         
 public class Main {
 
@@ -19,9 +18,8 @@ public class Main {
         do {
             
             System.out.print("\n[+] Choose a number(0 to terminate the program): ");
-            System.out.flush();
-            System.out.print("\u001b[0K");
             char choice = input.next().charAt(0);
+            input.nextLine();
             
             switch (choice) {
                 case '1':
@@ -56,7 +54,6 @@ public class Main {
         clearScreen();
         printBanner();
         printDashboards();
-        System.out.flush();
         
     }
     
@@ -97,7 +94,7 @@ public class Main {
         } catch (AWTException ex) {
             System.out.println(ex.toString());
         }
-         
+
     }
     
 }
