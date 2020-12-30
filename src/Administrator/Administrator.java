@@ -14,15 +14,6 @@ public class Administrator extends PersonDriver {
     protected final String operatorRole = "Operator";
     protected final String adminRole = "Admin";
     
-    
-    protected final String[][] governmentCodes = { {"02", "Cairo"}, {"013", "Qalyubia"}, {"03", "Alexandria"}, {"040", "Gharbia"},
-                                                   {"048", "Monufia"}, {"055", "Sharqia"}, {"062", "Suez"}, {"064", "Ismailia"},
-                                                   {"046", "Matruh"}, {"066", "Port Said"}, {"068", "North Sinai"}, {"069", "South Sinai"}, 
-                                                   {"050", "Dakahlia"}, {"045", "Beheira"}, {"057", "Damietta"}, {"047", "Kafr El Sheikh"},
-                                                   {"092", "New Valley"}, {"065", "Red Sea"}, {"084", "Faiyum"}, {"082", "Beni Suef"}, 
-                                                   {"086", "Minya"}, {"088", "Asyut"}, {"093", "Sohag"}, {"095", "Luxor"},
-                                                   {"096", "Qena"}, {"097", "Aswan"} };
-    
     protected final String addressColumn = "Address";
     protected final String emailColumn = "Email";
     protected final String governmentCodeColumn = "GovernmentCode";
@@ -66,6 +57,11 @@ public class Administrator extends PersonDriver {
         AdministratorDatabase.updateAdministrator(columnName, value, administratorID);
     }
 
+    
+    protected static void collectPayments(String meterCode){
+        AdministratorDatabase.collectPayments(OldCustomerDatabase.getMoneyValueofLastPaidBill(meterCode));
+    }
+    
 
     protected static String[] getLastBillInfo(String meterCode){
         return OldCustomerDatabase.getLastBillInfo(meterCode);

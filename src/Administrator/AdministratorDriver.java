@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class AdministratorDriver extends Administrator {
 
@@ -126,6 +127,60 @@ public class AdministratorDriver extends Administrator {
 
     }
 
+    
+    protected void viewBillsOfSpecificRegion(){
+        
+        printGovernmentCodes();
+        
+        do {            
+            
+            System.out.print("\n[+] Enter a government code: ");            
+            ArrayList<String[]> billsInfo = getBillsInfoOfSpecificRegion(GovernmentCode_Val(input.next()));
+            
+            System.out.println("\n  ===============================================================================================================================================");
+            System.out.printf("\t  %-15s | %-15s | %-15s | %-15s | %-10s | %-15s | %-15s | %-20s", "MeterCode", "PastReading", "CurrentReading",
+                              "Consumption", "Tariff", "MoneyValue", "Status", "DateOfBill");
+            System.out.println();
+            System.out.println("  ===============================================================================================================================================");
+            
+            for(int i = 0; i < billsInfo.size(); i++){
+                    System.out.format("\t  %-15s | %-15s | %-15s | %-15s | %-10s | %-15s | %-15s | %-20s",
+                                      billsInfo.get(i)[0], billsInfo.get(i)[1], billsInfo.get(i)[2], billsInfo.get(i)[3],
+                                      billsInfo.get(i)[4], billsInfo.get(i)[5], billsInfo.get(i)[6], billsInfo.get(i)[7]);
+                  
+                System.out.println();
+            }
+            System.out.println("  ===============================================================================================================================================");
+            
+
+            System.out.print("\n[+]Do you want to View bills Of another region?(y/n): ");
+            qContinue = input.next().charAt(0);
+            
+        } while (qContinue == 'Y' || qContinue == 'y');
+        
+    }
+    
+    
+    protected void printGovernmentCodes(){
+        
+        System.out.println("\n-------------------------------------------------------------------------------------------------");
+        
+        for (int i = 0; i < 22; i += 3) {
+            
+            System.out.printf("| %20s -> %5s |", governmentCodes[i][1], governmentCodes[i][0]);
+            System.out.printf(" %20s -> %5s ", governmentCodes[i + 1][1], governmentCodes[i + 1][0]);
+            System.out.printf("| %20s -> %5s |\n", governmentCodes[i + 2][1], governmentCodes[i + 2][0]);
+
+        }
+        
+        System.out.printf("| %20s -> %5s |", governmentCodes[24][1], governmentCodes[24][0]);
+        System.out.printf(" %20s -> %5s ", governmentCodes[25][1], governmentCodes[25][0]);
+        System.out.printf("| %29s |", "");
+
+        System.out.println("\n-------------------------------------------------------------------------------------------------");
+        
+    }
+    
     
     protected static void clearScreen() {
 

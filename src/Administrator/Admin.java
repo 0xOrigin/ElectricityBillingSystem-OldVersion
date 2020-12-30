@@ -37,7 +37,7 @@ public class Admin extends AdministratorDriver {
                         viewTotalCollected();
                         break;
                     case '5':
-                        //view bills of specific region
+                        viewBillsOfSpecificRegion();
                         break;
                     case '6':
                         consumptionStatForSpecificRegion();
@@ -472,43 +472,12 @@ public class Admin extends AdministratorDriver {
     
     private void consumptionStatForSpecificRegion() {
 
-        System.out.println("\n-------------------------------------------------------------------------------------------------");
+        printGovernmentCodes();
         
-        for (int i = 0; i < 22; i += 3) {
+        do {            
             
-            System.out.printf("| %20s -> %5s |", governmentCodes[i][1], governmentCodes[i][0]);
-            System.out.printf(" %20s -> %5s ", governmentCodes[i + 1][1], governmentCodes[i + 1][0]);
-            System.out.printf("| %20s -> %5s |\n", governmentCodes[i + 2][1], governmentCodes[i + 2][0]);
-
-        }
-        
-        System.out.printf("| %20s -> %5s |", governmentCodes[24][1], governmentCodes[24][0]);
-        System.out.printf(" %20s -> %5s ", governmentCodes[25][1], governmentCodes[25][0]);
-        System.out.printf("| %29s |", "");
-
-        System.out.println("\n-------------------------------------------------------------------------------------------------");
-        
-        String governmentCode;
-        
-        do {
-            
-            boolean Exists = false;
-            
-            do {
-                
-                System.out.print("\n\t[+] Enter the government code of the region that you want to make consumption statistics for: ");
-                governmentCode = input.next();
-                
-                for (int i = 0; i < 26; i++)
-                    if (governmentCode.equals(governmentCodes[i][0])) {
-                        Exists = true;
-                        break;
-                    }
-                
-                if (!Exists)
-                    System.out.println("\n[+] Enter a valid Government Code.");
-
-            } while (!Exists);
+            System.out.print("\n\t[+] Enter the government code of the region that you want to make consumption statistics for: ");
+            String governmentCode = GovernmentCode_Val(input.nextLine());
             
             String[] statisticsData = consumptionStatForSpecificRegionFromDB(governmentCode);
             

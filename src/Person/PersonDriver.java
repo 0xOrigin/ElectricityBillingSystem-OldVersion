@@ -135,20 +135,16 @@ public class PersonDriver extends Person {
     
     
     public String GovernmentCode_Val(String governmentCode){
-
-        String[] governmentCodes = {"02", "013", "03", "040", "048", "055", "062", "064",
-                                    "046", "066", "068", "069", "050", "045", "057", "047",
-                                    "092", "065", "084", "082", "086", "088", "093", "095",
-                                    "096", "097"};
         
         do {
-            // To determines the government code in the list above or not.
             
             boolean found = false;
             
             for(int i = 0; i < governmentCodes.length; i++)
-                if(governmentCode.equals(governmentCodes[i]))
+                if(governmentCode.equals(governmentCodes[i][0])){
                     found = true;
+                    break;
+                }
             
             
             if(!governmentCode.matches("^(\\w+\\S+)$") || !found){ // No spaces No chars and should be in the array list

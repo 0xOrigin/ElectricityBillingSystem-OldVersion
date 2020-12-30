@@ -28,7 +28,7 @@ public class OldCustomerDriver extends OldCustomer {
                 switch (choice) {
                     case '1':
                         meterCode= enterMeterCode();
-                        payBills(meterCode);
+                        payBill(meterCode);
                         break;
                      case '2':
                         meterCode= enterMeterCode();
@@ -64,7 +64,7 @@ public class OldCustomerDriver extends OldCustomer {
         sendUnpaidMail(meterCode);
         return meterCode;
     }
-    public  void payBills(String meterCode){
+    public void payBill(String meterCode){
         
             if (haveUnpaidBills(meterCode)==true)
             {
