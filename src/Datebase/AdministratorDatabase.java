@@ -220,7 +220,9 @@ public class AdministratorDatabase {
         
         return "";
     }
-     public static String getAdministratorName(String administratorID){
+    
+    
+    public static String getAdministratorName(String administratorID){
         
         try(Connection connect = DbConnection.connect();
             PreparedStatement ps = connect.prepareStatement("SELECT Name from Administrators where AdministratorID = ?");
@@ -238,6 +240,8 @@ public class AdministratorDatabase {
         
         return "";
     }
+    
+    
     public static boolean loginValidator(String administratorID, String administratorPass){
         
         if(!isAdministratorIdExists(administratorID))

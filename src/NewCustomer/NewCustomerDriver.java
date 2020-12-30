@@ -128,7 +128,7 @@ public class NewCustomerDriver extends NewCustomer {
         
         System.out.print("\n\t[+] Enter type of use(0 for Home use, 1 for Commerical use): ");
         typeOfUse = input.next().charAt(0);
-        TypeOfUse_Val(typeOfUse);
+        setTypeOfUse(TypeOfUse_Val(typeOfUse));
         
         System.out.print("\n\t[+] Do you want to attach a copy of apartment contract? (y/n): ");
         determinesAttachOrNot = input.next().charAt(0);
@@ -145,17 +145,15 @@ public class NewCustomerDriver extends NewCustomer {
     
     // Data Validators
     
-    public void TypeOfUse_Val(char selector){
+    public String TypeOfUse_Val(char selector){
         
         do{
             
             switch (selector) {
                 case '0':
-                    setTypeOfUse("Home");
-                    return;
+                    return "Home";
                 case '1':
-                    setTypeOfUse("Commerical");
-                    return;
+                    return "Commerical";
                 default:
                     System.out.print("\n[-] Invalid type of use selection, Enter a valid type of use: ");
                     selector = input.next().charAt(0);

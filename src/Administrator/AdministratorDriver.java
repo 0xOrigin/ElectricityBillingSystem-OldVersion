@@ -1,7 +1,7 @@
 package Administrator;
 
 import Datebase.*;
-import NewCustomer.*;
+import NewCustomer.NewCustomerDriver;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
@@ -9,12 +9,14 @@ import java.util.*;
 
 public class AdministratorDriver extends Administrator {
 
+    // Data fields
     private String administratorID;
     private String administratorPass;
     private String operatorID;
+    
     private char qContinue, choice;
     Scanner input = new Scanner(System.in);
-    private String meterCode;
+    
 
     public void runDashboard() {
 
@@ -35,14 +37,7 @@ public class AdministratorDriver extends Administrator {
 
     }
 
-    /*
-        -------------------- Administrator DashBoard --------------------
-        -------------------- Administrator DashBoard --------------------
-        -------------------- Administrator DashBoard --------------------
-        -------------------- Administrator DashBoard --------------------
-        -------------------- Administrator DashBoard --------------------
-    
-     */
+
     private void runAdminDashboard() {
 
         do {
@@ -52,33 +47,28 @@ public class AdministratorDriver extends Administrator {
             do {
 
                 System.out.print("\n[+] Choose a number(0 to return to main menu): ");
-                System.out.flush();
+                
                 System.out.print("\u001b[0K");
                 choice = input.next().charAt(0);
 
                 switch (choice) {
-                    /*case [1] Add User -> (Operator || Customer || Administrator)? */
+                    
                     case '1':
+                        /*case [1] Add User -> (Operator || Customer || Administrator)? */
                         addUser();
                         break;
-
-                    /*case [2] Delete User-> (Operator || Customer || Administrator)? */
                     case '2':
+                        /*case [2] Delete User-> (Operator || Customer || Administrator)? */
                         deleteUser();
                         break;
-                    /*case [3] Update User-> (Operator || Customer || Administrator)? */
                     case '3':
+                        /*case [3] Update User-> (Operator || Customer || Administrator)? */
                         updateUser();
                         break;
                     case '4':
                         viewTotalCollected();
                         break;
                     case '5':
-                        //view bills of specific region
-                        //view bills of specific region
-                        //view bills of specific region
-                        //view bills of specific region
-                        //view bills of specific region
                         //view bills of specific region
                         break;
                     case '6':
@@ -89,27 +79,30 @@ public class AdministratorDriver extends Administrator {
                     default:
                         System.out.println("\n[-] Enter a valid choice.");
                         break;
+                        
                 }
 
             } while (choice != '1' && choice != '2' && choice != '3' && choice != '4' && choice != '5' && choice != '6');
 
             System.out.print("\n[+] Do you want to perform any additional operation in this dashboard? (y/n): ");
-            System.out.flush();
+            
             qContinue = input.next().charAt(0);
 
         } while (qContinue == 'Y' || qContinue == 'y');
 
     }
 
+    
     private static void viewAdminDashboard() {
 
         clearScreen();
         printAdminBanner();
         printAdminSelections();
-        System.out.flush();
+        
 
     }
 
+    
     private static void printAdminBanner() {
 
         System.out.println("\n\t\t  ——————————————————————————————");
@@ -120,6 +113,7 @@ public class AdministratorDriver extends Administrator {
 
     }
 
+    
     private static void printAdminSelections() {
 
         System.out.println("\n[-] What do you want to do?\n");
@@ -132,28 +126,7 @@ public class AdministratorDriver extends Administrator {
 
     }
 
-    /*
-        -------------------- End Of Administrator DashBoard --------------------
-        -------------------- End Of Administrator DashBoard --------------------
-        -------------------- End Of Administrator DashBoard --------------------
-        -------------------- End Of Administrator DashBoard --------------------
-        -------------------- End Of Administrator DashBoard --------------------
-     */
- /*-------------------------------------------------------------------
-    -------------------------------------------------------------------
-    -------------------------------------------------------------------
-    -------------------------------------------------------------------
-    -------------------------------------------------------------------
-    -------------------------------------------------------------------
-    -------------------------------------------------------------------*/
- /*
-        -------------------- Operator DashBoard --------------------
-        -------------------- Operator DashBoard --------------------
-        -------------------- Operator DashBoard --------------------
-        -------------------- Operator DashBoard --------------------
-        -------------------- Operator DashBoard --------------------
-    
-     */
+   
     private void runOperatorDashboard() {
 
         do {
@@ -163,7 +136,7 @@ public class AdministratorDriver extends Administrator {
             do {
 
                 System.out.print("\n[+] Choose a number(0 to return to main menu): ");
-                System.out.flush();
+                
                 System.out.print("\u001b[0K");
                 choice = input.next().charAt(0);
 
@@ -190,7 +163,7 @@ public class AdministratorDriver extends Administrator {
             } while (choice != '1' && choice != '2' && choice != '3' && choice != '4');
 
             System.out.print("\n[+] Do you want to perform any additional operation in this dashboard? (y/n): ");
-            System.out.flush();
+            
             qContinue = input.next().charAt(0);
 
         } while (qContinue == 'Y' || qContinue == 'y');
@@ -202,7 +175,7 @@ public class AdministratorDriver extends Administrator {
         clearScreen();
         printOperatorBanner();
         printOperatorSelections();
-        System.out.flush();
+        
 
     }
 
@@ -225,21 +198,7 @@ public class AdministratorDriver extends Administrator {
         System.out.println("\t     [4] - Stop meter and cancel subscription for customer.");
     }
 
-    /*
-        -------------------- End Of Operator DashBoard --------------------
-        -------------------- End Of Operator DashBoard --------------------
-        -------------------- End Of Operator DashBoard --------------------
-        -------------------- End Of Operator DashBoard --------------------
-        -------------------- End Of Operator DashBoard --------------------
-    
-     */
- /*-------------------------------------------------------------------
-    -------------------------------------------------------------------
-    -------------------------------------------------------------------
-    -------------------------------------------------------------------
-    -------------------------------------------------------------------
-    -------------------------------------------------------------------
-    -------------------------------------------------------------------*/
+   
     private static void clearScreen() {
 
         try {
@@ -278,26 +237,12 @@ public class AdministratorDriver extends Administrator {
 
     }
 
-    /*-------------------------------------------------------------------
-    -------------------------------------------------------------------
-    -------------------------------------------------------------------
-    -------------------------------------------------------------------
-    -------------------------------------------------------------------
-    -------------------------------------------------------------------
-    -------------------------------------------------------------------*/
-
- /*
-        -------------------- Administrator Code --------------------
-        -------------------- Administrator Code --------------------
-        -------------------- Administrator Code --------------------
-        -------------------- Administrator Code --------------------
-        -------------------- Administrator Code --------------------
-     */
+    
     private String AdministratorID_Val(String administratorID) {
 
         do {
 
-            if (isAdministratorIdExists(administratorID) && "Administrator".equals(AdministratorDatabase.getAdministratorRole(administratorID))) {
+            if (isAdministratorIdExists(administratorID) && "Administrator".equals(getAdministratorRole(administratorID))) {
                 return administratorID;
             } else {
 
@@ -314,7 +259,7 @@ public class AdministratorDriver extends Administrator {
 
         do {
 
-            if (isAdministratorIdExists(OperatorID) && "Operator".equals(AdministratorDatabase.getAdministratorRole(OperatorID))) {
+            if (isAdministratorIdExists(OperatorID) && "Operator".equals(getAdministratorRole(OperatorID))) {
                 return OperatorID;
             } else {
 
@@ -331,7 +276,7 @@ public class AdministratorDriver extends Administrator {
 
         do {
 
-            if (NewCustomerDatabase.isMeterCodeExists(meterCode) == true) {
+            if (isMeterCodeExists(meterCode)) {
                 return meterCode;
             } else {
 
@@ -344,21 +289,22 @@ public class AdministratorDriver extends Administrator {
 
     }
 
-    /**
-     ************************ADD USER****************
-     */
+    
     private void addUser() {
-        char choice_2, q2Continue;
+        
         do {
-            System.out.println("\n\t     [1] - Add New Customer ");
-            System.out.println("\t     [2] - Add New Operator ");
-            System.out.println("\t     [3] - Add New Administrator ");
+            
+            System.out.println("\n\t     [1] - Add New Customer.\n");
+            System.out.println("\t     [2] - Add New Operator.\n");
+            System.out.println("\t     [3] - Add New Administrator.");
 
             System.out.print("\n[+] Choose a number(0 to return to main menu): ");
-            System.out.flush();
-            System.out.print("\u001b[0K");
-            choice_2 = input.next().charAt(0);
-            switch (choice_2) {
+            
+            choice = input.next().charAt(0);
+            
+            
+            switch (choice) {
+                
                 case '1':
                     addNewCustomer();
                     break;
@@ -373,208 +319,198 @@ public class AdministratorDriver extends Administrator {
                 default:
                     System.out.println("\n[-] Enter a valid choice.");
                     break;
+                    
             }
 
-            System.out.print("\n[+] Do you want to Add another User? (y/n): ");
-            System.out.flush();
-            q2Continue = input.next().charAt(0);
-        } while (q2Continue == 'Y' || q2Continue == 'y');
+            System.out.print("\n[+] Do you want to Add another User?(y/n): ");
+            
+            qContinue = input.next().charAt(0);
+            
+        } while (qContinue == 'Y' || qContinue == 'y');
+        
     }
 
+    
     private void addNewCustomer() {
+        
         NewCustomerDriver newCustomer = new NewCustomerDriver();
         newCustomer.fillNewContract();
+        
     }
 
+    
     private void addNewOperator() {
+        
         runPersonDriver();
         setAdministratorID(getGovernmentCode(), getNationalIdNum());
-        setAdministratorRole("Operator");
+        setAdministratorRole(operatorRole);
         System.out.print("\n\t     [+] Enter Your Password : ");
-        String password = input.next();
-        setAdministratorPass(password);
-        pushAllNewAdministratorInfoToDB();
+        setAdministratorPass(input.nextLine());
+        pushAllAdministratorInfoToDB();
+        
     }
 
+    
     private void addNewAdministrator() {
+        
         runPersonDriver();
         setAdministratorID(getGovernmentCode(), getNationalIdNum());
-        setAdministratorRole("Administrator");
+        setAdministratorRole(adminRole);
         System.out.print("\n\t     [+] Enter Your Password : ");
-        String password = input.next();
-        setAdministratorPass(password);
-        pushAllNewAdministratorInfoToDB();
+        setAdministratorPass(input.nextLine());
+        pushAllAdministratorInfoToDB();
+        
     }
 
-    /**
-     ******************END OF ADD USER****************
-     */
-    /**
-     **********************Delete********************
-     */
+    
     private void deleteUser() {
-        char choice_2, q2Continue;
-        String administratorID, meterCode, operatorID;
+        
         do {
-            System.out.println("\n\t     [1] - Delete  Customer");
-            System.out.println("\t     [2] - Delete  Operator");
-            System.out.println("\t     [3] - Delete  Addminstrator");
+            
+            System.out.println("\n\t     [1] - Delete  Customer.\n");
+            System.out.println("\t     [2] - Delete  Operator.\n");
+            System.out.println("\t     [3] - Delete  Addminstrator.");
             System.out.print("\n[+] Choose a number(0 to return to main menu): ");
-            System.out.flush();
-            System.out.print("\u001b[0K");
-            choice_2 = input.next().charAt(0);
-            switch (choice_2) {
-                case '1': {
-                    System.out.print("\n\t      [+] Enter Meter Code: ");
-                    meterCode = input.next();
-                    deleteCustomer(meterCode);
+            
+            
+            choice = input.next().charAt(0);
+            input.nextLine();
+            
+            switch (choice) {
+                
+                case '1':
+                    System.out.print("\n\t      [+] Enter meter code: ");
+                    deleteCustomer(Customer_Val(input.nextLine()));
                     break;
-                }
-                case '2': {
+                case '2':
                     System.out.print("\n\t      [+] Enter Operator ID: ");
-                    operatorID = input.next();
-                    deleteOperator(operatorID);
+                    deleteOperator(OperatorID_Val(input.nextLine()));
                     break;
-                }
-                case '3': {
+                case '3':
                     System.out.print("\n\t      [+] Enter Administrator ID: ");
-                    administratorID = input.next();
-                    deleteAdministrator(administratorID);
+                    deleteAdministrator(AdministratorID_Val(input.nextLine()));
                     break;
-                }
                 case '0':
                     return;
                 default:
                     System.out.println("\n[-] Enter a valid choice.");
                     break;
+                    
             }
 
             System.out.print("\n[+] Do you want to Delete another User? (y/n): ");
-            System.out.flush();
-            q2Continue = input.next().charAt(0);
-        } while (q2Continue == 'Y' || q2Continue == 'y');
+            
+            qContinue = input.next().charAt(0);
+            
+        } while (qContinue == 'Y' || qContinue == 'y');
+        
     }
 
-    public void deleteCustomer(String meterCode) {
-        this.meterCode = Customer_Val(meterCode);
-        AdministratorDatabase.deleteCustomer(this.meterCode);
+    private void deleteCustomer(String meterCode) {
+        
+        deleteCustomerFromDB(meterCode);
         System.out.println("\n\t       [-] The Customer Deleted Successfully.");
+        
     }
 
-    public void deleteOperator(String operatorID) {
-        this.operatorID = OperatorID_Val(operatorID);
-        AdministratorDatabase.deleteAdministrator(this.operatorID);
+    private void deleteOperator(String operatorID) {
+        
+        deleteAdministratorFromDB(operatorID);
         System.out.println("\n\t       [-] The Operator Deleted Successfully.");
 
     }
 
-    public void deleteAdministrator(String administratorID) {
-        this.administratorID = AdministratorID_Val(administratorID);
-        AdministratorDatabase.deleteAdministrator(this.administratorID);
+    private void deleteAdministrator(String administratorID) {
+        
+        deleteAdministratorFromDB(administratorID);
         System.out.println("\n\t       [-] The Administrator Deleted Successfully.");
+        
     }
 
-    /**
-     ******************END OF Delete USER****************
-     */
-    /**
-     * ***************Update User Info*********************
-     */
-    private void updateUser() {
-        char choice_2, q2Continue;
-        do {
-            System.out.println("\n\t     [1] - Update Customer ");
-            System.out.println("\t     [2] - Update Operator ");
-            System.out.println("\t     [3] - Update Addminstrator ");
-            System.out.print("\n[+] Choose a number(0 to return to main menu): ");
-            System.out.flush();
-            System.out.print("\u001b[0K");
-            choice_2 = input.next().charAt(0);
-            switch (choice_2) {
-                case '1': {
-                    String meterCode;
-                    System.out.print("\n\t      Enter Meter Code: ");
-                    meterCode = input.next();
-                    this.meterCode = Customer_Val(meterCode);
-                    viewCustomerDataBase(this.meterCode);
-                    break;
-                }
-                case '2': {
-                    String operatorID;
-                    System.out.print("\n\t      Enter Operator ID: ");
-                    operatorID = input.next();
-                    this.operatorID = OperatorID_Val(operatorID);
-                    viewOperatorDataBase(this.operatorID);
-                    break;
-                }
 
-                case '3': {
-                    String administratorID;
-                    System.out.print("\n\t      Enter Administrator ID: ");
-                    administratorID = input.next();
-                    this.administratorID = AdministratorID_Val(administratorID);
-                    viewAdministratorDataBase(this.administratorID);
+    private void updateUser() {
+        
+        do {
+            
+            System.out.println("\n\t     [1] - Update Customer.\n");
+            System.out.println("\t     [2] - Update Operator.\n");
+            System.out.println("\t     [3] - Update Addminstrator.");
+            System.out.print("\n[+] Choose a number(0 to return to main menu): ");
+            
+            
+            choice = input.next().charAt(0);
+            input.nextLine();
+            
+            switch (choice) {
+                
+                case '1':
+                    System.out.print("\n\t      [+] Enter meter code: ");
+                    viewCustomerDataBase(Customer_Val(input.nextLine()));
                     break;
-                }
+                case '2':
+                    System.out.print("\n\t      [+] Enter Operator ID: ");
+                    viewOperatorDataBase(OperatorID_Val(input.nextLine()));
+                    break;
+                case '3':
+                    System.out.print("\n\t      [+] Enter Administrator ID: ");
+                    viewAdministratorDataBase(AdministratorID_Val(input.nextLine()));
+                    break;
                 case '0':
                     return;
                 default:
                     System.out.println("\n[-] Enter a valid choice.");
                     break;
+                    
             }
 
-            System.out.print("\n[+] Do you want to Update another User? (y/n): ");
-            System.out.flush();
-            q2Continue = input.next().charAt(0);
-        } while (q2Continue == 'Y' || q2Continue == 'y');
+            System.out.print("\n[+] Do you want to Update another User?(y/n): ");
+            
+            qContinue = input.next().charAt(0);
+            
+        } while (qContinue == 'Y' || qContinue == 'y');
+        
     }
 
     public void viewCustomerDataBase(String meterCode) {
-        char choice_2, q2Continue;
+        
         do {
-            System.out.println("\n[+] Select The Information You Want To Update In (" + NewCustomerDatabase.getName(meterCode) + "'s) Information ");
+            
+            System.out.println("\n[+] Select The Information You Want To Update In (" + getCustomerName(meterCode).split(" ")[0] + "'s) Information ");
             System.out.println("\n\t[-] Alert : You Can't Update Name, National Id, Birth Date, Administrator ID, Gender nor Contract Date");
-            System.out.println("\n\t     [1] - Address");
-            System.out.println("\t     [2] - Email");
-            System.out.println("\t     [3] - GovernmentCode");
-            System.out.println("\t     [4] - Phone Number");
-            System.out.println("\t     [5] - Type Of Use");
+            System.out.println("\n\t     [1] - Address.\n");
+            System.out.println("\t     [2] - Email.\n");
+            System.out.println("\t     [3] - GovernmentCode.\n");
+            System.out.println("\t     [4] - Phone Number.\n");
+            System.out.println("\t     [5] - Type Of Use.");
             System.out.print("\n[+] Choose a number(0 to return to main menu): ");
-            System.out.flush();
-            System.out.print("\u001b[0K");
-            choice_2 = input.next().charAt(0);
-            switch (choice_2) {
-                case '1': {
-                    System.out.print("\n\t      [+] Enter The New Address:");
-                    input.nextLine();
-                    String value = input.nextLine();
-                    updateCustomer("Address", value, meterCode);
+            
+            choice = input.next().charAt(0);
+            input.nextLine();
+            
+            
+            switch (choice) {
+                
+                case '1':
+                    System.out.print("\n\t      [+] Enter new address: ");
+                    updateCustomer(addressColumn, Address_Val(input.nextLine()), meterCode);
                     break;
-                }
-                case '2': {
-                    System.out.print("\n\t      [+] Enter The New Email:");
-                    String value = input.next();
-                    updateCustomer("Email", value, meterCode);
+                case '2':
+                    System.out.print("\n\t      [+] Enter new email: ");
+                    updateCustomer(emailColumn, Email_Val(input.nextLine()), meterCode);
                     break;
-                }
-                case '3': {
-                    System.out.print("\n\t      [+] Enter The New Government Code:");
-                    String value = input.next();
-                    updateCustomer("GovernmentCode", value, meterCode);
+                case '3':
+                    System.out.print("\n\t      [+] Enter new government code: ");
+                    updateCustomer(governmentCodeColumn, GovernmentCode_Val(input.nextLine()), meterCode);
                     break;
-                }
-                case '4': {
-                    System.out.print("\n\t      [+] Enter The New Phone Number:");
-                    String value = input.next();
-                    updateCustomer("Phone Number", value, meterCode);
+                case '4':
+                    System.out.print("\n\t      [+] Enter new phone number: ");
+                    updateCustomer(phoneNumColumn, PhoneNumber_Val(input.nextLine()), meterCode);
                     break;
-                }
-                case '5': {
-                    System.out.print("\n\t      [+] Enter The New Type Of Use:");
-                    String value = input.next();
-                    updateCustomer("TypeOfUse", value, meterCode);
+                case '5':
+                    NewCustomerDriver newCustomerDriver = new NewCustomerDriver();
+                    System.out.print("\n\t      [+] Enter new type of use(0 for Home use, 1 for Commerical use): ");
+                    updateCustomer(typeOfUseColumn, newCustomerDriver.TypeOfUse_Val(input.next().charAt(0)), meterCode);
                     break;
-                }
                 case '0':
                     return;
                 default:
@@ -582,76 +518,71 @@ public class AdministratorDriver extends Administrator {
                     break;
             }
 
-            System.out.print("\n[+] Do you want to Update another Information in ( " + NewCustomerDatabase.getName(meterCode) + "'s ) Informations ? (y/n): ");
-            System.out.flush();
-            q2Continue = input.next().charAt(0);
-        } while (q2Continue == 'Y' || q2Continue == 'y');
+            System.out.print("\n[+] Do you want to Update another Information in ( " + getCustomerName(meterCode).split(" ")[0] + "'s ) Informations ?(y/n): ");
+            qContinue = input.next().charAt(0);
+            
+        } while (qContinue == 'Y' || qContinue == 'y');
+        
     }
 
     public void viewOperatorDataBase(String operatorID) {
-        char choice_2, q2Continue;
+        
         do {
-            System.out.println("\n[+] Select The Information You Want To Update In (" + AdministratorDatabase.getAdministratorName(operatorID) + "'s) Information ");
+            
+            System.out.println("\n[+] Select The Information You Want To Update In (" + getAdministratorName(operatorID).split(" ")[0] + "'s) Information ");
             System.out.println("\n[-] Alert : You Can't Update Name, National Id, Birth Date, Administrator ID, Gender nor Contract Date");
             System.out.println("\n\t     [1] - Address");
             System.out.println("\t     [2] - Email");
             System.out.println("\t     [3] - Phone Number");
             System.out.println("\t     [4] - Password");
             System.out.println("\t     [5] - Administrator Role");
-
             System.out.print("\n[+] Choose a number(0 to return to main menu): ");
-            System.out.flush();
-            System.out.print("\u001b[0K");
-            choice_2 = input.next().charAt(0);
-            switch (choice_2) {
-                case '1': {
-                    System.out.print("\n\t      [+] Enter The New Address:");
-                    input.nextLine();
-                    String value = input.nextLine();
-                    updateAdministrator("Address", value, operatorID);
+            
+            choice = input.next().charAt(0);
+            input.nextLine();
+            
+            switch (choice) {
+                
+                case '1':
+                    System.out.print("\n\t      [+] Enter new address: ");
+                    updateAdministrator(addressColumn, Address_Val(input.nextLine()), operatorID);
                     break;
-                }
-                case '2': {
-                    System.out.print("\n\t      [+] Enter The New Email:");
+                case '2':
+                    System.out.print("\n\t      [+] Enter new email: ");
+                    updateAdministrator(emailColumn, Email_Val(input.nextLine()), operatorID);
+                    break;
+                case '3':
+                    System.out.print("\n\t      [+] Enter new phone number: ");
+                    updateAdministrator(phoneNumColumn, PhoneNumber_Val(input.nextLine()), operatorID);
+                    break;
+                case '4':
+                    System.out.print("\n\t      [+] Enter new password: ");
+                    updateAdministrator(administratorPassColumn, input.nextLine(), operatorID);
+                    break;
+                case '5':
+                    System.out.print("\n\t      [+] Enter new Administrator Role:");
                     String value = input.next();
-                    updateAdministrator("Email", value, operatorID);
+                    updateAdministrator(administratorRoleColumn, value, operatorID);
                     break;
-                }
-                case '3': {
-                    System.out.print("\n\t      [+] Enter The New Phone Number:");
-                    String value = input.next();
-                    updateAdministrator("PhoneNumber", value, operatorID);
-                    break;
-                }
-                case '4': {
-                    System.out.print("\n\t      [+] Enter The New Password:");
-                    String value = input.next();
-                    updateAdministrator("AdministratorPass", value, operatorID);
-                    break;
-                }
-                case '5': {
-                    System.out.print("\n\t      [+] Enter The New Administrator Role:");
-                    String value = input.next();
-                    updateAdministrator("AdministratorRole", value, operatorID);
-                    break;
-                }
                 case '0':
                     return;
                 default:
                     System.out.println("\n[-] Enter a valid choice.");
                     break;
+                    
             }
 
-            System.out.print("\n[+] Do you want to Update another Information in ( " + AdministratorDatabase.getAdministratorName(operatorID) + "'s ) Informations ? (y/n): ");
-            System.out.flush();
-            q2Continue = input.next().charAt(0);
-        } while (q2Continue == 'Y' || q2Continue == 'y');
+            System.out.print("\n[+] Do you want to Update another Information in (" + getAdministratorName(operatorID).split(" ")[0] + "'s) Informations ?(y/n): ");
+            qContinue = input.next().charAt(0);
+            
+        } while (qContinue == 'Y' || qContinue == 'y');
+        
     }
 
     public void viewAdministratorDataBase(String administratorID) {
         char choice_2, q2Continue;
         do {
-            System.out.println("\n[+] Select The Information You Want To Update In (" + AdministratorDatabase.getAdministratorName(administratorID) + "'s) Information ");
+            System.out.println("\n[+] Select The Information You Want To Update In (" + getAdministratorName(administratorID).split(" ")[0] + "'s) Information ");
             System.out.println("\n\t[-] Alert : You Can't Update Name, National Id, Birth Date, Administrator ID, Gender nor Contract Date");
             System.out.println("\n\t     [1] - Address");
             System.out.println("\t     [2] - Email");
@@ -660,7 +591,7 @@ public class AdministratorDriver extends Administrator {
             System.out.println("\t     [5] - Administrator Role");
 
             System.out.print("\n[+] Choose a number(0 to return to main menu): ");
-            System.out.flush();
+            
             System.out.print("\u001b[0K");
             choice_2 = input.next().charAt(0);
             switch (choice_2) {
@@ -668,31 +599,31 @@ public class AdministratorDriver extends Administrator {
                     System.out.print("\n\t      [+] Enter The New Address:");
                     input.nextLine();
                     String value = input.nextLine();
-                    updateAdministrator("Address", value, administratorID);
+                    updateAdministrator(addressColumn, value, administratorID);
                     break;
                 }
                 case '2': {
                     System.out.print("\n\t      [+] Enter The New Email:");
                     String value = input.next();
-                    updateAdministrator("Email", value, administratorID);
+                    updateAdministrator(emailColumn, value, administratorID);
                     break;
                 }
                 case '3': {
                     System.out.print("\n\t      [+] Enter The New Phone Number:");
                     String value = input.next();
-                    updateAdministrator("PhoneNumber", value, administratorID);
+                    updateAdministrator(phoneNumColumn, value, administratorID);
                     break;
                 }
                 case '4': {
                     System.out.print("\n\t      [+] Enter The New Password:");
                     String value = input.next();
-                    updateAdministrator("AdministratorPass", value, administratorID);
+                    updateAdministrator(administratorPassColumn, value, administratorID);
                     break;
                 }
                 case '5': {
                     System.out.print("\n\t      [+] Enter The New Administrator Role:");
                     String value = input.next();
-                    updateAdministrator("AdministratorRole", value, administratorID);
+                    updateAdministrator(administratorRoleColumn, value, administratorID);
                     break;
                 }
                 case '0':
@@ -702,8 +633,8 @@ public class AdministratorDriver extends Administrator {
                     break;
             }
 
-            System.out.print("\n[+] Do you want to Update another Information in ( " + AdministratorDatabase.getAdministratorName(administratorID) + "'s ) Informations ? (y/n): ");
-            System.out.flush();
+            System.out.print("\n[+] Do you want to Update another Information in ( " + getAdministratorName(administratorID).split(" ")[0] + "'s ) Informations ? (y/n): ");
+            
             q2Continue = input.next().charAt(0);
         } while (q2Continue == 'Y' || q2Continue == 'y');
     }
@@ -744,10 +675,7 @@ public class AdministratorDriver extends Administrator {
     private void consumptionStatForSpecificRegion() {
         char q2Continue;
         System.out.println("\n-------------------------------------------------------------------------------------------------");
-        String[][] governmentCodes = {{"02", "Cairo"}, {"013", "Qalyubia"}, {"03", "Alexandria"}, {"040", "Gharbia"}, {"048", "Monufia"}, {"055", "Sharqia"}, {"062", "Suez"}, {"064", "Ismailia"},
-        {"046", "Matruh"}, {"066", "Port Said"}, {"068", "North Sinai"}, {"069", "South Sinai"}, {"050", "Dakahlia"}, {"045", "Beheira"}, {"057", "Damietta"}, {"047", "Kafr El Sheikh"},
-        {"092", "New Valley"}, {"065", "Red Sea"}, {"084", "Faiyum"}, {"082", "Beni Suef"}, {"086", "Minya"}, {"088", "Asyut"}, {"093", "Sohag"}, {"095", "Luxor"},
-        {"096", "Qena"}, {"097", "Aswan"}};
+        
         for (int i = 0; i < 22; i += 3) {
             System.out.printf("| %20s -> %5s |", governmentCodes[i][1], governmentCodes[i][0]);
             System.out.printf(" %20s -> %5s ", governmentCodes[i + 1][1], governmentCodes[i + 1][0]);
@@ -782,23 +710,10 @@ public class AdministratorDriver extends Administrator {
             System.out.println("\n\t\t [-] The Average consumption For " + ": " + statisticsData[2]);
 
             System.out.print("\n[+]Do you want to View Consumption Of another Region ? (y/n): ");
-            System.out.flush();
+            
             q2Continue = input.next().charAt(0);
         } while (q2Continue == 'Y' || q2Continue == 'y');
     }
-    /*
-        -------------------- End Of Administrator Code --------------------
-        -------------------- End Of Administrator Code --------------------
-        -------------------- End Of Administrator Code --------------------
-        -------------------- End Of Administrator Code --------------------
-        -------------------- End Of Administrator Code --------------------
-     */
- /*-------------------------------------------------------------------
-    -------------------------------------------------------------------
-    -------------------------------------------------------------------
-    -------------------------------------------------------------------
-    -------------------------------------------------------------------
-    -------------------------------------------------------------------
-    -------------------------------------------------------------------*/
+
 
 }
