@@ -133,6 +133,9 @@ public class Administrator extends PersonDriver {
         return AdministratorDatabase.viewTotalCollected();
     }
     
+    protected int countUnpaidBills(String meterCode){
+        return OldCustomerDatabase.countUnpaidBills(meterCode);
+    }
     
     protected static String[] consumptionStatForSpecificRegionFromDB(String governmentCode){
         return AdministratorDatabase.consumptionStatForSpecificRegion(governmentCode);

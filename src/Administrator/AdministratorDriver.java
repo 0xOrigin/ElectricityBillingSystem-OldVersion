@@ -184,6 +184,14 @@ public class AdministratorDriver extends Administrator {
     
     protected void deleteCustomer(String meterCode) {
         
+        if(countUnpaidBills(meterCode) > 0){
+            
+            System.out.println("\n[-] You have unpaid bills, please pay them first.");
+            return;
+            
+        }
+            
+        
         deleteCustomerFromDB(meterCode);
         System.out.println("\n\t       [-] The customer has been successfully deleted.");
         

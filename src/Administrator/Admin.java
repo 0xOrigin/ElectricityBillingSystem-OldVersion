@@ -150,6 +150,7 @@ public class Admin extends AdministratorDriver {
         setAdministratorRole(operatorRole);
         System.out.print("\n\t     [+] Enter Your Password : ");
         setAdministratorPass(input.nextLine());
+        System.out.println("\n[-] Your Operator ID is: " + getAdministratorID() + " . You can use it to login.");
         pushAllAdministratorInfoToDB();
         
     }
@@ -162,6 +163,7 @@ public class Admin extends AdministratorDriver {
         setAdministratorRole(adminRole);
         System.out.print("\n\t     [+] Enter Your Password : ");
         setAdministratorPass(input.nextLine());
+        System.out.println("\n[-] Your Admin ID is: " + getAdministratorID() + " . You can use it to login.");
         pushAllAdministratorInfoToDB();
         
     }
