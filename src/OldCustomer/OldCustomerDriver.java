@@ -11,6 +11,8 @@ public class OldCustomerDriver extends OldCustomer {
 
     Scanner input = new Scanner(System.in);
     
+    public static double paymentCollector = 0.0;
+    
     char qContinue, choice;
     
     public void runDashboard(){
@@ -124,7 +126,9 @@ public class OldCustomerDriver extends OldCustomer {
 
     }
     
-    private void payBillWithMeterCode(String meterCode){
+    public void payBillWithMeterCode(String meterCode){
+        
+        paymentCollector = 0.0;
         
         do{
             
@@ -140,6 +144,7 @@ public class OldCustomerDriver extends OldCustomer {
                     
                     changeUnpaidStatusToPaid(meterCode);
                     
+                    paymentCollector += getMoneyValueofLastPaidBill(meterCode);
                     System.out.println("\n[-] The bill has been paid successfully.");
                 
                     System.out.print("\n[+]Do you want to pay another bill?(y/n): ");

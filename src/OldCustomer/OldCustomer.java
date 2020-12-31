@@ -52,6 +52,10 @@ public class OldCustomer {
     }
     
     
+    protected static double getMoneyValueofLastPaidBill(String meterCode){
+        return OldCustomerDatabase.getMoneyValueofLastPaidBill(meterCode);
+    }
+    
     protected static void complainAboutBill(String complain, String meterCode){
         OldCustomerDatabase.complainAboutBill(complain, meterCode);
     }

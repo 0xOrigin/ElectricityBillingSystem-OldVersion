@@ -30,7 +30,7 @@ public class Operator extends AdministratorDriver {
                         viewBillsOfSpecificRegion();
                         break;
                     case '4':
-
+                        stopMeterAndCancelSubscription();
                         break;
                     case '0':
                         return;
@@ -104,11 +104,11 @@ public class Operator extends AdministratorDriver {
         System.out.print("\n[+] Enter a meter code: ");
         String meterCode = Customer_Val(input.nextLine());
         
-        OldCustomerDriver ocd = new OldCustomerDriver();
-//        ocd.payBill(meterCode);
+        OldCustomerDriver oldCustomer = new OldCustomerDriver();
+        oldCustomer.payBillWithMeterCode(meterCode);
         
-        collectPayments(meterCode);
-        
+        collectPayments(meterCode, OldCustomerDriver.paymentCollector);
+            
     }
     
     public int Reading_Val(int currentReading, String meterCode){ // Enables operator to validate reading with real consumption.
@@ -127,6 +127,15 @@ public class Operator extends AdministratorDriver {
         } while (true);
         
     }
+    
+    
+    private void stopMeterAndCancelSubscription(){
+        
+        System.out.print("\n[+] Enter a meter code: ");
+        deleteCustomer(Customer_Val(input.nextLine()));
+        
+    }
+    
 
     public double getMoneyValue(int consumption, String typeOfUse){ // Enables operator to define tariff for customer.
 

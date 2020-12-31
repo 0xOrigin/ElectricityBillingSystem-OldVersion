@@ -211,18 +211,10 @@ public class Admin extends AdministratorDriver {
     }
 
     
-    private void deleteCustomer(String meterCode) {
-        
-        deleteCustomerFromDB(meterCode);
-        System.out.println("\n\t       [-] The Customer Deleted Successfully.");
-        
-    }
-
-    
     private void deleteOperator(String operatorID) {
         
         deleteAdministratorFromDB(operatorID);
-        System.out.println("\n\t       [-] The Operator Deleted Successfully.");
+        System.out.println("\n\t       [-] The operator has been successfully deleted.");
 
     }
 
@@ -230,7 +222,7 @@ public class Admin extends AdministratorDriver {
     private void deleteAdministrator(String administratorID) {
         
         deleteAdministratorFromDB(administratorID);
-        System.out.println("\n\t       [-] The Administrator Deleted Successfully.");
+        System.out.println("\n\t       [-] The admin has been successfully deleted.");
         
     }
 

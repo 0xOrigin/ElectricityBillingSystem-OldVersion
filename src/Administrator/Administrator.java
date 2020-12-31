@@ -58,8 +58,8 @@ public class Administrator extends PersonDriver {
     }
 
     
-    protected static void collectPayments(String meterCode){
-        AdministratorDatabase.collectPayments(OldCustomerDatabase.getMoneyValueofLastPaidBill(meterCode));
+    protected static void collectPayments(String meterCode, double paymentCollected){
+        AdministratorDatabase.collectPayments(paymentCollected);
     }
     
 

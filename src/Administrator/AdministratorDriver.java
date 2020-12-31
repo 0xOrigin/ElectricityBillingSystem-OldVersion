@@ -182,6 +182,14 @@ public class AdministratorDriver extends Administrator {
     }
     
     
+    protected void deleteCustomer(String meterCode) {
+        
+        deleteCustomerFromDB(meterCode);
+        System.out.println("\n\t       [-] The customer has been successfully deleted.");
+        
+    }
+    
+    
     protected static void clearScreen() {
 
         try {
