@@ -206,7 +206,8 @@ public class OldCustomerDriver extends OldCustomer {
         Operator operator = new Operator();
         
         System.out.print("\n\t[+] Enter monthly reading: ");
-        int monthlyReading = operator.Reading_Val(input.nextInt(), meterCode);
+        int reading = Integer.parseInt(IO_Val(input.next()));
+        int monthlyReading = operator.Reading_Val(reading, meterCode);
         
         double moneyValue = Double.parseDouble(String.format("%.2f", operator.getMoneyValue(getConsumption(meterCode, monthlyReading), getTypeOfUse(meterCode))));
         
@@ -230,4 +231,21 @@ public class OldCustomerDriver extends OldCustomer {
         
     }
         
+    
+    private String IO_Val(String reading){
+        
+        do {
+
+            if (reading.matches("\\d+\\S") || !reading.isBlank()) {
+                return reading;
+            } else {
+
+                System.out.print("\n[+] Enter a valid monthly reading: ");
+                reading = input.next();
+
+            }
+
+        } while (true);
+        
+    }
 }

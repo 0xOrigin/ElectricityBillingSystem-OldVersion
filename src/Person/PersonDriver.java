@@ -147,7 +147,7 @@ public class PersonDriver extends Person {
                 }
             
             
-            if(!governmentCode.matches("^(\\w+\\S+)$") || !found){ // No spaces No chars and should be in the array list
+            if(!governmentCode.matches("\\d+\\S") || governmentCode.isBlank() || !found){ // No spaces No chars and should be in the array list
                 
                 System.out.print("\n[-] Invalid government code, Enter a valid government code: ");
                 governmentCode = input.nextLine();
@@ -164,7 +164,7 @@ public class PersonDriver extends Person {
         
         do {
 
-            if(!phoneNum.matches("\\d+")){
+            if(!phoneNum.matches("\\d+\\S")){
                 
                 System.out.print("\n[-] Invalid phone number, Enter a valid phone number: ");
                 phoneNum = input.nextLine();

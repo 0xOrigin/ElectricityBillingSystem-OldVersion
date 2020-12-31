@@ -110,8 +110,7 @@ public class NewCustomerDriver extends NewCustomer {
         getContractDataFromCustomer();
         setContractDate();
         pushAllNewCustomerInfoToDB();
-        String [] name = getName().split(" ");
-        Sendmail.meterReady(getEmail(), name[0], getMeterCode());
+        Sendmail.meterReady(getEmail(), getName().split(" ")[0], getMeterCode());
         
         if(determinesAttachOrNot == 'Y' || determinesAttachOrNot == 'y'){
             
