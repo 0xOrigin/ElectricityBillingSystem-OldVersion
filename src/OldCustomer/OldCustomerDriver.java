@@ -50,11 +50,11 @@ public class OldCustomerDriver extends OldCustomer {
                         
                 }
                 
-            } while (choice != '1' || choice != '2' || choice != '3');
+            } while (choice != '1' && choice != '2' && choice != '3');
             
             System.out.print("\n[+]Do you want to perform any additional operation in this dashboard? (y/n): ");
             qContinue = input.next().charAt(0);
-           
+            
         } while (qContinue == 'Y' || qContinue == 'y');
         
     }
@@ -207,8 +207,11 @@ public class OldCustomerDriver extends OldCustomer {
         
         System.out.print("\n\t[+] Enter monthly reading: ");
         int monthlyReading = operator.Reading_Val(input.nextInt(), meterCode);
+        
+        double moneyValue = Double.parseDouble(String.format("%.2f", operator.getMoneyValue(getConsumption(meterCode, monthlyReading), getTypeOfUse(meterCode))));
+        
         pushMonthlyReadingToDB(meterCode, monthlyReading,
-                               operator.getMoneyValue(getConsumption(meterCode, monthlyReading), getTypeOfUse(meterCode)),
+                               moneyValue,
                                operator.getTarrif());
         
         System.out.println("\n[-] A new bill has been released.");

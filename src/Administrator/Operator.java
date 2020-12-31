@@ -107,7 +107,7 @@ public class Operator extends AdministratorDriver {
         OldCustomerDriver oldCustomer = new OldCustomerDriver();
         oldCustomer.payBillWithMeterCode(meterCode);
         
-        collectPayments(meterCode, OldCustomerDriver.paymentCollector);
+        collectPayments(meterCode, Double.parseDouble(String.format("%.2f", OldCustomerDriver.paymentCollector)));
             
     }
     
@@ -119,7 +119,7 @@ public class Operator extends AdministratorDriver {
                 return currentReading;
             } else {
 
-                System.out.print("\n[+] Enter a monthly reading: ");
+                System.out.print("\n[+] Enter a valid monthly reading: ");
                 currentReading = input.nextInt();
 
             }

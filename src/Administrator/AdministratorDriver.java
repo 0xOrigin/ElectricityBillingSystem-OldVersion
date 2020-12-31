@@ -137,21 +137,28 @@ public class AdministratorDriver extends Administrator {
             System.out.print("\n[+] Enter a government code: ");            
             ArrayList<String[]> billsInfo = getBillsInfoOfSpecificRegion(GovernmentCode_Val(input.next()));
             
-            System.out.println("\n  ===============================================================================================================================================");
-            System.out.printf("\t  %-15s | %-15s | %-15s | %-15s | %-10s | %-15s | %-15s | %-20s", "MeterCode", "PastReading", "CurrentReading",
-                              "Consumption", "Tariff", "MoneyValue", "Status", "DateOfBill");
-            System.out.println();
-            System.out.println("  ===============================================================================================================================================");
+            if(billsInfo.size() == 0){
+                
+                System.out.println("\n[-] No bills have been registered in this government yet.");
+                
+            } else {
             
-            for(int i = 0; i < billsInfo.size(); i++){
-                    System.out.format("\t  %-15s | %-15s | %-15s | %-15s | %-10s | %-15s | %-15s | %-20s",
-                                      billsInfo.get(i)[0], billsInfo.get(i)[1], billsInfo.get(i)[2], billsInfo.get(i)[3],
-                                      billsInfo.get(i)[4], billsInfo.get(i)[5], billsInfo.get(i)[6], billsInfo.get(i)[7]);
-                  
+                System.out.println("\n  ===============================================================================================================================================");
+                System.out.printf("\t  %-15s | %-15s | %-15s | %-15s | %-10s | %-15s | %-15s | %-20s", "MeterCode", "PastReading", "CurrentReading",
+                                  "Consumption", "Tariff", "MoneyValue", "Status", "DateOfBill");
                 System.out.println();
-            }
-            System.out.println("  ===============================================================================================================================================");
+                System.out.println("  ===============================================================================================================================================");
+
+                for(int i = 0; i < billsInfo.size(); i++){
+                        System.out.format("\t  %-15s | %-15s | %-15s | %-15s | %-10s | %-15s | %-15s | %-20s",
+                                          billsInfo.get(i)[0], billsInfo.get(i)[1], billsInfo.get(i)[2], billsInfo.get(i)[3],
+                                          billsInfo.get(i)[4], billsInfo.get(i)[5], billsInfo.get(i)[6], billsInfo.get(i)[7]);
+
+                    System.out.println();
+                }
+                System.out.println("  ===============================================================================================================================================");
             
+            }
 
             System.out.print("\n[+]Do you want to View bills Of another region?(y/n): ");
             qContinue = input.next().charAt(0);

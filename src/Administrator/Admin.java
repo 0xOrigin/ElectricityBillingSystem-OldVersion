@@ -149,7 +149,7 @@ public class Admin extends AdministratorDriver {
         setAdministratorID(getGovernmentCode(), getNationalIdNum());
         setAdministratorRole(operatorRole);
         System.out.print("\n\t     [+] Enter Your Password : ");
-        setAdministratorPass(input.nextLine());
+        setAdministratorPass(Password_Val(input.nextLine()));
         System.out.println("\n[-] Your Operator ID is: " + getAdministratorID() + " . You can use it to login.");
         pushAllAdministratorInfoToDB();
         
@@ -162,7 +162,7 @@ public class Admin extends AdministratorDriver {
         setAdministratorID(getGovernmentCode(), getNationalIdNum());
         setAdministratorRole(adminRole);
         System.out.print("\n\t     [+] Enter Your Password : ");
-        setAdministratorPass(input.nextLine());
+        setAdministratorPass(Password_Val(input.nextLine()));
         System.out.println("\n[-] Your Admin ID is: " + getAdministratorID() + " . You can use it to login.");
         pushAllAdministratorInfoToDB();
         
@@ -359,12 +359,11 @@ public class Admin extends AdministratorDriver {
                     break;
                 case '4':
                     System.out.print("\n\t      [+] Enter new password: ");
-                    updateOperator(administratorPassColumn, input.nextLine(), operatorID);
+                    updateOperator(administratorPassColumn, Password_Val(input.nextLine()), operatorID);
                     break;
                 case '5':
-                    System.out.print("\n\t      [+] Enter new Administrator Role:");
-                    String value = input.next(); //// -----------------------------------------------------------------------
-                    updateOperator(administratorRoleColumn, value, operatorID);
+                    System.out.print("\n\t      [+] Enter new Administrator Role(0 for Operator, 1 for Admin):");
+                    updateOperator(administratorRoleColumn, AdministratorRole_Val(input.next().charAt(0)), operatorID);
                     break;
                 case '0':
                     return;
@@ -413,12 +412,11 @@ public class Admin extends AdministratorDriver {
                     break;
                 case '4':
                     System.out.print("\n\t      [+] Enter new password: ");
-                    updateAdministrator(administratorPassColumn, input.nextLine(), administratorID);
+                    updateAdministrator(administratorPassColumn, Password_Val(input.nextLine()), administratorID);
                     break;
                 case '5':
-                    System.out.print("\n\t      [+] Enter new Administrator Role: ");
-                    String value = input.next(); //// =====================================================
-                    updateAdministrator(administratorRoleColumn, value, administratorID);
+                    System.out.print("\n\t      [+] Enter new Administrator Role(0 for Operator, 1 for Admin): ");
+                    updateAdministrator(administratorRoleColumn, AdministratorRole_Val(input.next().charAt(0)), administratorID);
                     break;
                 case '0':
                     return;
@@ -435,6 +433,44 @@ public class Admin extends AdministratorDriver {
         
     }
 
+    
+    private String Password_Val(String pass){
+        
+        do {
+            
+            if(pass.isBlank()){
+                
+                System.out.print("\n[-] Invalid password, Enter a valid password: ");
+                pass = input.nextLine();
+                
+            } else 
+                return pass;
+                
+        } while (true);
+        
+    }
+    
+    
+    private String AdministratorRole_Val(char selector){
+        
+        do{
+            
+            switch (selector) {
+                case '0':
+                    return operatorRole;
+                case '1':
+                    return adminRole;
+                default:
+                    System.out.print("\n[-] Invalid administrator role, Enter a valid administrator role(0 for Operator, 1 for Admin): ");
+                    selector = input.next().charAt(0);
+                    break;
+            }
+            
+        } while (true);
+        
+    }
+    
+    
     private void updateCustomer(final String columnName, String value, String meterCode) {
 
         pushCustomerUpdateToDB(columnName, value, meterCode);
@@ -481,6 +517,7 @@ public class Admin extends AdministratorDriver {
 
             System.out.print("\n[+]Do you want to View Consumption Of another region?(y/n): ");
             qContinue = input.next().charAt(0);
+            input.nextLine();
             
         } while (qContinue == 'Y' || qContinue == 'y');
         
