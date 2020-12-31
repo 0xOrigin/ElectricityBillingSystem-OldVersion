@@ -67,6 +67,14 @@ public class Administrator extends PersonDriver {
         return OldCustomerDatabase.getLastBillInfo(meterCode);
     }
     
+    protected static int getLastReading(String meterCode){
+        return OldCustomerDatabase.getLastReading(meterCode);
+    }
+    
+    protected static double getMoneyValueofLastPaidBill(String meterCode){
+        return OldCustomerDatabase.getMoneyValueofLastPaidBill(meterCode);
+    }
+    
     
     protected static ArrayList<String[]> getBillsInfoOfSpecificRegion(String governmentCode){
         return OldCustomerDatabase.getBillsInfoOfSpecificRegion(governmentCode);

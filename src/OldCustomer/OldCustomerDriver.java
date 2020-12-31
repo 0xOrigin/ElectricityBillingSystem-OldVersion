@@ -1,139 +1,225 @@
 package OldCustomer;
 
 import Email.Sendmail;
-import static OldCustomer.OldCustomer.complainAboutBill;
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import Administrator.Operator;
 
 public class OldCustomerDriver extends OldCustomer {
 
     Scanner input = new Scanner(System.in);
     
+    char qContinue, choice;
     
     public void runDashboard(){
-        System.out.println("\n\t\t  ——————————————————————————————");
-        System.out.print("\t\t |  Electricity Billing System  |\n");
-        System.out.println("\t\t  ——————————————————————————————\n");
-        System.out.println("\t     [-] Welcome in Old Customer Dashboard [-]");
-        System.out.println("\t    ———————————————————————————————————————————");
-        System.out.println("\n[-] What do you want to do?\n");
-        System.out.println("\t     [1] - Pay bill with meter code.");
-        System.out.println("\t     [2] - Enter monthly reading of meter code.");
-        System.out.println("\t     [3] - Complain about bill.");
-        System.out.print("\n[+] Choose a number(0 to return to main menu): ");
-        char choice = input.next().charAt(0);
-        input.nextLine();
-        String meterCode;
+        
+        do {
+            
+            viewDashboard();
+            
+            do {
+                
+                System.out.print("\n[+] Choose a number(0 to return to main menu): ");
+                
+                choice = input.next().charAt(0);
+                input.nextLine();
+                
                 switch (choice) {
+                    
                     case '1':
-                        meterCode= enterMeterCode();
-                        payBill(meterCode);
+                        System.out.print("\n\t[+] Enter meter code: ");
+                        payBillWithMeterCode(MeterCode_Val(input.nextLine()));
                         break;
-                     case '2':
-                        meterCode= enterMeterCode();
-                        System.out.println("\n[-]Enter the current reading: ");
-                        int currentReading=input.nextInt();
-                        input.nextLine();
-                        int tariff=1; double moneyValue=100;// SHOULD BE CHANGED LATER!!!
-                        enterMonthlyReading(meterCode, currentReading, tariff, moneyValue);
+                    case '2':
+                        System.out.print("\n\t[+] Enter meter code: ");
+                        enterMonthlyReading(MeterCode_Val(input.next()));
                         break;
-                     case '3':
-                        meterCode= enterMeterCode();
-                         System.out.println("\n[-]Enter your complain about "+firstUnpaidMoneyValueString(meterCode)+"$: ");
-                         String complain=input.nextLine();
-                         complainAboutBill( complain,meterCode);
+                    case '3':
+                        System.out.print("\n\t[+] Enter meter code: ");
+                        complainAboutBillWithMeterCode(MeterCode_Val(input.nextLine()));
                         break;
                     case '0':
                         return;
                     default:
                         System.out.println("\n[-] Enter a valid choice.");
                         break;
+                        
                 }
+                
+            } while (choice != '1' || choice != '2' || choice != '3');
+            
+            System.out.print("\n[+]Do you want to perform any additional operation in this dashboard? (y/n): ");
+            qContinue = input.next().charAt(0);
+           
+        } while (qContinue == 'Y' || qContinue == 'y');
         
     }
-    private String enterMeterCode()
-    {
-        System.out.println("\n[+]Enter your meter code: ");
-        String meterCode=input.nextLine();
-        while (isMeterCodeExists(meterCode)==false)
-        {
-            System.out.println("\n[+]Enter VALID meter code: ");
-            meterCode=input.nextLine();
+    
+    private static void viewDashboard(){
+        
+        clearScreen();
+        printBanner();
+        printSelections();
+        
+    }
+    
+    private static void printBanner() {
+
+        System.out.println("\n\t\t  ——————————————————————————————");
+        System.out.print("\t\t |  Electricity Billing System  |\n");
+        System.out.println("\t\t  ——————————————————————————————\n");
+        System.out.println("\t     [-] Welcome in Old Customer Dashboard [-]");
+        System.out.println("\t    ———————————————————————————————————————————");
+
+    }
+    
+    
+    private static void printSelections() {
+
+        System.out.println("\n[-] What do you want to do?\n");
+        System.out.println("\t     [1] - Pay bill with meter code.\n");
+        System.out.println("\t     [2] - Enter monthly reading of meter code.\n");
+        System.out.println("\t     [3] - Complain about bill.");
+        
+    }
+    
+    
+    private String MeterCode_Val(String meterCode) {
+
+        do {
+
+            if (isMeterCodeExists(meterCode)) {
+                return meterCode;
+            } else {
+
+                System.out.print("\n[+] Enter a valid meter code: ");
+                meterCode = input.nextLine();
+
+            }
+
+        } while (true);
+
+    }
+    
+    private static void clearScreen() {
+
+        try {
+
+            Robot ro = new Robot();
+            ro.setAutoWaitForIdle(true);
+            ro.setAutoDelay(10);
+            ro.keyPress(KeyEvent.VK_CONTROL);
+            ro.keyPress(KeyEvent.VK_L);
+            ro.keyRelease(KeyEvent.VK_L);
+            System.out.print("\u001b[1K");
+            ro.keyRelease(KeyEvent.VK_CONTROL);
+            System.out.print("\u001b[2K");
+            ro.delay(10);
+
+        } catch (AWTException ex) {
+            System.out.println(ex.toString());
         }
-        sendUnpaidMail(meterCode);
-        return meterCode;
+
     }
-    public void payBill(String meterCode){
+    
+    private void payBillWithMeterCode(String meterCode){
         
-            if (haveUnpaidBills(meterCode)==true)
-            {
-                System.out.println("\n[+]Your Bill Information");
-                System.out.println("\n\t[-]Government Code: "+getFirstUnpaidGovCode(meterCode));
-                System.out.println("\n\t[-]Past Reading: "+getFirstUnpaidPastReading(meterCode));
-                System.out.println("\n\t[-]Current Reading: "+getFirstUnpaidCurrentReading(meterCode));
-                System.out.println("\n\t[-]Consumption: "+getFirstUnpaidConsumption(meterCode));
-                System.out.println("\n\t[-]Tariff: "+getFirstUnpaidTariff(meterCode));
-                System.out.println("\n\t[-]Date Of Bill: "+getFirstUnpaidDateOfBill(meterCode));
-                System.out.println("\n[-]Do you want to pay "+firstUnpaidMoneyValueString(meterCode)+"$ ? (1 = Yes / 0 = No)");
-                int choice1=input.nextInt();
+        do{
+            
+            if(countUnpaidBills(meterCode) > 0){
+            
+                printBill(meterCode);
+
+                System.out.print("\n[+] Pay this bill?(y/n): ");
+                choice = input.next().charAt(0);
                 input.nextLine();
-                if (choice1==0)
-                {
-                    System.out.println("[-]Do you want to complain about the bill? (1 = Yes / 0 = No)");
-                    int choice2=input.nextInt();
+                
+                if(choice == 'y' || choice == 'Y'){
+                    
+                    changeUnpaidStatusToPaid(meterCode);
+                    
+                    System.out.println("\n[-] The bill has been paid successfully.");
+                
+                    System.out.print("\n[+]Do you want to pay another bill?(y/n): ");
+                    qContinue = input.next().charAt(0);
                     input.nextLine();
-                    if (choice2==1)
-                    {
-                        System.out.println("[-]Please Enter your complain: ");
-                        String complain=input.nextLine();
-                        complainAboutBill(complain,meterCode);
+                    
+                } else {
+                    
+                    System.out.print("\n[-] Do you want to complain about the bill?(y/n): ");
+                    choice = input.next().charAt(0);
+                    input.nextLine();
+                    
+                    if(choice == 'y' || choice == 'Y'){
+                        
+                        System.out.print("\n\t[+] Enter your complain: ");
+                        complainAboutBill(input.nextLine(), meterCode);
+                        
+                        System.out.println("\n[-] The complaint has been received, we are doing our best to raise the level of customer satisfaction.");
+                        break;
+                        
+                    } else {
+                        
+                        break;
+                        
                     }
-                    else if (choice2==0)
-                        return;
                 }
-                else if (choice1==1)
-                {
-                    changePaidStatusToPaid(meterCode);
-                }
+
+            } else {
+                
+                System.out.println("\n[-] You have already paid all bills, have a nice day!");
+                break;
+                
             }
-            else
-            {
-                System.out.println("\n[-]You have no unpaid bills");
-                return;
-            }
-        
+  
+        } while (qContinue == 'Y' || qContinue == 'y');
         
     }
     
-    @Override
-    public void enterMonthlyReading(String meterCode, int currentReading, int tariff, double moneyValue)
-    {
+    private void printBill(String meterCode){
         
+        String[] billInfo = getFirstUnpaidBillInfo(meterCode);
         
-        if (true/*if the current reading is true*/)
-        {
-            super.enterMonthlyReading(meterCode, currentReading, tariff, moneyValue);
-        }
-        else
-        {
-            System.out.println("\n\nPlease enter valid reading.");
-        }
-    }
-    
-    private void sendUnpaidMail(String meterCode){
-        if (unpaidMonthCount(meterCode)>=3)
-        {
-            String name[]=getName(meterCode);
-            try {
-                Sendmail.unpaidEmail(getEmail(meterCode),name[0],meterCode);
-            } catch (Exception ex) {
-                Logger.getLogger(OldCustomerDriver.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
+        System.out.println("\n  ===============================================================================================================================================");
+        System.out.printf("\t  %-15s | %-15s | %-15s | %-15s | %-10s | %-15s | %-20s", "GovernmentCode", "PastReading", "CurrentReading",
+                          "Consumption", "Tariff", "MoneyValue", "DateOfBill");
+        System.out.println("\n  ===============================================================================================================================================");
+
+
+        System.out.format("\t  %-15s | %-15s | %-15s | %-15s | %-10s | %-15s | %-20s",
+                            billInfo[0], billInfo[1], billInfo[2], billInfo[3],
+                            billInfo[4], billInfo[5], billInfo[6]);
+
+        System.out.println("\n  ===============================================================================================================================================");
         
     }
     
+    private void enterMonthlyReading(String meterCode){
+     
+        Operator operator = new Operator();
+        
+        System.out.print("\n\t[+] Enter monthly reading: ");
+        int monthlyReading = operator.Reading_Val(input.nextInt(), meterCode);
+        pushMonthlyReadingToDB(meterCode, monthlyReading,
+                               operator.getMoneyValue(getConsumption(meterCode, monthlyReading), getTypeOfUse(meterCode)),
+                               operator.getTarrif());
+        
+        System.out.println("\n[-] A new bill has been released.");
+        
+        if(countUnpaidBills(meterCode) >= 3)
+            Sendmail.unpaidEmail(getEmail(meterCode), getName(meterCode), meterCode);
+        
+    }
     
+    
+    private void complainAboutBillWithMeterCode(String meterCode){
+        
+        System.out.print("\n\t[+] Enter your complain: ");
+        complainAboutBill(input.nextLine(), meterCode);
+        System.out.println("\n[-] The complaint has been received, we are doing our best to raise the level of customer satisfaction.");
+        
+    }
+        
 }

@@ -34,6 +34,7 @@ public class NewCustomerDriver extends NewCustomer {
                 input.nextLine();
                 
                 switch (choice) {
+                    
                     case '1':
                         fillNewContract();
                         break;
@@ -42,6 +43,7 @@ public class NewCustomerDriver extends NewCustomer {
                     default:
                         System.out.println("\n[-] Enter a valid choice.");
                         break;
+                        
                 }
                 
             } while (choice != '1');

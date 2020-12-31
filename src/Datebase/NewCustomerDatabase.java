@@ -103,7 +103,7 @@ public class NewCustomerDatabase {
             ResultSet rs = ps.executeQuery();
             rs.next();
             
-            return rs.getString("MeterCode");
+            return rs.getString("Email");
             
         } catch (SQLException ex) {
             System.out.println(ex.toString());

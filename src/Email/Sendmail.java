@@ -10,7 +10,7 @@ public class Sendmail {
     
     //This method will send email if customer didn't pay for three months
     
-    public static void unpaidEmail(String recepient, String name, String meterCode) throws Exception{
+    public static void unpaidEmail(String recepient, String name, String meterCode){
         
         
         try {
@@ -36,14 +36,14 @@ public class Sendmail {
             Message message= unpaidBills(session,myAccountEmail,recepient, name, meterCode);
             Transport.send(message);
             
-        } catch (UnsupportedEncodingException | MessagingException e) {
+        } catch (MessagingException e) {
             System.out.println("\n\t[-] You haven't paid your bills for three months or more at the meter number: " + meterCode + " , please pay.");
         }
         
     }
     
     
-    private static Message unpaidBills(Session session,String myAccountEmail,String recepient, String name, String meterCode) throws UnsupportedEncodingException {
+    private static Message unpaidBills(Session session,String myAccountEmail,String recepient, String name, String meterCode) {
         
         try {
             
@@ -57,6 +57,8 @@ public class Sendmail {
             
         } catch (MessagingException ex) {
             System.out.println("\n\t[-] You haven't paid your bills for three months or more at the meter number: " + meterCode + " , please pay.");
+        } catch (UnsupportedEncodingException ex) {
+            System.out.println(ex.toString());
         }
         
         return null;
@@ -94,7 +96,7 @@ public class Sendmail {
             Message message= meterReady(session,myAccountEmail,recepient, name, meterCode);
             Transport.send(message);
             
-        } catch (UnsupportedEncodingException | MessagingException e) {
+        } catch (MessagingException e) {
             System.out.println("\n\t[-] Your meter code is: " + meterCode + " . You can pay bills using this code only.");
         }
         
@@ -104,7 +106,7 @@ public class Sendmail {
 
     //Method for the ready meter code
     
-    private static Message meterReady(Session session, String myAccountEmail, String recepient, String name, String meterCode) throws UnsupportedEncodingException {
+    private static Message meterReady(Session session, String myAccountEmail, String recepient, String name, String meterCode) {
         
         String mailMessege = "\nDear " + name + ", meter is ready.\n" 
                 + "\n\tYour meter code is: " + meterCode + " . You can pay bills using this code only.";
@@ -121,6 +123,8 @@ public class Sendmail {
             
         } catch (MessagingException ex) {
             System.out.println("\n\t[-] Your meter code is: " + meterCode + " . You can pay bills using this code only.");
+        } catch (UnsupportedEncodingException ex) {
+            System.out.println(ex.toString());
         }
         
         return null;

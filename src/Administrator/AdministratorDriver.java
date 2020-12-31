@@ -128,8 +128,8 @@ public class AdministratorDriver extends Administrator {
     }
 
     
-    protected void viewBillsOfSpecificRegion(){
-        
+    protected void viewBillsOfSpecificRegion(){ // Enables operator to view bills of specific region.
+                                                // Enables admin to view all bills of specific regions.
         printGovernmentCodes();
         
         do {            

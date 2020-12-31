@@ -1,9 +1,6 @@
 package Administrator;
 import OldCustomer.OldCustomerDriver;
 
-import Datebase.AdministratorDatabase;
-import Datebase.OldCustomerDatabase;
-
 public class Operator extends AdministratorDriver {
 
     private int tarrif;
@@ -82,24 +79,23 @@ public class Operator extends AdministratorDriver {
         
     }
     
-    private void printBill(){
+    private void printBill(){ // Enables operator to print bill with meter code
         
         System.out.print("\n[+] Enter a meter code: ");
         String[] billInfo = getLastBillInfo(Customer_Val(input.nextLine()));
         
         System.out.println("\n  ===============================================================================================================================================");
-            System.out.printf("\t  %-15s | %-15s | %-15s | %-15s | %-10s | %-15s | %-15s | %-20s", "GovernmentCode", "PastReading", "CurrentReading",
-                              "Consumption", "Tariff", "MoneyValue", "Status", "DateOfBill");
-            System.out.println();
-            System.out.println("  ===============================================================================================================================================");
-            
-            
-            System.out.format("\t  %-15s | %-15s | %-15s | %-15s | %-10s | %-15s | %-15s | %-20s",
-                                billInfo[0], billInfo[1], billInfo[2], billInfo[3],
-                                billInfo[4], billInfo[5], billInfo[6], billInfo[7]);
-  
-            System.out.println("\n  ===============================================================================================================================================");
-        
+        System.out.printf("\t  %-15s | %-15s | %-15s | %-15s | %-10s | %-15s | %-15s | %-20s", "GovernmentCode", "PastReading", "CurrentReading",
+                          "Consumption", "Tariff", "MoneyValue", "Status", "DateOfBill");
+        System.out.println("\n  ===============================================================================================================================================");
+
+
+        System.out.format("\t  %-15s | %-15s | %-15s | %-15s | %-10s | %-15s | %-15s | %-20s",
+                            billInfo[0], billInfo[1], billInfo[2], billInfo[3],
+                            billInfo[4], billInfo[5], billInfo[6], billInfo[7]);
+
+        System.out.println("\n  ===============================================================================================================================================");
+
     }
     
     
@@ -109,16 +105,32 @@ public class Operator extends AdministratorDriver {
         String meterCode = Customer_Val(input.nextLine());
         
         OldCustomerDriver ocd = new OldCustomerDriver();
-        ocd.payBill(meterCode);
+//        ocd.payBill(meterCode);
         
         collectPayments(meterCode);
         
     }
     
+    public int Reading_Val(int currentReading, String meterCode){ // Enables operator to validate reading with real consumption.
+        
+        do {
 
-    public double getMoneyValue(int consumption, String typeOfUse){
+            if (currentReading >= getLastReading(meterCode)) {
+                return currentReading;
+            } else {
 
-        double moneyValue = 0;
+                System.out.print("\n[+] Enter a monthly reading: ");
+                currentReading = input.nextInt();
+
+            }
+
+        } while (true);
+        
+    }
+
+    public double getMoneyValue(int consumption, String typeOfUse){ // Enables operator to define tariff for customer.
+
+        double moneyValue = 0.0;
 
         if (typeOfUse.equals("Home")){
             
