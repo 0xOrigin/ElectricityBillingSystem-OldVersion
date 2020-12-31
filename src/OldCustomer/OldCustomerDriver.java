@@ -236,7 +236,7 @@ public class OldCustomerDriver extends OldCustomer {
         
         do {
 
-            if (reading.matches("\\d+\\S") || !reading.isBlank()) {
+            if (reading.matches("\\d+\\S") && !reading.isBlank()) {
                 return reading;
             } else {
 
