@@ -264,4 +264,26 @@ public class AdministratorDatabase {
         return false;
         
     }
+    
+    
+    public static int getNumOfAdministratorRole(final String role){
+        
+        try(Connection connect = DbConnection.connect();
+            PreparedStatement ps = connect.prepareStatement("SELECT count(AdministratorRole) from Administrators where AdministratorRole = ?");
+        ){
+            
+            ps.setString(1, role);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            
+            return rs.getInt(1);
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        
+        return 0;
+    }
+    
+    
 }

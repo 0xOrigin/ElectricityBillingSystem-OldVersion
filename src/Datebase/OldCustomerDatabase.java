@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class OldCustomerDatabase {
     
-    private int tarrif;
     
     // --------------------------------------------- Public functions --------------------------------------------- //
     

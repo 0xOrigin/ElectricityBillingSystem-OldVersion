@@ -1,6 +1,5 @@
 package Administrator;
 
-import NewCustomer.NewCustomerDriver;
 import java.util.Scanner;
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -137,7 +136,7 @@ public class AdministratorDriver extends Administrator {
             System.out.print("\n[+] Enter a government code: ");            
             ArrayList<String[]> billsInfo = getBillsInfoOfSpecificRegion(GovernmentCode_Val(input.next()));
             
-            if(billsInfo.size() == 0){
+            if(billsInfo.isEmpty()){
                 
                 System.out.println("\n[-] No bills have been registered in this government yet.");
                 

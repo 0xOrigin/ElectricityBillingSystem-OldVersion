@@ -80,6 +80,11 @@ public class Administrator extends PersonDriver {
         return OldCustomerDatabase.getBillsInfoOfSpecificRegion(governmentCode);
     }
     
+    
+    protected static int getNumOfAdministratorRole(final String role){
+        return AdministratorDatabase.getNumOfAdministratorRole(role);
+    }
+    
     // --------------------------------------- Protected Setters
     
     protected void setAdministratorID(String governmentCode, String nationalIdNum){

@@ -214,6 +214,13 @@ public class Admin extends AdministratorDriver {
 
     
     private void deleteOperator(String operatorID) {
+    
+        if(getNumOfAdministratorRole(operatorRole) == 1){
+            
+            System.out.println("\n[-] This is the last operator, add another operator before deleting the current one.");
+            return;
+            
+        }
         
         deleteAdministratorFromDB(operatorID);
         System.out.println("\n\t       [-] The operator has been successfully deleted.");
@@ -222,6 +229,13 @@ public class Admin extends AdministratorDriver {
 
     
     private void deleteAdministrator(String administratorID) {
+        
+        if(getNumOfAdministratorRole(adminRole) == 1){
+            
+            System.out.println("\n[-] This is the last admin, add another admin before deleting the current one.");
+            return;
+            
+        }
         
         deleteAdministratorFromDB(administratorID);
         System.out.println("\n\t       [-] The admin has been successfully deleted.");
@@ -362,8 +376,8 @@ public class Admin extends AdministratorDriver {
                     updateOperator(administratorPassColumn, Password_Val(input.nextLine()), operatorID);
                     break;
                 case '5':
-                    System.out.print("\n\t      [+] Enter new Administrator Role(0 for Operator, 1 for Admin):");
-                    updateOperator(administratorRoleColumn, AdministratorRole_Val(input.next().charAt(0)), operatorID);
+                    System.out.print("\n\t      [+] Enter new Administrator Role(0 for Operator, 1 for Admin): ");
+                    updateOperator(administratorRoleColumn, AdministratorRole_Val(input.next().charAt(0), operatorID), operatorID);
                     break;
                 case '0':
                     return;
@@ -416,7 +430,7 @@ public class Admin extends AdministratorDriver {
                     break;
                 case '5':
                     System.out.print("\n\t      [+] Enter new Administrator Role(0 for Operator, 1 for Admin): ");
-                    updateAdministrator(administratorRoleColumn, AdministratorRole_Val(input.next().charAt(0)), administratorID);
+                    updateAdministrator(administratorRoleColumn, AdministratorRole_Val(input.next().charAt(0), administratorID), administratorID);
                     break;
                 case '0':
                     return;
@@ -451,17 +465,23 @@ public class Admin extends AdministratorDriver {
     }
     
     
-    private String AdministratorRole_Val(char selector){
+    private String AdministratorRole_Val(char selector, String administratorID){
         
         do{
             
             switch (selector) {
                 case '0':
-                    return operatorRole;
+                    if(getNumOfAdministratorRole(adminRole) == 1 && getAdministratorRole(administratorID).equals(adminRole)){
+                        System.out.println("\n[-] This is the last admin, add another admin before updating the current one.");
+                    } else
+                        return operatorRole;
                 case '1':
-                    return adminRole;
+                    if(getNumOfAdministratorRole(operatorRole) == 1 && getAdministratorRole(administratorID).equals(operatorRole)){
+                        System.out.println("\n[-] This is the last operator, add another operator before updating the current one.");
+                    } else 
+                        return adminRole;
                 default:
-                    System.out.print("\n[-] Invalid administrator role, Enter a valid administrator role(0 for Operator, 1 for Admin): ");
+                    System.out.print("\n[-] Enter a valid administrator role(0 for Operator, 1 for Admin): ");
                     selector = input.next().charAt(0);
                     break;
             }
