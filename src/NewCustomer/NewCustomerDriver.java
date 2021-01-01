@@ -1,30 +1,22 @@
 package NewCustomer;
 
-import java.util.*;
+import java.util.Scanner;
+import java.io.File;
+import Email.Sendmail;
 import java.awt.Robot;
 import java.awt.AWTException;
 import java.awt.event.KeyEvent;
-import java.io.File;
-import Email.Sendmail;
 
 public class NewCustomerDriver extends NewCustomer {
     
     Scanner input = new Scanner(System.in);
     
-    // Data fields
-    private char typeOfUse;
-    private String apartmentContractPath;
-    
-    private char determinesAttachOrNot;
-    
+    private char choice, qContinue, determinesAttachOrNot;
     
     public void runDashboard(){
         
-        char qContinue;
-        
         do {
             
-            char choice;
             viewDashboard();
             
             do {
@@ -110,35 +102,31 @@ public class NewCustomerDriver extends NewCustomer {
         getContractDataFromCustomer();
         setContractDate();
         pushAllNewCustomerInfoToDB();
-        Sendmail.meterReady(getEmail(), getName().split(" ")[0], getMeterCode());
         
-        if(determinesAttachOrNot == 'Y' || determinesAttachOrNot == 'y'){
-            
-            setApartmentContractPath(apartmentContractPath);
+        if(determinesAttachOrNot == 'Y' || determinesAttachOrNot == 'y')
             attachCopyOfContractToDB();
-
-        }
         
+        Sendmail.meterReady(getEmail(), getName().split(" ")[0], getMeterCode());
         System.out.println("\n[-] The contract has been successfully registered, check your email.");
+        
     }
     
     private void getContractDataFromCustomer(){
         
         System.out.print("\n\t[+] Enter type of use(0 for Home use, 1 for Commerical use): ");
-        typeOfUse = input.next().charAt(0);
-        setTypeOfUse(TypeOfUse_Val(typeOfUse));
+        setTypeOfUse(TypeOfUse_Val(input.next().charAt(0)));
         
         System.out.print("\n\t[+] Do you want to attach a copy of apartment contract? (y/n): ");
         determinesAttachOrNot = input.next().charAt(0);
+        input.nextLine();
         
         if(determinesAttachOrNot == 'Y' || determinesAttachOrNot == 'y'){
-            input.nextLine();
+            
             System.out.format("\n\t[+] Enter a file path of apartment contract: ");
-            apartmentContractPath = input.nextLine();
-            apartmentContractPath = AttachedFile_Val(apartmentContractPath);
+            setApartmentContractPath(AttachedFile_Val(input.nextLine()));
+            
         }
             
-        
     }
     
     // Data Validators
@@ -148,6 +136,7 @@ public class NewCustomerDriver extends NewCustomer {
         do{
             
             switch (selector) {
+                
                 case '0':
                     return "Home";
                 case '1':
@@ -156,6 +145,7 @@ public class NewCustomerDriver extends NewCustomer {
                     System.out.print("\n[-] Invalid type of use selection, Enter a valid type of use: ");
                     selector = input.next().charAt(0);
                     break;
+                    
             }
             
         } while (true);

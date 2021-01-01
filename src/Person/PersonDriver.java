@@ -1,67 +1,42 @@
 package Person;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class PersonDriver extends Person {
     
     Scanner input = new Scanner(System.in);
     
-    // Data fields
-    private String name;
-    private String nationalIdNum;
-    private String address;
-    private String email;
-    private String governmentCode;
-    private String phoneNum;
-    
     
     public void runPersonDriver() {
       
-        getPersonalDataFromCustomer();
         PersonalDataSetter();
         
     }
     
     private void PersonalDataSetter(){
         
-        setName(name);
-        setNationalIdNum(nationalIdNum);
-        setAddress(address);
-        setEmail(email);
-        setGovernmentCode(governmentCode);
-        setPhoneNum(phoneNum);
-        setContractDate();
-    }
-    
-    
-    private void getPersonalDataFromCustomer(){
-        
         System.out.print("\n\t[+] Enter name: ");
-        name = input.nextLine();
-        name = Name_Val(name.trim());
+        setName(Name_Val(input.nextLine().trim()));
         
         System.out.print("\n\t[+] Enter National ID: ");
-        nationalIdNum = input.nextLine();
-        nationalIdNum = NationalID_Val(nationalIdNum);
+        setNationalIdNum(NationalID_Val(input.nextLine()));
         
         System.out.print("\n\t[+] Enter address: ");
-        address = input.nextLine();
-        address = Address_Val(address.trim());
+        setAddress(Address_Val(input.nextLine().trim()));
         
         System.out.print("\n\t[+] Enter e-mail: ");
-        email = input.nextLine();
-        email = Email_Val(email.trim());
+        setEmail(Email_Val(input.nextLine().trim()));
         
         System.out.print("\n\t[+] Enter government code: ");
-        governmentCode = input.nextLine();
-        governmentCode = GovernmentCode_Val(governmentCode.trim());
+        setGovernmentCode(GovernmentCode_Val(input.nextLine().trim()));
         
         System.out.print("\n\t[+] Enter phone number: ");
-        phoneNum = input.nextLine();
-        phoneNum = PhoneNumber_Val(phoneNum.trim());
+        setPhoneNum(PhoneNumber_Val(input.nextLine().trim()));
+        
+        
+        setContractDate();
         
     }
-    
     
     
     // Data Validators
@@ -147,7 +122,7 @@ public class PersonDriver extends Person {
                 }
             
             
-            if(!governmentCode.matches("\\d+\\S") || governmentCode.isBlank() || !found){ // No spaces No chars and should be in the array list
+            if(!governmentCode.matches("\\d+\\S") || governmentCode.isBlank() || !found){ // No spaces No chars and should be in array
                 
                 System.out.print("\n[-] Invalid government code, Enter a valid government code: ");
                 governmentCode = input.nextLine();
