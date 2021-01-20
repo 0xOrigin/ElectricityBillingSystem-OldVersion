@@ -40,7 +40,7 @@ public class NewCustomerDriver extends NewCustomer {
                 
             } while (choice != '1');
             
-            System.out.print("\n[+]Do you want to perform any additional operation in this dashboard? (y/n): ");
+            System.out.print("\n[+] Do you want to perform any additional operation in this dashboard? (y/n): ");
             qContinue = input.next().charAt(0);
            
         } while (qContinue == 'Y' || qContinue == 'y');
