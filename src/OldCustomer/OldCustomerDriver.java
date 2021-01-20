@@ -260,7 +260,7 @@ public class OldCustomerDriver extends OldCustomer {
                 
             } else {
                 
-                System.out.print("[-] Empty complaint. Enter a complaint: ");
+                System.out.print("[+] Empty complaint. Enter a complaint: ");
                 complaint = input.nextLine();
                 
             }
