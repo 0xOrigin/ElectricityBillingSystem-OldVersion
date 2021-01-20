@@ -107,14 +107,14 @@ public class NewCustomerDriver extends NewCustomer {
             attachCopyOfContractToDB();
         
         Sendmail.meterReady(getEmail(), getName().split(" ")[0], getMeterCode());
-        System.out.println("\n[-] The contract has been successfully registered, check your email.");
+        System.out.println("\n\t[-] The contract has been successfully registered, check your email.");
         
     }
     
     private void getContractDataFromCustomer(){
         
         System.out.print("\n\t[+] Enter type of use(0 for Home use, 1 for Commerical use): ");
-        setTypeOfUse(TypeOfUse_Val(input.next().charAt(0)));
+        setTypeOfUse(TypeOfUse_Val(input.nextLine()));
         
         System.out.print("\n\t[+] Do you want to attach a copy of apartment contract? (y/n): ");
         determinesAttachOrNot = input.next().charAt(0);
@@ -131,21 +131,30 @@ public class NewCustomerDriver extends NewCustomer {
     
     // Data Validators
     
-    public String TypeOfUse_Val(char selector){
+    public String TypeOfUse_Val(String selector){
         
         do{
             
-            switch (selector) {
+            if(!selector.isBlank()){
+            
+                switch (selector.charAt(0)) {
+
+                    case '0':
+                        return "Home";
+                    case '1':
+                        return "Commerical";
+                    default:
+                        System.out.print("\n[-] Invalid type of use selection, Enter a valid type of use: ");
+                        selector = input.nextLine();
+                        break;
+
+                }
                 
-                case '0':
-                    return "Home";
-                case '1':
-                    return "Commerical";
-                default:
-                    System.out.print("\n[-] Invalid type of use selection, Enter a valid type of use: ");
-                    selector = input.next().charAt(0);
-                    break;
-                    
+            } else {
+                
+                System.out.print("\n[-] Invalid type of use selection, Enter a valid type of use: ");
+                selector = input.nextLine();
+                
             }
             
         } while (true);
