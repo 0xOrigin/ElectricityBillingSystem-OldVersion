@@ -107,7 +107,7 @@ public class Operator extends AdministratorDriver {
         OldCustomerDriver oldCustomer = new OldCustomerDriver();
         oldCustomer.payBillWithMeterCode(meterCode);
         
-        collectPayments(meterCode, Double.parseDouble(String.format("%.2f", OldCustomerDriver.paymentCollector)));
+        collectPayments(meterCode, Double.parseDouble(String.format("%.2f", oldCustomer.getPaymentCollected())));
             
     }
     
