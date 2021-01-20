@@ -138,7 +138,7 @@ public class AdministratorDriver extends Administrator {
             
             if(billsInfo.isEmpty()){
                 
-                System.out.println("\n[-] No bills have been registered in this government yet.");
+                System.out.println("\n\t[-] No bills have been registered in this government yet.");
                 
             } else {
             
@@ -159,7 +159,7 @@ public class AdministratorDriver extends Administrator {
             
             }
 
-            System.out.print("\n[+]Do you want to View bills Of another region?(y/n): ");
+            System.out.print("\n[+] Do you want to View bills Of another region?(y/n): ");
             qContinue = input.next().charAt(0);
             
         } while (qContinue == 'Y' || qContinue == 'y');
@@ -169,21 +169,21 @@ public class AdministratorDriver extends Administrator {
     
     protected void printGovernmentCodes(){
         
-        System.out.println("\n-------------------------------------------------------------------------------------------------");
+        System.out.println("\n\t-------------------------------------------------------------------------------------------------");
         
         for (int i = 0; i < 22; i += 3) {
             
-            System.out.printf("| %20s -> %5s |", governmentCodes[i][1], governmentCodes[i][0]);
+            System.out.printf("\t| %20s -> %5s |", governmentCodes[i][1], governmentCodes[i][0]);
             System.out.printf(" %20s -> %5s ", governmentCodes[i + 1][1], governmentCodes[i + 1][0]);
             System.out.printf("| %20s -> %5s |\n", governmentCodes[i + 2][1], governmentCodes[i + 2][0]);
 
         }
         
-        System.out.printf("| %20s -> %5s |", governmentCodes[24][1], governmentCodes[24][0]);
+        System.out.printf("\t| %20s -> %5s |", governmentCodes[24][1], governmentCodes[24][0]);
         System.out.printf(" %20s -> %5s ", governmentCodes[25][1], governmentCodes[25][0]);
         System.out.printf("| %29s |", "");
 
-        System.out.println("\n-------------------------------------------------------------------------------------------------");
+        System.out.println("\n\t-------------------------------------------------------------------------------------------------");
         
     }
     
@@ -196,10 +196,9 @@ public class AdministratorDriver extends Administrator {
             return;
             
         }
-            
-        
+
         deleteCustomerFromDB(meterCode);
-        System.out.println("\n\t       [-] The customer has been successfully deleted.");
+        System.out.println("\n\tThe meter has been stopped and the customer has been successfully deleted.");
         
     }
     
