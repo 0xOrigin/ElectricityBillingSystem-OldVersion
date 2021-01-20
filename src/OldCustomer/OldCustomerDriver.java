@@ -11,7 +11,7 @@ public class OldCustomerDriver extends OldCustomer {
 
     Scanner input = new Scanner(System.in);
     
-    public static double paymentCollector = 0.0;
+    private double paymentCollector = 0.0;
     
     char qContinue, choice;
     
@@ -33,6 +33,7 @@ public class OldCustomerDriver extends OldCustomer {
                     case '1':
                         System.out.print("\n\t[+] Enter meter code: ");
                         payBillWithMeterCode(MeterCode_Val(input.nextLine()));
+                        choice = '1';
                         break;
                     case '2':
                         System.out.print("\n\t[+] Enter meter code: ");
@@ -52,7 +53,7 @@ public class OldCustomerDriver extends OldCustomer {
                 
             } while (choice != '1' && choice != '2' && choice != '3');
             
-            System.out.print("\n[+]Do you want to perform any additional operation in this dashboard? (y/n): ");
+            System.out.print("\n[+] Do you want to perform any additional operation in this dashboard? (y/n): ");
             qContinue = input.next().charAt(0);
             
         } while (qContinue == 'Y' || qContinue == 'y');
@@ -145,9 +146,9 @@ public class OldCustomerDriver extends OldCustomer {
                     changeUnpaidStatusToPaid(meterCode);
                     
                     paymentCollector += getMoneyValueofLastPaidBill(meterCode);
-                    System.out.println("\n[-] The bill has been paid successfully.");
+                    System.out.println("\n\t[-] The bill has been paid successfully.");
                 
-                    System.out.print("\n[+]Do you want to pay another bill?(y/n): ");
+                    System.out.print("\n[+] Do you want to pay another bill?(y/n): ");
                     qContinue = input.next().charAt(0);
                     input.nextLine();
                     
@@ -159,22 +160,22 @@ public class OldCustomerDriver extends OldCustomer {
                     
                     if(choice == 'y' || choice == 'Y'){
                         
-                        System.out.print("\n\t[+] Enter your complain: ");
-                        complainAboutBill(input.nextLine(), meterCode);
+                        System.out.print("\n\t[+] Enter your complaint: ");
+                        complainAboutBill(Complaint_Val(input.nextLine()), meterCode);
                         
-                        System.out.println("\n[-] The complaint has been received, we are doing our best to raise the level of customer satisfaction.");
+                        System.out.println("\n\t[-] The complaint has been received, we are doing our best to raise the level of customer satisfaction.");
                         break;
                         
                     } else {
                         
-                        break;
+                        return;
                         
                     }
                 }
 
             } else {
                 
-                System.out.println("\n[-] You have already paid all bills, have a nice day!");
+                System.out.println("\n\t[-] You have already paid all bills, have a nice day!");
                 break;
                 
             }
@@ -215,7 +216,7 @@ public class OldCustomerDriver extends OldCustomer {
                                moneyValue,
                                operator.getTarrif());
         
-        System.out.println("\n[-] A new bill has been released.");
+        System.out.println("\n\t[-] A new bill has been released.");
         
         if(countUnpaidBills(meterCode) >= 3)
             Sendmail.unpaidEmail(getEmail(meterCode), getName(meterCode), meterCode);
@@ -225,9 +226,9 @@ public class OldCustomerDriver extends OldCustomer {
     
     private void complainAboutBillWithMeterCode(String meterCode){
         
-        System.out.print("\n\t[+] Enter your complain: ");
-        complainAboutBill(input.nextLine(), meterCode);
-        System.out.println("\n[-] The complaint has been received, we are doing our best to raise the level of customer satisfaction.");
+        System.out.print("\n\t[+] Enter your complaint: ");
+        complainAboutBill(Complaint_Val(input.nextLine()), meterCode);
+        System.out.println("\n\t[-] The complaint has been received, we are doing our best to raise the level of customer satisfaction.");
         
     }
         
@@ -248,4 +249,31 @@ public class OldCustomerDriver extends OldCustomer {
         } while (true);
         
     }
+    
+    private String Complaint_Val(String complaint){
+        
+        do {
+            
+            if(!complaint.isBlank()){
+                
+                return complaint;
+                
+            } else {
+                
+                System.out.print("[-] Empty complaint. Enter a complaint: ");
+                complaint = input.nextLine();
+                
+            }
+            
+        } while (true);
+        
+    }
+    
+    
+    public double getPaymentCollected(){
+        
+        return paymentCollector;
+        
+    }
+    
 }
