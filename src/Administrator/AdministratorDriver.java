@@ -198,7 +198,7 @@ public class AdministratorDriver extends Administrator {
         }
 
         deleteCustomerFromDB(meterCode);
-        System.out.println("\n\tThe meter has been stopped and the customer has been successfully deleted.");
+        System.out.println("\n\t[-] The meter has been stopped and the customer has been successfully deleted.");
         
     }
     
