@@ -100,7 +100,7 @@ public class Admin extends AdministratorDriver {
             
             System.out.println("\n\t     [1] - Add New Customer.\n");
             System.out.println("\t     [2] - Add New Operator.\n");
-            System.out.println("\t     [3] - Add New Administrator.");
+            System.out.println("\t     [3] - Add New Admin.");
 
             System.out.print("\n[+] Choose a number(0 to return to main menu): ");
             
@@ -116,7 +116,7 @@ public class Admin extends AdministratorDriver {
                     addNewOperator();
                     break;
                 case '3':
-                    addNewAdministrator();
+                    addNewAdmin();
                     break;
                 case '0':
                     return;
@@ -156,7 +156,7 @@ public class Admin extends AdministratorDriver {
     }
 
     
-    private void addNewAdministrator() {
+    private void addNewAdmin() {
         
         runPersonDriver();
         setAdministratorID(getGovernmentCode(), getNationalIdNum());
@@ -175,7 +175,7 @@ public class Admin extends AdministratorDriver {
             
             System.out.println("\n\t     [1] - Delete  Customer.\n");
             System.out.println("\t     [2] - Delete  Operator.\n");
-            System.out.println("\t     [3] - Delete  Addminstrator.");
+            System.out.println("\t     [3] - Delete  Admin.");
             System.out.print("\n[+] Choose a number(0 to return to main menu): ");
             
             
@@ -193,8 +193,8 @@ public class Admin extends AdministratorDriver {
                     deleteOperator(OperatorID_Val(input.nextLine()));
                     break;
                 case '3':
-                    System.out.print("\n\t[+] Enter Administrator ID: ");
-                    deleteAdministrator(AdminID_Val(input.nextLine()));
+                    System.out.print("\n\t[+] Enter Admin ID: ");
+                    deleteAdmin(AdminID_Val(input.nextLine()));
                     break;
                 case '0':
                     return;
@@ -228,7 +228,7 @@ public class Admin extends AdministratorDriver {
     }
 
     
-    private void deleteAdministrator(String administratorID) {
+    private void deleteAdmin(String adminID) {
         
         if(getNumOfAdministratorRole(adminRole) == 1){
             
@@ -237,7 +237,7 @@ public class Admin extends AdministratorDriver {
             
         }
         
-        deleteAdministratorFromDB(administratorID);
+        deleteAdministratorFromDB(adminID);
         System.out.println("\n\t[-] The admin has been successfully deleted.");
         
     }
@@ -249,7 +249,7 @@ public class Admin extends AdministratorDriver {
             
             System.out.println("\n\t     [1] - Update Customer.\n");
             System.out.println("\t     [2] - Update Operator.\n");
-            System.out.println("\t     [3] - Update Adminstrator.");
+            System.out.println("\t     [3] - Update Admin.");
             System.out.print("\n[+] Choose a number(0 to return to main menu): ");
             
             
@@ -267,8 +267,8 @@ public class Admin extends AdministratorDriver {
                     viewOperatorDataBase(OperatorID_Val(input.nextLine()));
                     break;
                 case '3':
-                    System.out.print("\n\t[+] Enter Administrator ID: ");
-                    viewAdministratorDataBase(AdminID_Val(input.nextLine()));
+                    System.out.print("\n\t[+] Enter Admin ID: ");
+                    viewAdminDataBase(AdminID_Val(input.nextLine()));
                     break;
                 case '0':
                     return;
@@ -292,7 +292,7 @@ public class Admin extends AdministratorDriver {
         do {
             
             System.out.println("\n[-] Select The Information You Want To Update In (" + getCustomerName(meterCode).split(" ")[0] + "'s) Information.");
-            System.out.println("\n\t[!] Alert : You Can't Update Name, National Id, Birth Date, Administrator ID, Gender nor Contract Date.");
+            System.out.println("\n\t[!] Alert : You Can't Update Name, National Id, Birth Date, Meter Code, Gender nor Contract Date.");
             System.out.println("\n\t     [1] - Address.\n");
             System.out.println("\t     [2] - Email.\n");
             System.out.println("\t     [3] - GovernmentCode.\n");
@@ -346,7 +346,7 @@ public class Admin extends AdministratorDriver {
         do {
             
             System.out.println("\n[-] Select The Information You Want To Update In (" + getAdministratorName(operatorID).split(" ")[0] + "'s) Information.");
-            System.out.println("\n[!] Alert : You Can't Update Name, National Id, Birth Date, Administrator ID, Gender nor Contract Date.");
+            System.out.println("\n[!] Alert : You Can't Update Name, National Id, Birth Date, Operator ID, Gender nor Contract Date.");
             System.out.println("\n\t     [1] - Address.\n");
             System.out.println("\t     [2] - Email.\n");
             System.out.println("\t     [3] - Phone Number.\n");
@@ -394,12 +394,12 @@ public class Admin extends AdministratorDriver {
         
     }
 
-    private void viewAdministratorDataBase(String administratorID) {
+    private void viewAdminDataBase(String adminID) {
 
         do {
             
-            System.out.println("\n[-] Select The Information You Want To Update In (" + getAdministratorName(administratorID).split(" ")[0] + "'s) Information.");
-            System.out.println("\n\t[!] Alert : You Can't Update Name, National Id, Birth Date, Administrator ID, Gender nor Contract Date.");
+            System.out.println("\n[-] Select The Information You Want To Update In (" + getAdministratorName(adminID).split(" ")[0] + "'s) Information.");
+            System.out.println("\n\t[!] Alert : You Can't Update Name, National Id, Birth Date, Admin ID, Gender nor Contract Date.");
             System.out.println("\n\t     [1] - Address.\n");
             System.out.println("\t     [2] - Email.\n");
             System.out.println("\t     [3] - Phone Number.\n");
@@ -414,23 +414,23 @@ public class Admin extends AdministratorDriver {
                 
                 case '1':
                     System.out.print("\n\t[+] Enter new address: ");
-                    updateAdministrator(addressColumn, Address_Val(input.nextLine()), administratorID);
+                    updateAdmin(addressColumn, Address_Val(input.nextLine()), adminID);
                     break;
                 case '2':
                     System.out.print("\n\t[+] Enter new email: ");
-                    updateAdministrator(emailColumn, Email_Val(input.nextLine()), administratorID);
+                    updateAdmin(emailColumn, Email_Val(input.nextLine()), adminID);
                     break;
                 case '3':
                     System.out.print("\n\t[+] Enter new phone number: ");
-                    updateAdministrator(phoneNumColumn, PhoneNumber_Val(input.nextLine()), administratorID);
+                    updateAdmin(phoneNumColumn, PhoneNumber_Val(input.nextLine()), adminID);
                     break;
                 case '4':
                     System.out.print("\n\t[+] Enter new password: ");
-                    updateAdministrator(administratorPassColumn, Password_Val(input.nextLine()), administratorID);
+                    updateAdmin(administratorPassColumn, Password_Val(input.nextLine()), adminID);
                     break;
                 case '5':
                     System.out.print("\n\t[+] Enter new Administrator Role(0 for Operator, 1 for Admin): ");
-                    updateAdministrator(administratorRoleColumn, AdministratorRole_Val(input.next().charAt(0), administratorID), administratorID);
+                    updateAdmin(administratorRoleColumn, AdministratorRole_Val(input.next().charAt(0), adminID), adminID);
                     break;
                 case '0':
                     return;
@@ -440,7 +440,7 @@ public class Admin extends AdministratorDriver {
                     
             }
 
-            System.out.print("\n[+] Do you want to Update another Information in (" + getAdministratorName(administratorID).split(" ")[0] + "'s) Informations ?(y/n): ");
+            System.out.print("\n[+] Do you want to Update another Information in (" + getAdministratorName(adminID).split(" ")[0] + "'s) Informations ?(y/n): ");
             qContinue = input.next().charAt(0);
             
         } while (qContinue == 'Y' || qContinue == 'y');
@@ -505,9 +505,9 @@ public class Admin extends AdministratorDriver {
         
     }
 
-    private void updateAdministrator(final String columnName, String value, String administratorID) {
+    private void updateAdmin(final String columnName, String value, String adminID) {
         
-        pushAdministratorUpdateToDB(columnName, value, administratorID);
+        pushAdministratorUpdateToDB(columnName, value, adminID);
         System.out.println("\n\t[-] Admin information has been successfully updated.");
         
     }
