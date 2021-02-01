@@ -1,11 +1,9 @@
 package OldCustomer;
 
 import Email.Sendmail;
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
 import java.util.Scanner;
 import Administrator.Operator;
+import Util.Display;
 
 public class OldCustomerDriver extends OldCustomer {
 
@@ -19,7 +17,7 @@ public class OldCustomerDriver extends OldCustomer {
         
         do {
             
-            viewDashboard();
+            viewOldCustomerDashboard();
             
             do {
                 
@@ -60,73 +58,15 @@ public class OldCustomerDriver extends OldCustomer {
         
     }
     
-    private static void viewDashboard(){
+    private static void viewOldCustomerDashboard(){
         
-        clearScreen();
-        printBanner();
-        printSelections();
-        
-    }
-    
-    private static void printBanner() {
-
-        System.out.println("\n\t\t  ——————————————————————————————");
-        System.out.print("\t\t |  Electricity Billing System  |\n");
-        System.out.println("\t\t  ——————————————————————————————\n");
-        System.out.println("\t     [-] Welcome in Old Customer Dashboard [-]");
-        System.out.println("\t    ———————————————————————————————————————————");
-
-    }
-    
-    
-    private static void printSelections() {
-
-        System.out.println("\n[-] What do you want to do?\n");
-        System.out.println("\t     [1] - Pay bill with meter code.\n");
-        System.out.println("\t     [2] - Enter monthly reading of meter code.\n");
-        System.out.println("\t     [3] - Complain about bill.");
+        Display.clearScreen();
+        Display.printProgramNameBanner();
+        Display.printOldCustomerDashboardBanner();
+        Display.printOldCustomerSelections();
         
     }
-    
-    
-    private String MeterCode_Val(String meterCode) {
-
-        do {
-
-            if (isMeterCodeExists(meterCode)) {
-                return meterCode;
-            } else {
-
-                System.out.print("\n[+] Enter a valid meter code: ");
-                meterCode = input.nextLine();
-
-            }
-
-        } while (true);
-
-    }
-    
-    private static void clearScreen() {
-
-        try {
-
-            Robot ro = new Robot();
-            ro.setAutoWaitForIdle(true);
-            ro.setAutoDelay(10);
-            ro.keyPress(KeyEvent.VK_CONTROL);
-            ro.keyPress(KeyEvent.VK_L);
-            ro.keyRelease(KeyEvent.VK_L);
-            System.out.print("\u001b[1K");
-            ro.keyRelease(KeyEvent.VK_CONTROL);
-            System.out.print("\u001b[2K");
-            ro.delay(10);
-
-        } catch (AWTException ex) {
-            System.out.println(ex.toString());
-        }
-
-    }
-    
+                
     public void payBillWithMeterCode(String meterCode){
         
         paymentCollector = 0.0;
@@ -184,6 +124,12 @@ public class OldCustomerDriver extends OldCustomer {
         
     }
     
+    public double getPaymentCollected(){
+
+       return paymentCollector;
+
+   }
+    
     private void printBill(String meterCode){
         
         String[] billInfo = getFirstUnpaidBillInfo(meterCode);
@@ -232,6 +178,24 @@ public class OldCustomerDriver extends OldCustomer {
         
     }
         
+    //------------------------------------------------- Data Validators
+
+    private String MeterCode_Val(String meterCode) {
+
+        do {
+
+            if (isMeterCodeExists(meterCode)) {
+                return meterCode;
+            } else {
+
+                System.out.print("\n[+] Enter a valid meter code: ");
+                meterCode = input.nextLine();
+
+            }
+
+        } while (true);
+
+    }
     
     private String IO_Val(String reading){
         
@@ -268,12 +232,5 @@ public class OldCustomerDriver extends OldCustomer {
         } while (true);
         
     }
-    
-    
-    public double getPaymentCollected(){
         
-        return paymentCollector;
-        
-    }
-    
 }

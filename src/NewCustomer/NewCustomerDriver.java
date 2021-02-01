@@ -3,9 +3,7 @@ package NewCustomer;
 import java.util.Scanner;
 import java.io.File;
 import Email.Sendmail;
-import java.awt.Robot;
-import java.awt.AWTException;
-import java.awt.event.KeyEvent;
+import Util.Display;
 
 public class NewCustomerDriver extends NewCustomer {
     
@@ -49,51 +47,12 @@ public class NewCustomerDriver extends NewCustomer {
     
     private static void viewDashboard(){
         
-        clearScreen();
-        printBanner();
-        printSelections();
+        Display.clearScreen();
+        Display.printProgramNameBanner();
+        Display.printNewCustomerDashboardBanner();
+        Display.printNewCustomerSelections();
         
     }
-    
-    private static void printBanner(){
-        
-        System.out.println("\n\t\t  ——————————————————————————————");
-        System.out.print("\t\t |  Electricity Billing System  |\n");
-        System.out.println("\t\t  ——————————————————————————————\n");
-        System.out.println("\t     [-] Welcome in New Customer Dashboard [-]");
-        System.out.println("\t    ———————————————————————————————————————————");
-        
-    }
-
-    private static void printSelections(){
-        
-        System.out.println("\n[-] What do you want to do?\n");
-        System.out.println("\t     [1] - Fill new contract.");
-        
-    }
-    
-    
-    private static void clearScreen(){
-       
-        try {
-            
-            Robot ro = new Robot();
-            ro.setAutoWaitForIdle(true);
-            ro.setAutoDelay(10);
-            ro.keyPress(KeyEvent.VK_CONTROL);
-            ro.keyPress(KeyEvent.VK_L);
-            ro.keyRelease(KeyEvent.VK_L);
-            System.out.print("\u001b[1K");
-            ro.keyRelease(KeyEvent.VK_CONTROL);
-            System.out.print("\u001b[2K");
-            ro.delay(10);
-            
-        } catch (AWTException ex) {
-            System.out.println(ex.toString());
-        }
-        
-    }
-    
     
     public void fillNewContract(){
         
@@ -129,7 +88,8 @@ public class NewCustomerDriver extends NewCustomer {
             
     }
     
-    // Data Validators
+    
+    //------------------------------------------------- Data Validators
     
     public String TypeOfUse_Val(String selector){
         

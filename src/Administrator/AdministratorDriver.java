@@ -1,9 +1,6 @@
 package Administrator;
 
 import java.util.Scanner;
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class AdministratorDriver extends Administrator {
@@ -200,28 +197,6 @@ public class AdministratorDriver extends Administrator {
         deleteCustomerFromDB(meterCode);
         System.out.println("\n\t[-] The meter has been stopped and the customer has been successfully deleted.");
         
-    }
-    
-    
-    protected static void clearScreen() {
-
-        try {
-
-            Robot ro = new Robot();
-            ro.setAutoWaitForIdle(true);
-            ro.setAutoDelay(10);
-            ro.keyPress(KeyEvent.VK_CONTROL);
-            ro.keyPress(KeyEvent.VK_L);
-            ro.keyRelease(KeyEvent.VK_L);
-            System.out.print("\u001b[1K");
-            ro.keyRelease(KeyEvent.VK_CONTROL);
-            System.out.print("\u001b[2K");
-            ro.delay(10);
-
-        } catch (AWTException ex) {
-            System.out.println(ex.toString());
-        }
-
     }
     
 }

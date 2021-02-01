@@ -1,19 +1,17 @@
 import NewCustomer.NewCustomerDriver;
 import OldCustomer.OldCustomerDriver;
 import Administrator.AdministratorDriver;
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
 import java.util.Scanner;
-        
+import Util.Display;
+
 public class Main {
 
     public static void main(String[] args){
         
         Scanner input = new Scanner(System.in);
         
-        printBanner();
-        printDashboards();
+        Display.printProgramNameBanner();
+        Display.printMainDashboards();
         
         do {
             
@@ -51,50 +49,10 @@ public class Main {
     
     public static void returnedToMain(){
         
-        clearScreen();
-        printBanner();
-        printDashboards();
+        Display.clearScreen();
+        Display.printProgramNameBanner();
+        Display.printMainDashboards();
         
-    }
-    
-    
-    public static void printBanner(){
-        
-        System.out.println("\n\t\t  ——————————————————————————————");
-        System.out.print("\t\t |  Electricity Billing System  |\n");
-        System.out.println("\t\t  ——————————————————————————————");
-        
-    }
-
-    public static void printDashboards(){
-        
-        System.out.println("\n[-] Are you _____________________ ?\n");
-        System.out.println("\t     [1] - New Customer\n");
-        System.out.println("\t     [2] - Old Customer\n");
-        System.out.println("\t     [3] - Administrator");
-        
-    }
-    
-    
-    public static void clearScreen(){
-       
-        try {
-            
-            Robot ro = new Robot();
-            ro.setAutoWaitForIdle(true);
-            ro.setAutoDelay(10);
-            ro.keyPress(KeyEvent.VK_CONTROL);
-            ro.keyPress(KeyEvent.VK_L);
-            ro.keyRelease(KeyEvent.VK_L);
-            System.out.print("\u001b[1K");
-            ro.keyRelease(KeyEvent.VK_CONTROL);
-            System.out.print("\u001b[2K");
-            ro.delay(10);
-           
-        } catch (AWTException ex) {
-            System.out.println(ex.toString());
-        }
-
     }
     
 }

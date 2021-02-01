@@ -60,5 +60,4 @@ public class OldCustomer {
         OldCustomerDatabase.complainAboutBill(complain, meterCode);
     }
     
-    
 }

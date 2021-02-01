@@ -1,5 +1,6 @@
 package Administrator;
 import OldCustomer.OldCustomerDriver;
+import Util.Display;
 
 public class Operator extends AdministratorDriver {
 
@@ -51,34 +52,13 @@ public class Operator extends AdministratorDriver {
     
     private static void viewOperatorDashboard() {
 
-        clearScreen();
-        printOperatorBanner();
-        printOperatorSelections();
+        Display.clearScreen();
+        Display.printProgramNameBanner();
+        Display.printOperatorDashboardBanner();
+        Display.printOperatorSelections();
         
     }
 
-    
-    private static void printOperatorBanner() {
-
-        System.out.println("\n\t\t  ——————————————————————————————");
-        System.out.print("\t\t |  Electricity Billing System  |\n");
-        System.out.println("\t\t  ——————————————————————————————\n");
-        System.out.println("\t      [-] Welcome in Operator Dashboard [-]");
-        System.out.println("\t      —————————————————————————————————————");
-
-    }
-
-    
-    private static void printOperatorSelections() {
-
-        System.out.println("\n[-] What do you want to do?\n");
-        System.out.println("\t     [1] - Collect payments from customer.\n");
-        System.out.println("\t     [2] - Print bill with meter code.\n");
-        System.out.println("\t     [3] - View bills of specific region.\n");
-        System.out.println("\t     [4] - Stop meter and cancel subscription for customer.");
-        
-    }
-    
     private void printBill(){ // Enables operator to print bill with meter code
         
         System.out.print("\n[+] Enter a meter code: ");

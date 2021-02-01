@@ -1,7 +1,7 @@
 package Administrator;
 
 import NewCustomer.NewCustomerDriver;
-
+import Util.Display;
 
 public class Admin extends AdministratorDriver {
     
@@ -10,10 +10,9 @@ public class Admin extends AdministratorDriver {
 
         do {
 
-            viewAdminDashboard();
-
             do {
-
+                
+                viewAdminDashboard();
                 System.out.print("\n[+] Choose a number(0 to return to main menu): ");
 
                 choice = input.next().charAt(0);
@@ -49,7 +48,7 @@ public class Admin extends AdministratorDriver {
                         break;
                         
                 }
-
+                                
             } while (choice != '1' && choice != '2' && choice != '3' && choice != '4' && choice != '5' && choice != '6');
 
             System.out.print("\n[+] Do you want to perform any additional operation in this dashboard?(y/n): ");
@@ -63,44 +62,18 @@ public class Admin extends AdministratorDriver {
     
     private static void viewAdminDashboard() {
 
-        clearScreen();
-        printAdminBanner();
-        printAdminSelections();
+        Display.clearScreen();
+        Display.printProgramNameBanner();
+        Display.printAdminDashboardBanner();
+        Display.printAdminSelections();
         
     }
 
-    
-    private static void printAdminBanner() {
-
-        System.out.println("\n\t\t  ——————————————————————————————");
-        System.out.print("\t\t |  Electricity Billing System  |\n");
-        System.out.println("\t\t  ——————————————————————————————\n");
-        System.out.println("\t\t[-] Welcome in Admin Dashboard [-]");
-        System.out.println("\t\t——————————————————————————————————");
-
-    }
-
-    
-    private static void printAdminSelections() {
-
-        System.out.println("\n[-] What do you want to do?\n");
-        System.out.println("\t     [1] - Add user.\n");
-        System.out.println("\t     [2] - Update user.\n");
-        System.out.println("\t     [3] - Delete user.\n");
-        System.out.println("\t     [4] - View total collected.\n");
-        System.out.println("\t     [5] - View all bills of specific regions.\n");
-        System.out.println("\t     [6] - Make consumption statistics for specific regions.");
-
-    }
-    
-    
     private void addUser() {
         
         do {
             
-            System.out.println("\n\t     [1] - Add New Customer.\n");
-            System.out.println("\t     [2] - Add New Operator.\n");
-            System.out.println("\t     [3] - Add New Admin.");
+            Display.addUserSelections();
 
             System.out.print("\n[+] Choose a number(0 to return to main menu): ");
             
@@ -173,9 +146,8 @@ public class Admin extends AdministratorDriver {
         
         do {
             
-            System.out.println("\n\t     [1] - Delete  Customer.\n");
-            System.out.println("\t     [2] - Delete  Operator.\n");
-            System.out.println("\t     [3] - Delete  Admin.");
+            Display.deleteUserSelections();
+            
             System.out.print("\n[+] Choose a number(0 to return to main menu): ");
             
             
@@ -247,11 +219,9 @@ public class Admin extends AdministratorDriver {
         
         do {
             
-            System.out.println("\n\t     [1] - Update Customer.\n");
-            System.out.println("\t     [2] - Update Operator.\n");
-            System.out.println("\t     [3] - Update Admin.");
-            System.out.print("\n[+] Choose a number(0 to return to main menu): ");
+            Display.updateUserSelections();
             
+            System.out.print("\n[+] Choose a number(0 to return to main menu): ");
             
             choice = input.next().charAt(0);
             input.nextLine();
@@ -292,12 +262,7 @@ public class Admin extends AdministratorDriver {
         do {
             
             System.out.println("\n[-] Select The Information You Want To Update In (" + getCustomerName(meterCode).split(" ")[0] + "'s) Information.");
-            System.out.println("\n\t[!] Alert : You Can't Update Name, National Id, Birth Date, Meter Code, Gender nor Contract Date.");
-            System.out.println("\n\t     [1] - Address.\n");
-            System.out.println("\t     [2] - Email.\n");
-            System.out.println("\t     [3] - GovernmentCode.\n");
-            System.out.println("\t     [4] - Phone Number.\n");
-            System.out.println("\t     [5] - Type Of Use.");
+            Display.customerUpdateList();
             System.out.print("\n[+] Choose a number(0 to return to main menu): ");
             
             choice = input.next().charAt(0);
@@ -347,11 +312,7 @@ public class Admin extends AdministratorDriver {
             
             System.out.println("\n[-] Select The Information You Want To Update In (" + getAdministratorName(operatorID).split(" ")[0] + "'s) Information.");
             System.out.println("\n[!] Alert : You Can't Update Name, National Id, Birth Date, Operator ID, Gender nor Contract Date.");
-            System.out.println("\n\t     [1] - Address.\n");
-            System.out.println("\t     [2] - Email.\n");
-            System.out.println("\t     [3] - Phone Number.\n");
-            System.out.println("\t     [4] - Password.\n");
-            System.out.println("\t     [5] - Administrator Role.");
+            Display.administratorUpdateList();
             System.out.print("\n[+] Choose a number(0 to return to main menu): ");
             
             choice = input.next().charAt(0);
@@ -400,11 +361,7 @@ public class Admin extends AdministratorDriver {
             
             System.out.println("\n[-] Select The Information You Want To Update In (" + getAdministratorName(adminID).split(" ")[0] + "'s) Information.");
             System.out.println("\n\t[!] Alert : You Can't Update Name, National Id, Birth Date, Admin ID, Gender nor Contract Date.");
-            System.out.println("\n\t     [1] - Address.\n");
-            System.out.println("\t     [2] - Email.\n");
-            System.out.println("\t     [3] - Phone Number.\n");
-            System.out.println("\t     [4] - Password.\n");
-            System.out.println("\t     [5] - Administrator Role.");
+            Display.administratorUpdateList();
             System.out.print("\n[+] Choose a number(0 to return to main menu): ");
 
             choice = input.next().charAt(0);
