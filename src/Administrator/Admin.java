@@ -4,13 +4,14 @@ import NewCustomer.NewCustomerDriver;
 import Util.Display;
 
 public class Admin extends AdministratorDriver {
-    
-    
-    protected void runAdminDashboard() {
+        
+    protected void runAdminDashboard(String loggedInID) {
 
         do {
 
             do {
+                
+                authorizationFlag = false;
                 
                 viewAdminDashboard();
                 System.out.print("\n[+] Choose a number(0 to return to main menu): ");
@@ -26,11 +27,15 @@ public class Admin extends AdministratorDriver {
                         break;
                     case '2':
                         /*case [2] Update User-> (Operator || Customer || Administrator)? */
-                        updateUser();
+                        updateUser(loggedInID);
+                        if(authorizationFlag)
+                            return;
                         break;
                     case '3':
                         /*case [3] Delete User-> (Operator || Customer || Administrator)? */
-                        deleteUser();
+                        deleteUser(loggedInID);
+                        if(authorizationFlag)
+                            return;
                         break;
                     case '4':
                         viewTotalCollected();
@@ -45,6 +50,11 @@ public class Admin extends AdministratorDriver {
                         return;
                     default:
                         System.out.println("\n[-] Enter a valid choice.");
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException ex) {
+                            System.out.println(ex.toString());
+                        }
                         break;
                         
                 }
@@ -75,7 +85,7 @@ public class Admin extends AdministratorDriver {
             
             Display.addUserSelections();
 
-            System.out.print("\n[+] Choose a number(0 to return to main menu): ");
+            System.out.print("\n[+] Choose a number(0 to return to admin dashboard menu): ");
             
             choice = input.next().charAt(0);
             input.nextLine();
@@ -99,7 +109,7 @@ public class Admin extends AdministratorDriver {
                     
             }
 
-            System.out.print("\n[+] Do you want to Add another User?(y/n): ");
+            System.out.print("\n\t[+] Do you want to Add another User?(y/n): ");
             
             qContinue = input.next().charAt(0);
             
@@ -142,13 +152,15 @@ public class Admin extends AdministratorDriver {
     }
 
     
-    private void deleteUser() {
+    private void deleteUser(String loggedInID) {
         
         do {
             
+            authorizationFlag = false;
+            
             Display.deleteUserSelections();
             
-            System.out.print("\n[+] Choose a number(0 to return to main menu): ");
+            System.out.print("\n[+] Choose a number(0 to return to admin dashboard menu): ");
             
             
             choice = input.next().charAt(0);
@@ -166,7 +178,9 @@ public class Admin extends AdministratorDriver {
                     break;
                 case '3':
                     System.out.print("\n\t[+] Enter Admin ID: ");
-                    deleteAdmin(AdminID_Val(input.nextLine()));
+                    deleteAdmin(AdminID_Val(input.nextLine()), loggedInID);
+                    if(authorizationFlag)
+                        return;
                     break;
                 case '0':
                     return;
@@ -176,7 +190,7 @@ public class Admin extends AdministratorDriver {
                     
             }
 
-            System.out.print("\n[+] Do you want to Delete another User? (y/n): ");
+            System.out.print("\n\t[+] Do you want to Delete another User? (y/n): ");
             
             qContinue = input.next().charAt(0);
             
@@ -200,7 +214,7 @@ public class Admin extends AdministratorDriver {
     }
 
     
-    private void deleteAdmin(String adminID) {
+    private void deleteAdmin(String adminID, String loggedInID) {
         
         if(getNumOfAdministratorRole(adminRole) == 1){
             
@@ -212,16 +226,31 @@ public class Admin extends AdministratorDriver {
         deleteAdministratorFromDB(adminID);
         System.out.println("\n\t[-] The admin has been successfully deleted.");
         
+        if(adminID.equals(loggedInID)){
+            
+            authorizationFlag = true;
+            System.out.println("\n\t[-] You just deleted yourself, so you are not authorized to continue with this dashboard.");
+            System.out.println("\t[!] You will be logged out in five seconds from now.\n");
+            
+            try {
+                
+                Thread.sleep(5000);
+                
+            } catch (InterruptedException ex) {
+                System.out.println(ex.toString());
+            }
+            
+        }
+        
     }
 
-
-    private void updateUser() {
+    private void updateUser(String loggedInID) {
         
         do {
             
             Display.updateUserSelections();
             
-            System.out.print("\n[+] Choose a number(0 to return to main menu): ");
+            System.out.print("\n[+] Choose a number(0 to return to admin dashboard menu): ");
             
             choice = input.next().charAt(0);
             input.nextLine();
@@ -238,7 +267,9 @@ public class Admin extends AdministratorDriver {
                     break;
                 case '3':
                     System.out.print("\n\t[+] Enter Admin ID: ");
-                    viewAdminDataBase(AdminID_Val(input.nextLine()));
+                    viewAdminDataBase(AdminID_Val(input.nextLine()), loggedInID);
+                    if(authorizationFlag)
+                        return;
                     break;
                 case '0':
                     return;
@@ -248,7 +279,7 @@ public class Admin extends AdministratorDriver {
                     
             }
 
-            System.out.print("\n[+] Do you want to Update another User?(y/n): ");
+            System.out.print("\n\t[+] Do you want to Update another User?(y/n): ");
             
             qContinue = input.next().charAt(0);
             
@@ -263,7 +294,7 @@ public class Admin extends AdministratorDriver {
             
             System.out.println("\n[-] Select The Information You Want To Update In (" + getCustomerName(meterCode).split(" ")[0] + "'s) Information.");
             Display.customerUpdateList();
-            System.out.print("\n[+] Choose a number(0 to return to main menu): ");
+            System.out.print("\n[+] Choose a number(0 to return to admin dashboard menu): ");
             
             choice = input.next().charAt(0);
             input.nextLine();
@@ -298,7 +329,7 @@ public class Admin extends AdministratorDriver {
                     break;
             }
 
-            System.out.print("\n[+] Do you want to Update another Information in (" + getCustomerName(meterCode).split(" ")[0] + "'s) Informations?(y/n): ");
+            System.out.print("\n\t[+] Do you want to Update another Information in (" + getCustomerName(meterCode).split(" ")[0] + "'s) Informations?(y/n): ");
             qContinue = input.next().charAt(0);
             
         } while (qContinue == 'Y' || qContinue == 'y');
@@ -313,7 +344,7 @@ public class Admin extends AdministratorDriver {
             System.out.println("\n[-] Select The Information You Want To Update In (" + getAdministratorName(operatorID).split(" ")[0] + "'s) Information.");
             System.out.println("\n[!] Alert : You Can't Update Name, National Id, Birth Date, Operator ID, Gender nor Contract Date.");
             Display.administratorUpdateList();
-            System.out.print("\n[+] Choose a number(0 to return to main menu): ");
+            System.out.print("\n[+] Choose a number(0 to return to admin dashboard menu): ");
             
             choice = input.next().charAt(0);
             input.nextLine();
@@ -338,7 +369,7 @@ public class Admin extends AdministratorDriver {
                     break;
                 case '5':
                     System.out.print("\n\t[+] Enter new Administrator Role(0 for Operator, 1 for Admin): ");
-                    updateOperator(administratorRoleColumn, AdministratorRole_Val(input.next().charAt(0), operatorID), operatorID);
+                    updateOperator(administratorRoleColumn, AdministratorRole_Val(input.nextLine(), operatorID), operatorID);
                     break;
                 case '0':
                     return;
@@ -348,21 +379,23 @@ public class Admin extends AdministratorDriver {
                     
             }
 
-            System.out.print("\n[+] Do you want to Update another Information in (" + getAdministratorName(operatorID).split(" ")[0] + "'s) Informations ?(y/n): ");
+            System.out.print("\n\t[+] Do you want to Update another Information in (" + getAdministratorName(operatorID).split(" ")[0] + "'s) Informations ?(y/n): ");
             qContinue = input.next().charAt(0);
             
         } while (qContinue == 'Y' || qContinue == 'y');
         
     }
 
-    private void viewAdminDataBase(String adminID) {
+    private void viewAdminDataBase(String adminID, String loggedInID) {
 
         do {
+            
+            authorizationFlag = false;
             
             System.out.println("\n[-] Select The Information You Want To Update In (" + getAdministratorName(adminID).split(" ")[0] + "'s) Information.");
             System.out.println("\n\t[!] Alert : You Can't Update Name, National Id, Birth Date, Admin ID, Gender nor Contract Date.");
             Display.administratorUpdateList();
-            System.out.print("\n[+] Choose a number(0 to return to main menu): ");
+            System.out.print("\n[+] Choose a number(0 to return to admin dashboard menu): ");
 
             choice = input.next().charAt(0);
             input.nextLine();
@@ -371,23 +404,25 @@ public class Admin extends AdministratorDriver {
                 
                 case '1':
                     System.out.print("\n\t[+] Enter new address: ");
-                    updateAdmin(addressColumn, Address_Val(input.nextLine()), adminID);
+                    updateAdmin(addressColumn, Address_Val(input.nextLine()), adminID, loggedInID);
                     break;
                 case '2':
                     System.out.print("\n\t[+] Enter new email: ");
-                    updateAdmin(emailColumn, Email_Val(input.nextLine()), adminID);
+                    updateAdmin(emailColumn, Email_Val(input.nextLine()), adminID, loggedInID);
                     break;
                 case '3':
                     System.out.print("\n\t[+] Enter new phone number: ");
-                    updateAdmin(phoneNumColumn, PhoneNumber_Val(input.nextLine()), adminID);
+                    updateAdmin(phoneNumColumn, PhoneNumber_Val(input.nextLine()), adminID, loggedInID);
                     break;
                 case '4':
                     System.out.print("\n\t[+] Enter new password: ");
-                    updateAdmin(administratorPassColumn, Password_Val(input.nextLine()), adminID);
+                    updateAdmin(administratorPassColumn, Password_Val(input.nextLine()), adminID, loggedInID);
                     break;
                 case '5':
                     System.out.print("\n\t[+] Enter new Administrator Role(0 for Operator, 1 for Admin): ");
-                    updateAdmin(administratorRoleColumn, AdministratorRole_Val(input.next().charAt(0), adminID), adminID);
+                    updateAdmin(administratorRoleColumn, AdministratorRole_Val(input.nextLine(), adminID), adminID, loggedInID);
+                    if(authorizationFlag)
+                        return;
                     break;
                 case '0':
                     return;
@@ -397,7 +432,7 @@ public class Admin extends AdministratorDriver {
                     
             }
 
-            System.out.print("\n[+] Do you want to Update another Information in (" + getAdministratorName(adminID).split(" ")[0] + "'s) Informations ?(y/n): ");
+            System.out.print("\n\t[+] Do you want to Update another Information in (" + getAdministratorName(adminID).split(" ")[0] + "'s) Informations ?(y/n): ");
             qContinue = input.next().charAt(0);
             
         } while (qContinue == 'Y' || qContinue == 'y');
@@ -422,24 +457,24 @@ public class Admin extends AdministratorDriver {
     }
     
     
-    private String AdministratorRole_Val(char selector, String administratorID){
+    private String AdministratorRole_Val(String selector, String administratorID){
         
         do{
             
-            switch (selector) {
+            switch (selector.charAt(0)) {
                 case '0':
                     if(getNumOfAdministratorRole(adminRole) == 1 && getAdministratorRole(administratorID).equals(adminRole)){
                         System.out.println("\n[-] This is the last admin, add another admin before updating the current one.");
-                    } else
+                    } else if(selector.charAt(0) == '0')
                         return operatorRole;
                 case '1':
                     if(getNumOfAdministratorRole(operatorRole) == 1 && getAdministratorRole(administratorID).equals(operatorRole)){
                         System.out.println("\n[-] This is the last operator, add another operator before updating the current one.");
-                    } else 
+                    } else if(selector.charAt(0) == '1')
                         return adminRole;
                 default:
                     System.out.print("\n[-] Enter a valid administrator role(0 for Operator, 1 for Admin): ");
-                    selector = input.next().charAt(0);
+                    selector = input.nextLine();
                     break;
             }
             
@@ -462,13 +497,28 @@ public class Admin extends AdministratorDriver {
         
     }
 
-    private void updateAdmin(final String columnName, String value, String adminID) {
+    private void updateAdmin(final String columnName, String value, String adminID, String loggedInID) {
         
         pushAdministratorUpdateToDB(columnName, value, adminID);
         System.out.println("\n\t[-] Admin information has been successfully updated.");
         
-    }
+        if(adminID.equals(loggedInID) && columnName.equals(administratorRoleColumn) && value.equals(operatorRole)){
+            
+            authorizationFlag = true;
+            System.out.println("\n\t[-] You have just switched your role to 'Operator', so you are not authorized to continue with this dashboard.");
+            System.out.println("\t[!] You will be logged out in five seconds from now.\n");
+            
+            try {
+                
+                Thread.sleep(5000);
+                
+            } catch (InterruptedException ex) {
+                System.out.println(ex.toString());
+            }
+        
+        }
 
+    }    
     
     private void viewTotalCollected() {
         
@@ -476,7 +526,6 @@ public class Admin extends AdministratorDriver {
         
     }
 
-    
     private void consumptionStatForSpecificRegion() {
 
         printGovernmentCodes();

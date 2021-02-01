@@ -106,9 +106,9 @@ public class Display {
     
     public static void deleteUserSelections(){
         
-        System.out.println("\n\t     [1] - Delete  Customer.\n");
-        System.out.println("\t     [2] - Delete  Operator.\n");
-        System.out.println("\t     [3] - Delete  Admin.");
+        System.out.println("\n\t     [1] - Delete Customer.\n");
+        System.out.println("\t     [2] - Delete Operator.\n");
+        System.out.println("\t     [3] - Delete Admin.");
 
     }
     

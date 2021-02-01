@@ -10,6 +10,7 @@ public class AdministratorDriver extends Administrator {
     private String administratorPass;
     
     protected char qContinue, choice;
+    protected boolean authorizationFlag = false;
     Scanner input = new Scanner(System.in);
     
 
@@ -25,7 +26,7 @@ public class AdministratorDriver extends Administrator {
 
         if (choiceDashboard.equals(adminRole)) {
             Admin admin = new Admin();
-            admin.runAdminDashboard();
+            admin.runAdminDashboard(administratorID);
         } else {
             Operator operator = new Operator();
             operator.runOperatorDashboard();
@@ -50,7 +51,6 @@ public class AdministratorDriver extends Administrator {
         } while (true);
 
     }
-
     
     protected String AdministratorID_Val(String administratorID) {
 
