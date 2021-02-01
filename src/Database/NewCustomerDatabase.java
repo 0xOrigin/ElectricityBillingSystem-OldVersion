@@ -1,4 +1,4 @@
-package Datebase;
+package Database;
 import java.io.*;
 import java.sql.*;
 

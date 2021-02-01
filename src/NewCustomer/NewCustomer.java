@@ -1,5 +1,5 @@
 package NewCustomer;
-import Datebase.NewCustomerDatabase;
+import Database.NewCustomerDatabase;
 import Person.*;
 
 public class NewCustomer extends PersonDriver {

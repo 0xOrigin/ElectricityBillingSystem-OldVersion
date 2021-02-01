@@ -1,4 +1,4 @@
-package Datebase;
+package Database;
 import java.sql.*;
 
 public class AdministratorDatabase {

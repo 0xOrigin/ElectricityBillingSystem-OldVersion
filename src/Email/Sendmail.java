@@ -37,7 +37,7 @@ public class Sendmail {
             Transport.send(message);
             
         } catch (MessagingException e) {
-            System.out.println("\n\t[-] You haven't paid your bills for three months or more at the meter number: " + meterCode + " , please pay.");
+            System.out.println("\n\t[-] You haven't paid your bills for three months or more at the meter number: " + meterCode + " , please pay them.");
         }
         
     }

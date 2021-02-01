@@ -1,7 +1,7 @@
 package OldCustomer;
 
-import Datebase.NewCustomerDatabase;
-import Datebase.OldCustomerDatabase;
+import Database.NewCustomerDatabase;
+import Database.OldCustomerDatabase;
 
 
 public class OldCustomer {
