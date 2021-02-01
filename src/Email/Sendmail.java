@@ -51,7 +51,7 @@ public class Sendmail {
             message.setFrom(new InternetAddress(myAccountEmail, "Electricity Company"));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
             message.setSubject("Alert: bills are accumulated!");  //subject
-            message.setText("\nDear "+ name +",\n\n\tYou haven't paid your bills for three months or more at the meter number: " + meterCode + " , please pay.");    //mail, you can edit this
+            message.setText("\nDear "+ name +",\n\n\tYou haven't paid your bills for three months or more at the meter number: " + meterCode + " , please pay them.");    //mail, you can edit this
             
             return message;
             
